@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>No title | AlexYang&#39;s World | 杨龙的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="git构建安装安装步骤1、下载git wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz 2、解归档 tar zxvf git-2.9.5.tar.gz 3、安装 cd git-2.9.5 ./configure make make install 安装过程中出现报错，以及解决办法错误一：usr/bi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="No title">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/25/git-install/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="git构建安装安装步骤1、下载git wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz 2、解归档 tar zxvf git-2.9.5.tar.gz 3、安装 cd git-2.9.5 ./configure make make install 安装过程中出现报错，以及解决办法错误一：usr/bi">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-22T10:22:25.823Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="No title">
+<meta name="twitter:description" content="git构建安装安装步骤1、下载git wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz 2、解归档 tar zxvf git-2.9.5.tar.gz 3、安装 cd git-2.9.5 ./configure make make install 安装过程中出现报错，以及解决办法错误一：usr/bi">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis"></div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title"></h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-25T12:50:09.704Z" itemprop="datePublished" class="page-time">
+  2018-05-25
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#git构建安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">git构建安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装步骤"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">安装步骤</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装过程中出现报错，以及解决办法"><span class="post-toc-number">1.0.2.</span> <span class="post-toc-text">安装过程中出现报错，以及解决办法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误一："><span class="post-toc-number">1.0.2.1.</span> <span class="post-toc-text">错误一：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决办法："><span class="post-toc-number">1.0.2.2.</span> <span class="post-toc-text">解决办法：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误二："><span class="post-toc-number">1.0.2.3.</span> <span class="post-toc-text">错误二：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决办法：-1"><span class="post-toc-number">1.0.2.4.</span> <span class="post-toc-text">解决办法：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误三："><span class="post-toc-number">1.0.2.5.</span> <span class="post-toc-text">错误三：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决办法：-2"><span class="post-toc-number">1.0.2.6.</span> <span class="post-toc-text">解决办法：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误四："><span class="post-toc-number">1.0.2.7.</span> <span class="post-toc-text">错误四：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决办法：-3"><span class="post-toc-number">1.0.2.8.</span> <span class="post-toc-text">解决办法：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误五："><span class="post-toc-number">1.0.2.9.</span> <span class="post-toc-text">错误五：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决办法：-4"><span class="post-toc-number">1.0.2.10.</span> <span class="post-toc-text">解决办法：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#错误六："><span class="post-toc-number">1.0.2.11.</span> <span class="post-toc-text">错误六：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#解决办法"><span class="post-toc-number">1.0.2.12.</span> <span class="post-toc-text">解决办法</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-git-install"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title"></h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-25 20:50:09" datetime="2018-05-25T12:50:09.704Z"  itemprop="datePublished">2018-05-25</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="git构建安装"><a href="#git构建安装" class="headerlink" title="git构建安装"></a>git构建安装</h1><h3 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h3><p>1、下载git</p>
+<p>wget <a href="https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz" target="_blank" rel="noopener">https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.9.5.tar.gz</a></p>
+<p>2、解归档</p>
+<p>tar zxvf git-2.9.5.tar.gz</p>
+<p>3、安装</p>
+<p>cd git-2.9.5</p>
+<p>./configure</p>
+<p>make</p>
+<p>make install</p>
+<h3 id="安装过程中出现报错，以及解决办法"><a href="#安装过程中出现报错，以及解决办法" class="headerlink" title="安装过程中出现报错，以及解决办法"></a>安装过程中出现报错，以及解决办法</h3><h4 id="错误一："><a href="#错误一：" class="headerlink" title="错误一："></a>错误一：</h4><p>usr/bin/perl Makefile.PL PREFIX=’/usr/local/git’ INSTALL_BASE=’’ –localedir=’/usr/local/git/share/locale’</p>
+<p>　　Can’t locate ExtUtils/MakeMaker.pm in @INC (@INC contains: /usr/local/lib64/perl5 /usr/local/share/perl5 /usr/lib64/perl5/vendor_perl /usr/share/perl5/vendor_perl /usr/lib64/perl5 　　/usr/share/perl5 .) at Makefile.PL line 3.</p>
+<p>　　BEGIN failed–compilation aborted at Makefile.PL line 3.</p>
+<p>　　make[1]: *** [perl.mak] Error 2</p>
+<p>　　make: *** [perl/perl.mak] Error 2</p>
+<h4 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h4><p>yum install perl-ExtUtils-MakeMaker package</p>
+<h4 id="错误二："><a href="#错误二：" class="headerlink" title="错误二："></a>错误二：</h4><p>/bin/sh: msgfmt: command not found</p>
+<h4 id="解决办法：-1"><a href="#解决办法：-1" class="headerlink" title="解决办法："></a>解决办法：</h4><p>yum install gettext-devel</p>
+<h4 id="错误三："><a href="#错误三：" class="headerlink" title="错误三："></a>错误三：</h4><p>make时出现：Can’t locate ExtUtils/MakeMaker.pm in @INC</p>
+<h4 id="解决办法：-2"><a href="#解决办法：-2" class="headerlink" title="解决办法："></a>解决办法：</h4><p>yum -y install perl-devel perl-CPAN</p>
+<h4 id="错误四："><a href="#错误四：" class="headerlink" title="错误四："></a>错误四：</h4><p>make时出现：tclsh failed; using unoptimized loading</p>
+<p>MSGFMT    po/bg.msg make[1]: *** [po/bg.msg] 错误 127</p>
+<h4 id="解决办法：-3"><a href="#解决办法：-3" class="headerlink" title="解决办法："></a>解决办法：</h4><p>yum install tcl  build-essential tk gettext</p>
+<h4 id="错误五："><a href="#错误五：" class="headerlink" title="错误五："></a>错误五：</h4><p>error： zlib.h:no such file or directory</p>
+<h4 id="解决办法：-4"><a href="#解决办法：-4" class="headerlink" title="解决办法："></a>解决办法：</h4><p>构建安装zlib</p>
+<p>wget <a href="https://netix.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.gz" target="_blank" rel="noopener">https://netix.dl.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.gz</a></p>
+<p>tar -vxf lib-1.2.11.tar.gz</p>
+<p>/usr/local/src/zlib-1.2.11</p>
+<p>构建静态库</p>
+<p>./configure</p>
+<p>make test</p>
+<p>make install</p>
+<p>构建共享库</p>
+<p>make clean</p>
+<p> ./configure –shared</p>
+<p> make test</p>
+<p>make install</p>
+<p>cp zutil.h /usr/local/include</p>
+<p>cp zutil.c /usr/local/include</p>
+<h4 id="错误六："><a href="#错误六：" class="headerlink" title="错误六："></a>错误六：</h4><p>configure: error: in <code>/root/msmtp-1.4.20&#39;:
+**configure: error: no acceptable C compiler found in $PATH**See</code>config.log’ for more details.</p>
+<h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h4><p>yum install gcc</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-22T10:22:25.823Z" itemprop="dateUpdated">2018-05-22 18:22:25</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/05/25/git-install/" target="_blank" rel="external">http://alexyanglong.github.io/2018/05/25/git-install/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/25/git-install/&title=AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/25/git-install/&title=AlexYang's World&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/25/git-install/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=AlexYang's World&url=http://alexyanglong.github.io/2018/05/25/git-install/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/25/git-install/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/25/hello-world/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hello World</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>AlexYang &copy; 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/25/git-install/&title=《No title》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/25/git-install/&title=《No title》 — AlexYang's World&source=" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/25/git-install/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《No title》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/25/git-install/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/25/git-install/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACIUlEQVR42u3aS3KDQAwFQN//0uQADvhJwqkw06xSLgL0LFT6vV7xdbxdyT1nd77ff/bLzRcGBsZjGcfllTCqyPyYkm/DwMDYh3H26Ot7kvvz4Ju/FwMDA2PC6AVuDAwMjG8wqsg8lcTAwMCYFLGT4DsJuDfX4hgYGA9k5CHy7//+ynwDAwPjUYyjeCUDyCRoTr7hl6dhYGAszeilevnCRD4qmKSeGBgY+zCSJa3r11+3w6pHkI8/MTAw1mYkja27auXe4lcUsjEwMLZk9IrVCbh3ZBgYGPswqq2xpKTsJXzVNh8GBsYOjHlrPq8oq6E2XyPDwMDYgTHfapjsQvRW00bbJRgYGI9lVFOxfGw5GSTk6SYGBsaqjDy09UJw9SyT8Fpes8DAwHg4YzJc7GGqAbpwrBgYGIsyeosO+dCxGoJvSw0xMDCWY/TC4gRTLZ4//BcGBsZmjEnZmaeJPdiHnREMDIxFGb1li94stHoE5QUODAyMLRnVj+i13qoJ4unTMDAwtmFUxwa9Flu+tFE4XAwMjA0YSTJXbeInnzhJMTEwMHZgTMrXe5PCaoi/rQrHwMD494z8ytv9SZssT/h6Y1EMDIz1GMkLkrWMfAxZPbLkGzAwMHZgFKre1gAyb7r1kBgYGBj5PXkeev3p5cUODAwMjLhkTdpnVV50QBgYGBsw8oZa8nvSpKsWvRgYGDszRpsa48FArxnXHGpiYGA8j/EDlYvwLjMWgUwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '死鬼去哪里了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
