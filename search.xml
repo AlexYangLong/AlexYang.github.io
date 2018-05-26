@@ -56,13 +56,13 @@
             
             <tag> 作用域 </tag>
             
+            <tag> 文件IO操作 </tag>
+            
             <tag> 异常处理 </tag>
             
             <tag> re </tag>
             
             <tag> 网络IO编程 </tag>
-            
-            <tag> 文件IO操作 </tag>
             
         </tags>
       

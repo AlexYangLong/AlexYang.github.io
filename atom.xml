@@ -80,13 +80,13 @@
     
       <category term="作用域" scheme="http://alexyanglong.github.io/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
     
+      <category term="文件IO操作" scheme="http://alexyanglong.github.io/tags/%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C/"/>
+    
       <category term="异常处理" scheme="http://alexyanglong.github.io/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
     
       <category term="re" scheme="http://alexyanglong.github.io/tags/re/"/>
     
       <category term="网络IO编程" scheme="http://alexyanglong.github.io/tags/%E7%BD%91%E7%BB%9CIO%E7%BC%96%E7%A8%8B/"/>
-    
-      <category term="文件IO操作" scheme="http://alexyanglong.github.io/tags/%E6%96%87%E4%BB%B6IO%E6%93%8D%E4%BD%9C/"/>
     
   </entry>
   
