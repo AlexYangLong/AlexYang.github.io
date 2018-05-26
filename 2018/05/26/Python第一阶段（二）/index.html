@@ -20,9 +20,9 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Python基础,函数,面向对象,作用域,IO操作,异常处理,re,网络IO编程">
+    <meta name="keywords" content="Python基础,函数,面向对象,作用域,异常处理,re,网络IO编程,文件IO操作">
     <meta name="description" content="Python第一阶段（二）函数定义函数，使用 def 关键字。 结构： 123def 函数名(参数列表...):	语句...	return 返回值... 函数的参数： 1、不定长参数： *args 2、关键字参数：**kwargs 匿名函数: 关键字 lambda  eg：qm = lambda x: x ** x 偏函数: 导入模块 import functools         ​    f">
-<meta name="keywords" content="Python基础,函数,面向对象,作用域,IO操作,异常处理,re,网络IO编程">
+<meta name="keywords" content="Python基础,函数,面向对象,作用域,异常处理,re,网络IO编程,文件IO操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python第一阶段（二）">
 <meta property="og:url" content="http://alexyanglong.github.io/2018/05/26/Python第一阶段（二）/index.html">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://alexyanglong.github.io/2018/05/26/Python第一阶段（二）/单线程模拟下载例子.png">
 <meta property="og:image" content="http://alexyanglong.github.io/2018/05/26/Python第一阶段（二）/多进程模拟下载例子.png">
 <meta property="og:image" content="http://alexyanglong.github.io/2018/05/26/Python第一阶段（二）/多线程模拟下载例子.png">
-<meta property="og:updated_time" content="2018-05-26T07:32:37.922Z">
+<meta property="og:updated_time" content="2018-05-26T08:44:20.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python第一阶段（二）">
 <meta name="twitter:description" content="Python第一阶段（二）函数定义函数，使用 def 关键字。 结构： 123def 函数名(参数列表...):	语句...	return 返回值... 函数的参数： 1、不定长参数： *args 2、关键字参数：**kwargs 匿名函数: 关键字 lambda  eg：qm = lambda x: x ** x 偏函数: 导入模块 import functools         ​    f">
@@ -264,11 +264,10 @@
 <p>​    1、继承的存在(继承是多态的基础,没有继承就没有多态)</p>
 <p>​    2、子类重写父类的方法(多态下调用子类重写的方法)</p>
 <p>​    3、父类引用变量指向子类对象(子类到父类的类型转换)</p>
-<p><strong>数据抽象</strong> 一 找到和对象相关的数据一属性( 名词）</p>
+<p><strong>数据抽象</strong> 一 找到和对象相关的数据一属性( 名词），可以使用包装器和修改器来装饰属性。</p>
 <p><code>@property</code></p>
 <p><code>@属性.setter</code></p>
-<p><code>__slots__</code></p>
-<p>限定自定义类型的对象只能绑定某些属性，可以通过在类中定义<strong>slots</strong>变量来进行限定。需要注意的是<strong>slots</strong>的限定只对当前类的对象生效，对子类并不起任何作用。</p>
+<p><code>__slots__</code>限定自定义类型的对象只能绑定某些属性，可以通过在类中定义<strong>slots</strong>变量来进行限定。需要注意的是<strong>slots</strong>的限定只对当前类的对象生效，对子类并不起任何作用。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    # 限定Person对象只能绑定_name, _age和_gender属性</span><br><span class="line">    __slots__ = (&apos;_name&apos;, &apos;_age&apos;, &apos;_gender&apos;)</span><br></pre></td></tr></table></figure>
 <p><strong>行为抽象</strong> 一 找到和对象相关的行为一方法（动词）</p>
 <p><strong>成员方法</strong>：第一个参数为<code>self</code>，由实例化的对象调用</p>
@@ -600,7 +599,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-05-26T07:32:37.922Z" itemprop="dateUpdated">2018-05-26 15:32:37</time>
+    最后更新时间：<time datetime="2018-05-26T08:44:20.645Z" itemprop="dateUpdated">2018-05-26 16:44:20</time>
 </span><br>
 
 
@@ -624,7 +623,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IO操作/">IO操作</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/re/">re</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/作用域/">作用域</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数/">函数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常处理/">异常处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络IO编程/">网络IO编程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python基础/">Python基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/re/">re</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/作用域/">作用域</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数/">函数</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常处理/">异常处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件IO操作/">文件IO操作</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/网络IO编程/">网络IO编程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
 
 
             
@@ -679,7 +678,14 @@
     </div>
 
     
-<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/26/Python第二阶段（一）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python第二阶段（一）</h4>
+      </a>
+    </div>
   
 
   

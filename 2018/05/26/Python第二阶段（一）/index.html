@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python第二阶段（一） | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="HTML,CSS,JavaScript,jQuery,AJAX">
+    <meta name="description" content="Python第二阶段（一）HTMLHTML 是用来描述网页的一种语言。 1、Tag: Content 装内容装数据 2、CSS: Display 渲染,显示 3、JavaScript: Behavior 交互,行为  HTML 指的是超文本标记语言: Hyper Text Markup Language HTML 不是一种编程语言，而是一种标记语言 标记语言是一套标记标签 (markup tag)">
+<meta name="keywords" content="HTML,CSS,JavaScript,jQuery,AJAX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python第二阶段（一）">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Python第二阶段（一）HTMLHTML 是用来描述网页的一种语言。 1、Tag: Content 装内容装数据 2、CSS: Display 渲染,显示 3、JavaScript: Behavior 交互,行为  HTML 指的是超文本标记语言: Hyper Text Markup Language HTML 不是一种编程语言，而是一种标记语言 标记语言是一套标记标签 (markup tag)">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-26T08:36:55.007Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python第二阶段（一）">
+<meta name="twitter:description" content="Python第二阶段（一）HTMLHTML 是用来描述网页的一种语言。 1、Tag: Content 装内容装数据 2、CSS: Display 渲染,显示 3、JavaScript: Behavior 交互,行为  HTML 指的是超文本标记语言: Hyper Text Markup Language HTML 不是一种编程语言，而是一种标记语言 标记语言是一套标记标签 (markup tag)">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python第二阶段（一）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python第二阶段（一）</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-26T07:49:55.212Z" itemprop="datePublished" class="page-time">
+  2018-05-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/HTML/">HTML</a></li></ul></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Python第二阶段（一）"><span class="post-toc-number">1.</span> <span class="post-toc-text">Python第二阶段（一）</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HTML"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">HTML</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#CSS"><span class="post-toc-number">2.</span> <span class="post-toc-text">CSS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS选择样式三原则："><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">CSS选择样式三原则：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS选择器："><span class="post-toc-number">2.0.2.</span> <span class="post-toc-text">CSS选择器：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#边框和轮廓"><span class="post-toc-number">2.0.3.</span> <span class="post-toc-text">边框和轮廓</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#字体"><span class="post-toc-number">2.0.4.</span> <span class="post-toc-text">字体</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文本"><span class="post-toc-number">2.0.5.</span> <span class="post-toc-text">文本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内外边距"><span class="post-toc-number">2.0.6.</span> <span class="post-toc-text">内外边距</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#背景"><span class="post-toc-number">2.0.7.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#display属性"><span class="post-toc-number">2.0.8.</span> <span class="post-toc-text">display属性</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS-定位："><span class="post-toc-number">2.0.9.</span> <span class="post-toc-text">CSS 定位：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS-hack-technology-（CSS黑科技）"><span class="post-toc-number">2.0.10.</span> <span class="post-toc-text">CSS hack technology （CSS黑科技）</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS-设置字符集"><span class="post-toc-number">2.0.11.</span> <span class="post-toc-text">CSS 设置字符集</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#JavaScript"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">JavaScript</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-数据类型-："><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">JavaScript 数据类型 ：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JavaScript-运算符："><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">JavaScript 运算符：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#编程范式（理念）："><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">编程范式（理念）：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#JS中的全局函数："><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">JS中的全局函数：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取对象："><span class="post-toc-number">2.1.5.</span> <span class="post-toc-text">获取对象：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#window对象："><span class="post-toc-number">2.1.6.</span> <span class="post-toc-text">window对象：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#JQuery"><span class="post-toc-number">3.</span> <span class="post-toc-text">JQuery</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#AJAX-Asynchronous-JavaScript-and-XML"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">AJAX - Asynchronous JavaScript and XML</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Python第二阶段（一）"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python第二阶段（一）</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-26 15:49:55" datetime="2018-05-26T07:49:55.212Z"  itemprop="datePublished">2018-05-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a><ul class="article-category-list-child"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/HTML/">HTML</a></li></ul></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Python第二阶段（一）"><a href="#Python第二阶段（一）" class="headerlink" title="Python第二阶段（一）"></a>Python第二阶段（一）</h1><h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>HTML 是用来描述网页的一种语言。</p>
+<p>1、Tag: Content 装内容装数据</p>
+<p>2、CSS: Display 渲染,显示</p>
+<p>3、JavaScript: Behavior 交互,行为</p>
+<ul>
+<li>HTML 指的是超文本标记语言: Hyper Text Markup Language</li>
+<li>HTML 不是一种编程语言，而是一种标记语言</li>
+<li>标记语言是一套标记标签 (markup tag)</li>
+<li>HTML 使用标记标签来描述网页</li>
+<li>HTML 文档包含了HTML 标签及文本 内容</li>
+<li>HTML文档也叫做web 页面</li>
+</ul>
+<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><p>内部样式表：多用于首页。  加载快</p>
+<p>外部样式表：用于其他页面。  所有页面可以共享同一个样式，便于风格统一；使内容和显示分离</p>
+<p>内嵌（行内）样式表：不常用</p>
+<h3 id="CSS选择样式三原则："><a href="#CSS选择样式三原则：" class="headerlink" title="CSS选择样式三原则："></a>CSS选择样式三原则：</h3><p>1、就近原则： </p>
+<p>2、具体性原则： #id选择器 &gt; .class选择器 &gt; 标签选择器 &gt; 通配符选择器</p>
+<p>3、重要性原则： !important</p>
+<p>CSS模型：Box Model （盒模型 ） ——  由内到外：</p>
+<p>内容 - padding - border - background-image - background-color - margin</p>
+<h3 id="CSS选择器："><a href="#CSS选择器：" class="headerlink" title="CSS选择器："></a>CSS选择器：</h3><p>通配符选择器： *</p>
+<p>标签选择器： &lt;标签名&gt;</p>
+<p>类选择器： .class</p>
+<p>id选择器： #id</p>
+<p>并列选择器：selector1 , selector2</p>
+<p>后代选择器： 父 空格(所有后代)、父&gt;(儿子后代)</p>
+<p>兄弟选择器： ~ (所有兄弟)</p>
+<p>相邻兄弟选择器： +  (必须是相邻兄弟)</p>
+<h3 id="边框和轮廓"><a href="#边框和轮廓" class="headerlink" title="边框和轮廓"></a>边框和轮廓</h3><p>border 设置对象边框的特性</p>
+<p><code>border-collapse : collapse</code> 设置表格的边框合并为一个单一的边框</p>
+<p><code>border-color</code> 设置或检索对象的边框颜色</p>
+<p><code>outline</code> 设置或检索对象外的线条轮廓。</p>
+<h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p><code>font-size</code> 设置字体大小</p>
+<p><code>font-family</code> 规定文本的字体</p>
+<p><code>font-style</code> 规定文本的字体样式</p>
+<p><code>font-weight</code> 规定字体的粗细</p>
+<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><p><code>color</code> 指定文本的颜色</p>
+<p><code>line-height</code> 设置行高</p>
+<p><code>text-align</code> 规定文本的水平对齐方式</p>
+<p><code>text-decoration</code> 规定添加到文本的装饰效果，：none取消下划线</p>
+<h3 id="内外边距"><a href="#内外边距" class="headerlink" title="内外边距"></a>内外边距</h3><p><code>padding</code> 简写属性在一个声明中设置所有填充属性。该属性可以有1到4个值</p>
+<p><code>margin</code> 在一个声明中设置所有外边距属性，该属性可以有1到4个值</p>
+<h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p><code>background-color</code> 设置或检索对象的背景颜色 </p>
+<p><code>background-image</code> 设置或检索对象的背景图像</p>
+<h3 id="display属性"><a href="#display属性" class="headerlink" title="display属性"></a>display属性</h3><p><code>display: none</code> 此元素不会被显示。</p>
+<p><code>display: block</code> 此元素将显示为块级元素，此元素前后会带有换行符。</p>
+<p><code>display: inline</code> 此元素会被显示为内联元素，元素前后没有换行符。</p>
+<p>具有<code>hidden</code> 属性的元素是不可见的。</p>
+<h3 id="CSS-定位："><a href="#CSS-定位：" class="headerlink" title="CSS 定位："></a>CSS 定位：</h3><p><code>position: static</code>    正常文档流</p>
+<p><code>position: relative</code>   相对定位（相对于元素原来的位置，没有脱离文档流，对周围元素没有影响）</p>
+<p><code>position: absolute</code>   绝对定位（相对于父元素来设定位置，脱离了文档流，对周围元素有影响）</p>
+<p><code>position: fixed</code>   固定定位（相对于浏览器窗口来设定位置，脱离了文档流）</p>
+<h3 id="CSS-hack-technology-（CSS黑科技）"><a href="#CSS-hack-technology-（CSS黑科技）" class="headerlink" title="CSS hack technology （CSS黑科技）"></a>CSS hack technology （CSS黑科技）</h3><p>z-index索引  当脱离文档流时  元素冲突  设置z-index 值越大就渲染在越上方</p>
+<p>在有浮动的情况下 ，为了让父级元素计算出它的高度的方法：</p>
+<p>1、<code>clear:both</code> 清除浮动  </p>
+<p>2、在父元素的样式中加入 <code>overflow：auto</code></p>
+<h3 id="CSS-设置字符集"><a href="#CSS-设置字符集" class="headerlink" title="CSS 设置字符集"></a>CSS 设置字符集</h3><p><code>@charset : utf-8</code></p>
+<p>CSS 设置字体：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@font-face &#123;</span><br><span class="line">  font-family： ‘字体名称’</span><br><span class="line">  src：url(字体资源路径)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h2><p>JavaScript : JS - Behavior</p>
+<p>​    ECMAScript  -  语法规范  -  ES5</p>
+<p>​    BOM  -  浏览器对象模型  -  window</p>
+<p>​    DOM  -  文档对象模型  -  document</p>
+<h3 id="JavaScript-数据类型-："><a href="#JavaScript-数据类型-：" class="headerlink" title="JavaScript 数据类型 ："></a>JavaScript 数据类型 ：</h3><p>JavaScript 有隐式的类型转换。</p>
+<p>​    简单数据类型： <code>number</code>、<code>string</code>、<code>boolean</code>、<code>null</code>、<code>undefined</code></p>
+<p>​    复杂数据类型： <code>object</code></p>
+<p>​    可以使用 <code>typeof()</code> 查看数据类型</p>
+<h3 id="JavaScript-运算符："><a href="#JavaScript-运算符：" class="headerlink" title="JavaScript 运算符："></a>JavaScript 运算符：</h3><p>​    算术运算符：<code>+</code> 、<code>-</code>、 <code>*</code>、<code>/</code>、 <code>%</code> 、<code>**</code>（ES7版本）</p>
+<p>​    赋值运算符：<code>=</code> 、<code>+=</code>、 <code>-=</code>、 <code>*=</code>、 <code>/=</code>、<code>%=</code></p>
+<p>​    比较（关系）运算符： <code>&gt;</code>、 <code>&gt;=</code>、 <code>&lt;</code>、 <code>&lt;=</code>、 <code>==</code>、 <code>!=</code> 、<code>===</code>（不带隐式类型转换的等于，全等于）、<code>!==</code>（严格不等于）</p>
+<p>​    逻辑运算符： <code>&amp;&amp;</code>（短路与）、 <code>||</code>（短路或）、 <code>!</code></p>
+<p>​    自增自减运算符： <code>++</code> 、<code>--</code></p>
+<p>​    位运算、成员运算</p>
+<h3 id="编程范式（理念）："><a href="#编程范式（理念）：" class="headerlink" title="编程范式（理念）："></a>编程范式（理念）：</h3><p>面向对象编程</p>
+<p>函数式编程</p>
+<h3 id="JS中的全局函数："><a href="#JS中的全局函数：" class="headerlink" title="JS中的全局函数："></a>JS中的全局函数：</h3><p><code>isNaN()</code>  是不是 不是一个数</p>
+<p><code>parseInt()</code>  取整，如果取不出，返回<code>NaN</code></p>
+<p><code>parseFloat()</code>  取小数，如果取不出，返回<code>NaN</code></p>
+<p><code>isFinite()</code>  是不是有限的数</p>
+<p><code>eval()</code>  - evaluate  - XSS（跨站脚本攻击）</p>
+<p><code>encodeURIcomponent()</code>  编成 百分号 编码</p>
+<p><code>decodeURIcomponent()</code>  从百分号编码 解码</p>
+<h3 id="获取对象："><a href="#获取对象：" class="headerlink" title="获取对象："></a>获取对象：</h3><p>获取引发事件的对象元素：</p>
+<p><code>document.getElementById(#id)</code></p>
+<p><code>document.getElementByClassName(.class)</code></p>
+<p><code>document.getElementByTagName(标签)</code></p>
+<p><code>querySelector()</code> ： 根据指定的选择器查找单个元素</p>
+<p><code>querySelectorAll()</code> ： 根据指定的选择器查找所有元素</p>
+<p><code>this</code>  // this 当前对象元素</p>
+<p>// <code>evt</code> 表示当前事件，<code>evt.target</code> 表示引发当前事件的事件源</p>
+<p>//  需要在函数参数中 传入<code>evt</code> 对象</p>
+<p><code>evt = evt || window.event;  // 兼容低版本的IE</code></p>
+<p><code>var target = evt.target || evt.srcElement;</code></p>
+<p>在定义函数时，如果没有传入参数，那么函数中有一个隐藏的 arguments 对象，它代表了参数的列表，在调用时，可以传入任意多个参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function foo()&#123;</span><br><span class="line">	for (var i = 0;i &lt; arguments.length;i++)&#123;</span><br><span class="line">		alert(arguments[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自定义的兼容函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">// 用cacheId 来缓存已经获取过的元素</span><br><span class="line">var cacheId = &#123;&#125;;</span><br><span class="line"> </span><br><span class="line">/**</span><br><span class="line"> * 根据id获取元素</span><br><span class="line"> * @param &#123;Object&#125; id 元素的id</span><br><span class="line"> */</span><br><span class="line">function $(id)&#123;</span><br><span class="line">	if (!cacheId[id])&#123;</span><br><span class="line">		cacheId[id] = document.getElementById(id);</span><br><span class="line">	&#125;</span><br><span class="line">	return cacheId[id];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 给element 元素绑定事件</span><br><span class="line"> * @param &#123;Object&#125; element 元素</span><br><span class="line"> * @param &#123;Object&#125; event 要绑定的事件</span><br><span class="line"> * @param &#123;Object&#125; fn 绑定的函数</span><br><span class="line"> */</span><br><span class="line">function bindEvent(element, event, fn)&#123;</span><br><span class="line">	if (element.addEventListener)&#123;</span><br><span class="line">		element.addEventListener(event, fn);		</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		element.attachEvent(&apos;on&apos; + event, fn);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 给element 元素取消绑定事件</span><br><span class="line"> * @param &#123;Object&#125; element 元素</span><br><span class="line"> * @param &#123;Object&#125; event 要取消的事件</span><br><span class="line"> * @param &#123;Object&#125; fn 要取消的函数</span><br><span class="line"> */</span><br><span class="line">function unbindEvent(element, event, fn)&#123;</span><br><span class="line">	if (element.removeEventListener)&#123;</span><br><span class="line">		element.removeEventListener(event, fn);		</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		element.detachEvent(&apos;on&apos; + event, fn);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 获取元素的只读的样式，读取元素的样式需要通过 getComputeStype() 来获取，IE9 以下的版本使用这个 currentStyle</span><br><span class="line"> * @param &#123;Object&#125; element 元素</span><br><span class="line"> */</span><br><span class="line">function getStyle(element)&#123;</span><br><span class="line">	return document.defaultView.getComputedStyle ? document.defaultView.getComputedStyle(element) : element.currentStyle;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 给事件绑定处理默认行为和冒泡行为的函数，兼容了IE11以下的版本</span><br><span class="line"> * @param &#123;Object&#125; ev</span><br><span class="line"> */</span><br><span class="line">function handleEvent(ev)&#123;</span><br><span class="line">	ev = ev || window.event;</span><br><span class="line">	ev.preventDefault = ev.preventDefault || </span><br><span class="line">						function ()&#123;</span><br><span class="line">							this.returnValue = false;</span><br><span class="line">						&#125;</span><br><span class="line">	</span><br><span class="line">	ev.stopPropagation = ev.stopPropagation ||</span><br><span class="line">						function ()&#123;</span><br><span class="line">							this.cancelBubble = true;</span><br><span class="line">						&#125;</span><br><span class="line">	return ev;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="window对象："><a href="#window对象：" class="headerlink" title="window对象："></a>window对象：</h3><p><code>document</code>  文档</p>
+<p><code>location</code>  地址栏  - <code>href</code> / <code>reload</code> / <code>replace</code></p>
+<p><code>history</code>  历史记录  - <code>go</code> / <code>forward</code> / <code>back</code></p>
+<p><code>navigator</code>  浏览器</p>
+<p><code>screen</code>  操作系统窗口  - <code>availWidth</code>/ <code>availHeight</code> / <code>width</code> / <code>height</code></p>
+<p><code>alert</code> /<code>confirm</code> / <code>prompt</code></p>
+<p><code>open</code> / <code>close</code></p>
+<p><code>setTimeout</code> / <code>setInterval</code> / <code>clearTimeout</code> / <code>clearInterval</code></p>
+<p>修改节点的内容和属性</p>
+<p><code>textContent</code></p>
+<p><code>innerHTML</code></p>
+<p><code>nodeValue</code></p>
+<p>访问成员运算符 .</p>
+<p><code>setAttribute</code> / <code>getAttribute</code> / <code>removeAttribute</code></p>
+<p>创建新节点</p>
+<p><code>createElement</code></p>
+<p>追加新节点</p>
+<p><code>appendChild</code></p>
+<p><code>insertBefore</code></p>
+<p>移除子节点</p>
+<p><code>removeChild</code></p>
+<p>通过自己节点访问父节点</p>
+<p><code>parentNode</code></p>
+<p>通过自己节点访问子节点</p>
+<p><code>children</code> 所有</p>
+<p><code>firstChild</code> 第一个</p>
+<p><code>lastChild</code> 最后一个</p>
+<p>通过自己节点访问兄弟节点</p>
+<p><code>nextSibling</code>  前面的兄弟</p>
+<p><code>prevSibling</code>  后面的兄弟</p>
+<h1 id="JQuery"><a href="#JQuery" class="headerlink" title="JQuery"></a>JQuery</h1><p>jQuery的$函数的作用:</p>
+<p>1、<code>$(function() {})</code> $() 函数传入的是一个函数，表示该函数是在页面加载完成之后要执行的回调函数</p>
+<p>2、<code>$(selector)</code>  $() 函数传入的是一个选择器，表示通过选择器获得对应的元素，并处理成 jQuery对象，jQuery对象的本质是一个数组，如果要将jQuery对象转成原生js对象，使用下标或者<code>get()</code> 运算</p>
+<p>3、<code>$(element)</code>  $() 函数传入的是一个原生js对象，表示将其转成jQuery对象</p>
+<p>4、<code>$(标签)</code>  $() 函数传入的是一个标签，表示创建对应的元素并处理成jQuery对象</p>
+<p>注意：当jQuery库和其他的库中的 <code>$函数</code> 有冲突，可以使用以下方法解决：</p>
+<p>​    <code>jQuery.noConflict()</code>  将jQuery库中的 <code>$函数</code> 不起作用，但是jQuery库可以使用jQuery来替代 <code>$</code>，其他库可以使用 <code>$函数</code>。</p>
+<p>查找元素</p>
+<ul>
+<li>选择器</li>
+</ul>
+<ul>
+<li><ul>
+<li><code>*</code> / <code>element</code> / <code>#id</code> / <code>.class</code> / <code>selector1, selector2</code></li>
+<li><code>ancestor descendant</code> / <code>parent&gt;child</code> / <code>previous+next</code> / <code>previous~siblings</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>筛选器</li>
+</ul>
+<ul>
+<li><ul>
+<li>基本筛选器：<code>:not(selector)</code>/ <code>:first</code> / <code>:last</code> / <code>:even</code> / <code>:odd</code> / <code>:eq(index)</code> / <code>:gt(index)</code> / <code>:lt(index)</code> / <code>:animated</code> / <code>:focus</code></li>
+<li>内容筛选器：<code>:contains(&#39;…&#39;)</code>/ <code>:empty</code> / <code>:parent</code> / <code>:has(selector)</code></li>
+<li>可见性筛选器：<code>:hidden</code> / <code>:visible</code></li>
+<li>子节点筛选器：<code>:nth-child(expr)</code> / <code>:first-child</code> / <code>:last-child</code> / <code>:only-child</code></li>
+<li>属性筛选器：<code>[attribute]</code> / <code>[attribute=&#39;value&#39;]</code> / <code>[attribute!=&#39;value&#39;]</code> / <code>[attribute^=&#39;value&#39;]</code> / <code>[attribute$=&#39;value&#39;]</code> / <code>[attribute|=&#39;value&#39;]</code> / <code>[attribute~=&#39;value&#39;]</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>表单： <code>:input</code> / <code>:text</code> / <code>:password</code> / <code>:radio</code> / <code>:checkbox</code> / <code>:submit</code> / <code>:image</code> / <code>:reset</code> / <code>:button</code> / <code>:file</code> / <code>:selected</code> / <code>:enabled</code> / <code>:disabled</code> / <code>:checked</code></li>
+</ul>
+<p>执行操作</p>
+<ul>
+<li>内容操作</li>
+</ul>
+<ul>
+<li><ul>
+<li>获取/修改内容：<code>html()</code> / <code>text()</code> / <code>replaceWith()</code> / <code>remove()</code></li>
+<li>获取/设置元素：<code>before()</code> / <code>after()</code> / <code>prepend()</code> / <code>append()</code> / <code>remove()</code> / <code>clone()</code> / <code>unwrap()</code> / <code>detach()</code> / <code>empty()</code> / <code>add()</code></li>
+<li>获取/修改属性：<code>attr()</code> / <code>removeAttr()</code> / <code>addClass()</code> / <code>removeClass()</code> / <code>css()</code></li>
+<li>获取/设置表单值：<code>val()</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>查找操作</li>
+</ul>
+<ul>
+<li><ul>
+<li>查找方法：<code>find()</code> / <code>parent()</code> / <code>children()</code> / <code>siblings()</code> / <code>next()</code> / <code>nextAll()</code> / <code>prev()</code> / <code>prevAll()</code></li>
+<li>筛选器：<code>filter()</code> / <code>not()</code> / <code>has()</code> / <code>is()</code> / <code>contains()</code></li>
+<li>索引编号：<code>eq()</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>尺寸和位置</li>
+</ul>
+<ul>
+<li><ul>
+<li>尺寸相关：<code>height()</code> / <code>width()</code> / <code>innerHeight()</code> / <code>innerWidth()</code> / <code>outerWidth()</code> / <code>outerHeight()</code></li>
+<li>位置相关：<code>offset()</code> / <code>position()</code> / <code>scrollLeft()</code> / <code>scrollTop()</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>特效和动画</li>
+</ul>
+<ul>
+<li><ul>
+<li>基本动画：<code>show()</code> / <code>hide()</code> / <code>toggle()</code></li>
+<li>消失出现：<code>fadeIn()</code> / <code>fadeOut()</code> / <code>fadeTo()</code> / <code>fadeToggle()</code></li>
+<li>滑动效果：<code>slideDown()</code> / <code>slideUp()</code> / <code>slideToggle()</code></li>
+<li>自定义：<code>delay()</code> / <code>stop()</code> / <code>animate()</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>事件</li>
+</ul>
+<ul>
+<li><ul>
+<li>文档加载：<code>ready()</code> / <code>load()</code></li>
+<li>用户交互：<code>on()</code> / <code>off()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="AJAX-Asynchronous-JavaScript-and-XML"><a href="#AJAX-Asynchronous-JavaScript-and-XML" class="headerlink" title="AJAX - Asynchronous JavaScript and XML"></a>AJAX - Asynchronous JavaScript and XML</h2><p>让浏览器向服务器发出异步请求(非阻塞式请求)，等服务器返回了响应数据(JSON/XML)后就可以对页面进行局部刷新，这样就可以在不中断用户体验的前提下刷新页面数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">	url:</span><br><span class="line">	type:</span><br><span class="line">	data:</span><br><span class="line">	datatype:</span><br><span class="line">	success:function()&#123;&#125;,</span><br><span class="line">	error:function()&#123;&#125;.</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-26T08:36:55.007Z" itemprop="dateUpdated">2018-05-26 16:36:55</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AJAX/">AJAX</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/&title=《Python第二阶段（一）》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/&title=《Python第二阶段（一）》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python第二阶段（一）》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/26/Python第一阶段（二）/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python第一阶段（二）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/&title=《Python第二阶段（一）》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/&title=《Python第二阶段（一）》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python第二阶段（一）》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/26/Python第二阶段（一）/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3awU5DIRAFUP//pzVxa6X3MlBrclgZ+wTOM4HpzHx8xOPze+S/+fnp+q/Wz6+fOTDw8PDwtrb+21hvPV8yeR3r1ZPnH+wHDw8P7xpvvaFk4Xwkh37CS14iHh4e3t/ykqg1mbkN0/Hw8PD+Ly9H5tS9rePh4eG9A68Nf9eM/MnkanlRrgUPDw8v5rVJ2Hf4+WJ9Dw8PD29QVW8P3L3LoP202C0eHh7eBV6eTp0c322wm68SXRt4eHh4F3jt4TspTZ16vi2t4eHh4d3jrY/dJNmaz5O3HaxfSv0FAA8PD+8or500j2DnQXZbfsPDw8O7wWtTt20CYt7I1c6/+f0ADw8Pr6yztwmIPARPtjJqlrqRX8HDw8Nb8tri/aRAlVwP+WuKLjA8PDy8y7y9VGy+5F56InkRUbsVHh4e3jVem5bdm6FtnNosueHh4eFd47Ul+fWke21SOSa5Qor/Bh4eHt6Y1wa4bephr/SVgA90LuDh4eGVvCS5MAG06YxJQP+k6QoPDw9vwJuEvG1iok0T5+1WT/4BeHh4eBd4eRjdhrltqSwvyBUXAx4eHt5RXn4ZJAWqU8ncBB+ti4eHh/cSXr7RNvieXCp7bDw8PLzX8yYVpbatam8PTwJxPDw8vGu8yXR7m1snFyYJkSg2x8PDwxvzJsvsJYL3Np2Xvh7ce3h4eHiHeHlyNj911y+rLWvtsevcMx4eHl7My9O1LSBfpS2PJS/612QEHh4e3jXejQ0lcyaBctGUgIeHh3eBd+DwjdMQe00D+UU1Gnh4eHglb95oNT/K25aCYjY8PDy8a7z2Mpgc7vmhv8fGw8PDex9e3j6VJ3/ba6BNIuPh4eG9G+9U4qANlIt2Bzw8PLxrvDwUnpy6bcNBPueTkBoPDw/vKK8tgLVXyKSN4EUDDw8PLx1fh/0NAeDnYjYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
