@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python基础（4）——字典dict | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,dict">
+    <meta name="description" content="Python基础（4）——字典dict字典dictPython内置了字典：dict的支持，dict全称dictionary，使用键-值（key-value）存储，具有极快的查找速度。 注意事项:​    1、在字典中键(key)的值必须是唯一​    2、在字典中可以存放多个键值对​    3、在字典中键(key)必须是不可变类型，字符串 、整数等都可以作为键(key) 下面是字典dict的一些常">
+<meta name="keywords" content="Python,dict">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础（4）——字典dict">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Python基础（4）——字典dict字典dictPython内置了字典：dict的支持，dict全称dictionary，使用键-值（key-value）存储，具有极快的查找速度。 注意事项:​    1、在字典中键(key)的值必须是唯一​    2、在字典中可以存放多个键值对​    3、在字典中键(key)必须是不可变类型，字符串 、整数等都可以作为键(key) 下面是字典dict的一些常">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-28T11:30:15.808Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础（4）——字典dict">
+<meta name="twitter:description" content="Python基础（4）——字典dict字典dictPython内置了字典：dict的支持，dict全称dictionary，使用键-值（key-value）存储，具有极快的查找速度。 注意事项:​    1、在字典中键(key)的值必须是唯一​    2、在字典中可以存放多个键值对​    3、在字典中键(key)必须是不可变类型，字符串 、整数等都可以作为键(key) 下面是字典dict的一些常">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/other-blog" target="_blank" >
+                <i class="icon icon-lg icon-chain"></i>
+                优秀博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python基础（4）——字典dict</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python基础（4）——字典dict</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-28T10:30:49.341Z" itemprop="datePublished" class="page-time">
+  2018-05-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Python基础（4）——字典dict"><span class="post-toc-number">1.</span> <span class="post-toc-text">Python基础（4）——字典dict</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#字典dict"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">字典dict</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Python基础（4）——字典dict"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python基础（4）——字典dict</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-28 18:30:49" datetime="2018-05-28T10:30:49.341Z"  itemprop="datePublished">2018-05-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Python基础（4）——字典dict"><a href="#Python基础（4）——字典dict" class="headerlink" title="Python基础（4）——字典dict"></a>Python基础（4）——字典dict</h1><h2 id="字典dict"><a href="#字典dict" class="headerlink" title="字典dict"></a>字典dict</h2><p>Python内置了字典：dict的支持，dict全称dictionary，使用键-值（key-value）存储，具有极快的查找速度。</p>
+<p>注意事项:<br>​    1、在字典中键(key)的值必须是唯一<br>​    2、在字典中可以存放多个键值对<br>​    3、在字典中键(key)必须是不可变类型，字符串 、整数等都可以作为键(key)</p>
+<p>下面是字典dict的一些常用操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义字典</span></span><br><span class="line">dict1 = &#123;<span class="string">'Alex'</span>: <span class="number">88</span>, <span class="string">'xiaoming'</span> : <span class="number">99</span>, <span class="string">'Ala'</span>: <span class="number">96</span>, <span class="string">'Tom'</span>: <span class="number">85</span>, <span class="string">'Jhon'</span>: <span class="number">77</span>&#125;</span><br><span class="line">print(dict1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 元素的访问</span></span><br><span class="line"><span class="comment"># 获取的方式: 字典名[key]</span></span><br><span class="line">print(dict1[<span class="string">'xiaoming'</span>])</span><br><span class="line">print(dict1.get(<span class="string">'Alex'</span>))</span><br><span class="line"><span class="comment"># 添加元素</span></span><br><span class="line">dict1[<span class="string">'HanMeimei'</span>] = <span class="number">89</span></span><br><span class="line">print(dict1)</span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line">dict1[<span class="string">'HanMeimei'</span>] = <span class="string">'90'</span></span><br><span class="line">print(dict1)</span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">dict1.pop(<span class="string">'HanMeimei'</span>)</span><br><span class="line">print(dict1)</span><br><span class="line"><span class="comment"># 遍历</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> dict1:</span><br><span class="line">    print(k, dict1[k])</span><br><span class="line"><span class="comment"># 获取字典所有的value和key</span></span><br><span class="line">print(dict1.values())</span><br><span class="line">print(dict1.keys())</span><br><span class="line"><span class="comment"># 遍历value值</span></span><br><span class="line"><span class="keyword">for</span> v <span class="keyword">in</span> dict1.values():</span><br><span class="line">    print(v)</span><br><span class="line"><span class="comment">#遍历key值</span></span><br><span class="line"><span class="keyword">for</span> k <span class="keyword">in</span> dict1.keys():</span><br><span class="line">    print(k)</span><br><span class="line"><span class="comment">#遍历key-value值</span></span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> dict1.items():</span><br><span class="line">    print(k, v)</span><br><span class="line"><span class="keyword">for</span> k,v <span class="keyword">in</span> enumerate(dict1):</span><br><span class="line">    print(k, v)</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-28T11:30:15.808Z" itemprop="dateUpdated">2018-05-28 19:30:15</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dict/">dict</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/&title=《Python基础（4）——字典dict》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/&title=《Python基础（4）——字典dict》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（4）——字典dict》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/28/Python基础（5）——集合set/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python基础（5）——集合set</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/28/Python基础（3）——元组tuple/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python基础（3）——元组tuple</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/&title=《Python基础（4）——字典dict》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/&title=《Python基础（4）——字典dict》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（4）——字典dict》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/28/Python基础（4）——字典dict/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3awW7bMBAE0Pz/T7tATwUCJzO7pNKiTycjliU+BiAXs/z4iK/X7yv5/Odfkud8vv/z35Mnry48PDy80dDfXftXvrvnHSz/9usx4+Hh4d3m5Yt4skl8vT4nyGS6o6nEw8PD+1FeXrUm385KcDw8PLx/ndcOPS+UN+PBw8PDe4aXl7BtiJAw8jD3YtaCh4eHF/PONsCe+fxj/T08PLz/nvcqrzzSbSPadumPRouHh4d3gdcOd3YUIA9287ZZcSceHh7eUV4Stp46ENC2ypJ3ffN2PDw8vAu8TWy6iV/z1lcbRkS7Hx4eHt6C1zby24G2RXnbYIv2PTw8PLwLvH0MsW+nJQFuHVXg4eHhXeBtQtj8eEEeJeSYOhrGw8PDO8RLDgecjVlnhxKGk4iHh4d3mbepRXNGXi63zyn6e3h4eHgLXrvotzFrHhnkg25bYnh4eHhneflxgfwFedE8e2bxz8DDw8O7wJsdltq0/GeNrqRdF6XUeHh4eGteXkCvFuUyom07eN9kLXh4eHhHeW0Je+pE06wQn7Xc8PDw8O7x2iZWGw3PYojNAQU8PDy827xZe2xDTRb9NhaJ9j08PDy8NS8vjttgYkNtww48PDy8Z3izZX2/neRTkxT6eHh4eE/y2og2DybyX7UtsfZ4Fh4eHt5Z3qxErpv368bYsEzHw8PDe4S3jyGSkjd/SxJSvH0CHh4e3gVestRuhtI+ud0M2m0JDw8Pb897ldeszE1Civb+6Fd4eHh4F3ibxXfW7J8V2bPCGg8PD+8eL98M8rk5FVvMxoCHh4f3DC9f0E+VwvnRgXYqV3saHh4e3lHevhHVttw2I8TDw8P7e3h5pJuUxUmhnJfXb8MIPDw8vAu89ojV5tDAbIPJAwg8PDy827xNA2zTMJvFtfsDDXh4eHgL3i9VraZLDDxo6AAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

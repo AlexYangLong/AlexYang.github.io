@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python基础（11）——面向对象基础 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,面向对象">
+    <meta name="description" content="Python基础（11）——面向对象基础在Python中，所有数据类型都可以视为对象，当然也可以自定义对象。自定义的对象数据类型就是面向对象中的类（Class）的概念。 面向对象的三个基本特征是：封装、继承、多态。 封装封装是实现面向对象程序设计的第一步，封装就是将数据或函数等集合在一个个的单元中（我们称之为类）。被封装的对象通常被称为抽象数据类型。 隐藏复杂的现实细节，暴露简单的调用接口。 封装">
+<meta name="keywords" content="Python,面向对象">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础（11）——面向对象基础">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Python基础（11）——面向对象基础在Python中，所有数据类型都可以视为对象，当然也可以自定义对象。自定义的对象数据类型就是面向对象中的类（Class）的概念。 面向对象的三个基本特征是：封装、继承、多态。 封装封装是实现面向对象程序设计的第一步，封装就是将数据或函数等集合在一个个的单元中（我们称之为类）。被封装的对象通常被称为抽象数据类型。 隐藏复杂的现实细节，暴露简单的调用接口。 封装">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-29T03:29:33.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础（11）——面向对象基础">
+<meta name="twitter:description" content="Python基础（11）——面向对象基础在Python中，所有数据类型都可以视为对象，当然也可以自定义对象。自定义的对象数据类型就是面向对象中的类（Class）的概念。 面向对象的三个基本特征是：封装、继承、多态。 封装封装是实现面向对象程序设计的第一步，封装就是将数据或函数等集合在一个个的单元中（我们称之为类）。被封装的对象通常被称为抽象数据类型。 隐藏复杂的现实细节，暴露简单的调用接口。 封装">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/other-blog" target="_blank" >
+                <i class="icon icon-lg icon-chain"></i>
+                优秀博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python基础（11）——面向对象基础</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python基础（11）——面向对象基础</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-29T03:23:42.864Z" itemprop="datePublished" class="page-time">
+  2018-05-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Python基础（11）——面向对象基础"><span class="post-toc-number">1.</span> <span class="post-toc-text">Python基础（11）——面向对象基础</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#封装"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">封装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#继承"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">继承</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#多态"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">多态</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Python基础（11）——面向对象基础"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python基础（11）——面向对象基础</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-29 11:23:42" datetime="2018-05-29T03:23:42.864Z"  itemprop="datePublished">2018-05-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Python基础（11）——面向对象基础"><a href="#Python基础（11）——面向对象基础" class="headerlink" title="Python基础（11）——面向对象基础"></a>Python基础（11）——面向对象基础</h1><p>在Python中，所有数据类型都可以视为对象，当然也可以自定义对象。自定义的对象数据类型就是面向对象中的类（Class）的概念。</p>
+<p>面向对象的三个基本特征是：封装、继承、多态。</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装是实现面向对象程序设计的第一步，封装就是将数据或函数等集合在一个个的单元中（我们称之为类）。被封装的对象通常被称为抽象数据类型。 隐藏复杂的现实细节，暴露简单的调用接口。</p>
+<p>封装的意义：封装的意义在于保护或者防止代码（数据）被我们无意中破坏。在面向对象程序设计中数据被看作是一个中心的元素并且和使用它的函数结合的很密切，从而保护它不被其它的函数意外的修改。</p>
+<p>​    1、保护数据成员，不让类以外的程序直接访问或修改，只能通过提供的公共的接口访问==&gt;数据封装。</p>
+<p>​    2、方法的细节对用户是隐藏的，只要接口不变，内容的修改不会影响到外部的调用者==&gt;方法封装。</p>
+<p>​    3、当对象含有完整的属性和与之对应的方法时称为封装。</p>
+<p>​    4、从对象外面不能直接访问对象的属性，只能通过和该属性对应的方法访问。</p>
+<p>​    5、对象的方法可以接收对象外面的消息。</p>
+<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>从已有的类创建新类的过程 提供继承信息的称为父类(超类/基类) 得到继承信息的称为子类(派生类)。继承主要实现重用代码，节省开发时间。</p>
+<p>​    1、在类名后边的括号里一般写的是基类的类名</p>
+<p>​    2、子类中继承自父类(基类),则父类的成员属性和成员方法都可以被子类所继承</p>
+<p>​    3、父类中私有的成员属性不能继承给子类的</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>“一个接口，多种表现形式”。</p>
+<p> 同一操作作用于不同的对象，可以有不同的解释，产生不同的执行结果。</p>
+<p>多态的三个条件:</p>
+<p>​    1、继承的存在(继承是多态的基础,没有继承就没有多态)</p>
+<p>​    2、子类重写父类的方法(多态下调用子类重写的方法)</p>
+<p>​    3、父类引用变量指向子类对象(子类到父类的类型转换)</p>
+<p><strong>数据抽象</strong> 一 找到和对象相关的数据——属性( 名词），可以使用包装器<code>@property</code>和修改器<code>@属性.setter</code>来装饰属性。</p>
+<p><code>__slots__</code>限定自定义类型的对象只能绑定某些属性，可以通过在类中定义<code>__slots__</code>变量来进行限定。需要注意的是<code>__slots__</code>的限定只对当前类的对象生效，对子类并不起任何作用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    # 限定Person对象只能绑定_name, _age和_gender属性</span><br><span class="line">    __slots__ = (&apos;_name&apos;, &apos;_age&apos;, &apos;_gender&apos;)</span><br></pre></td></tr></table></figure>
+<p><strong>行为抽象</strong> 一 找到和对象相关的行为——方法（动词）</p>
+<p><strong>成员方法</strong>：第一个参数为<code>self</code>，由实例化的对象调用</p>
+<p><strong>类方法</strong>：使用<code>@classmethod</code>装饰的方法是类方法，与成员方法的区别在于所接收的第一个参数不是 <code>self</code> （类实例的指针），而是<code>cls</code>（当前类的具体类型）</p>
+<p><strong>静态方法</strong>：使用<code>@staticmethod</code>装饰的方法是类静态方法，其跟成员方法的区别是没有 <code>self</code> 参数，并且可以在类不进行实例化的情况下调用</p>
+<p><strong>魔法方法</strong>：<code>__init__()</code> 、<code>__del__()</code> 、<code>__str__()</code> 、<code>__repr__()</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-29T03:29:33.297Z" itemprop="dateUpdated">2018-05-29 11:29:33</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/面向对象/">面向对象</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/&title=《Python基础（11）——面向对象基础》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/&title=《Python基础（11）——面向对象基础》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（11）——面向对象基础》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/29/Python基础（12）——正则表达式/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python基础（12）——正则表达式</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python基础（10）——文件IO、异常处理、StringIO、BytesIO</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/&title=《Python基础（11）——面向对象基础》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/&title=《Python基础（11）——面向对象基础》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（11）——面向对象基础》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/29/Python基础（11）——面向对象基础/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADIElEQVR42u3aS27CAAwFwN7/0nRbCRGe7UQFZ7JCBZJMWLz68/MTH48/x9+/PL9+9W7yl+d3n8+cf+aEAxsbG/tL2I/D4/gy1dev2Mn9VB/om0eDjY2NvY796vL5xXpJUT1bHqtvjNjY2Ng3ZichdHz+SelSLYqwsbGxsectpOse7j/kNjY2NvYHs3shkbfye7ebjAQu76VhY2Njfzw7b998/utL5tvY2NjYH8x+FI9eO+ncptIJCmxsbOxF7F4ZcO4AIB8S5w2s6P6xsbGxF7GTlk3SBsq/2yNdscqDjY2NvYldRfYCbLJwmQ+bq/GGjY2NvYM9X22clw3VqMtXhZq5jY2Njf0l7N5qTo9XLU4mTavjz2NjY2NvYudN/PIwNb6h3vJlfi1sbGzsrexJyZHHQ3Xom68NNQcD2NjY2DdjT4a+k+LhrB/gzY4SNjY29lJ2bxVmvlI5aV0V1n2wsbGxF7Hz/89PmyfHUZQPFQpjAGxsbOyl7F6jv9fczx/3daGIjY2NvZs9H6/24qpa5CSBGs20sbGxsb+cXQ2Ms4av5dFscWD8xoKNjY29iN0rFfIRb7Xx1Fvc6Y0osLGxsXewq1/LS4gcnxQz+YOIfgBsbGzsG7CvbvdUy5tqpJU7W9jY2Nhfy+4t9FTXffKiZXL+aqxiY2Nj72PPwyPhTZZseiXNm6IFGxsbexH7rPIj+W5+zgTQGzBjY2Nj72D3lnJ6zZ1q+6k3tIgeFjY2NvZt2Hl4TAYDVzezXg56sbGxsVewz7315LvVcJoMpAv1FjY2NvYKdnXlJY+l6vnn49toRIGNjY29jt2LnzxOekPiakFSGCRgY2Njr2NXw6baMJoXOfOIxcbGxt7HfhSPKqkXMPkVe6s82NjY2JvY+dFr3/QGvdVxxfHr0YPAxsbG/hJ2NbTmS5b5o6x+Jn/o2NjY2PvYvZ2WasD01oaaSznHUmxsbOwbs6vh0YvGJMAmd4iNjY19Z3YeVPmqzXF0zdv92NjY2Hdg5035+bu9R1BdIYo2lbCxsbFXsKvtmF5QJW2jJLSq44dRQwobGxv709m/sSubp1sOZRsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

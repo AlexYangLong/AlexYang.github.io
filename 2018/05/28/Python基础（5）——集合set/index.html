@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python基础（5）——集合set | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,set">
+    <meta name="description" content="Python基础（5）——集合set集合setset和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。 作用: 一般是对list ，tuple中的元素进行去重的，求交集、并集、差集等 set的一些常用操作： 1234567891011121314151617181920212223242526272829303132333435363">
+<meta name="keywords" content="Python,set">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础（5）——集合set">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Python基础（5）——集合set集合setset和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。 作用: 一般是对list ，tuple中的元素进行去重的，求交集、并集、差集等 set的一些常用操作： 1234567891011121314151617181920212223242526272829303132333435363">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-28T11:34:52.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础（5）——集合set">
+<meta name="twitter:description" content="Python基础（5）——集合set集合setset和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。 作用: 一般是对list ，tuple中的元素进行去重的，求交集、并集、差集等 set的一些常用操作： 1234567891011121314151617181920212223242526272829303132333435363">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/other-blog" target="_blank" >
+                <i class="icon icon-lg icon-chain"></i>
+                优秀博客
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python基础（5）——集合set</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python基础（5）——集合set</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-28T10:31:11.109Z" itemprop="datePublished" class="page-time">
+  2018-05-28
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Python基础（5）——集合set"><span class="post-toc-number">1.</span> <span class="post-toc-text">Python基础（5）——集合set</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#集合set"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">集合set</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Python基础（5）——集合set"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python基础（5）——集合set</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-28 18:31:11" datetime="2018-05-28T10:31:11.109Z"  itemprop="datePublished">2018-05-28</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Python基础（5）——集合set"><a href="#Python基础（5）——集合set" class="headerlink" title="Python基础（5）——集合set"></a>Python基础（5）——集合set</h1><h2 id="集合set"><a href="#集合set" class="headerlink" title="集合set"></a>集合set</h2><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p>
+<p>作用: 一般是对<code>list</code> ，<code>tuple</code>中的元素进行去重的，求交集、并集、差集等</p>
+<p>set的一些常用操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获得set</span></span><br><span class="line">set1 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line">print(set1)</span><br><span class="line">print(type(set1))</span><br><span class="line">set2 = set((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>))</span><br><span class="line">print(set2)</span><br><span class="line">print(type(set2))</span><br><span class="line">set3 = set(&#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>&#125;)</span><br><span class="line">print(set3)</span><br><span class="line">print(type(set3))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加</span></span><br><span class="line">set4 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line">set4.add(<span class="number">55</span>)  <span class="comment"># add() #可以添加重复的值,但是没效果</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set4.add([10, 9]) #直接报错,不能添加list</span></span><br><span class="line">set4.add((<span class="number">10</span>, <span class="number">9</span>))</span><br><span class="line"><span class="comment"># set4.add(&#123;'a':1&#125;) #直接报错,不能添加字典</span></span><br><span class="line"><span class="comment"># 总结:list和dict是可改变的, 而tuple是不可改变</span></span><br><span class="line">print(set4)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line">set5 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="comment"># 将list dict tuple 等等整个插入进去</span></span><br><span class="line">set5.update([<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])</span><br><span class="line">set5.update(&#123;<span class="number">9</span> : <span class="string">'a'</span>, <span class="number">10</span> : <span class="string">'b'</span>&#125;)  <span class="comment">#注意：插入字典时，是将key插进去</span></span><br><span class="line">set5.update((<span class="number">11</span>, <span class="number">56</span>))</span><br><span class="line">print(set5)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">set6= set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">set6.remove(<span class="number">4</span>)</span><br><span class="line">print(set6)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历</span></span><br><span class="line">set7 = set((<span class="number">231</span>, <span class="number">323.14</span>, <span class="string">'asddf'</span>, <span class="keyword">None</span>, <span class="keyword">True</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> set7:</span><br><span class="line">    print(i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交集  &amp;  并集  |  差集 -  对称差 ^</span></span><br><span class="line">set8 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">set9 = set([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line">set10 = set8 &amp; set9</span><br><span class="line">set11 = set8 | set9</span><br><span class="line">print(set10)</span><br><span class="line">print(type(set10))</span><br><span class="line">print(set11)</span><br><span class="line">print(type(set11))</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-28T11:34:52.937Z" itemprop="dateUpdated">2018-05-28 19:34:52</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/set/">set</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/&title=《Python基础（5）——集合set》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/&title=《Python基础（5）——集合set》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（5）——集合set》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/28/Python基础（6）——list、tuple、dict、set之间的转换/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python基础（6）——list、tuple、dict、set之间的转换</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/28/Python基础（4）——字典dict/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python基础（4）——字典dict</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+<section class="comments" id="comments">
+    <div id="disqus_thread"></div>
+    <script>
+    var disqus_shortname = 'true';
+    lazyScripts.push('//' + disqus_shortname + '.disqus.com/embed.js')
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/&title=《Python基础（5）——集合set》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/&title=《Python基础（5）——集合set》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（5）——集合set》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/28/Python基础（5）——集合set/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3ay27jMBAEQP//T3uvCxiWuoek4kPpFOQhsRSAM27O6xVf74/r/+9//ubnX13fefasbRceHh7e8tJXbn3NS17Nt2d9u/O3NePh4eGd5iW3y5fVvprrpef3xMPDw/tNXlseZi8uadbx8PDwfp/XNsEr0cYfFAY8PDy8kpeEEbsa5Vk7fjxrwcPDw4t5s3D2b78+cr6Hh4eHt3yqfr3hJsHr9ROTAYKl1eLh4eEd4M1GB1YGAvKxrV1DBnh4eHh7ecmi80AhPwBr/6otBnh4eHineSvLzePdWfDarmRb/46Hh4cXp6Bt6LCCmbXy7QEbHh4e3gnerGnOj8dmUUJbrvDw8PCe4bWDVrvGrVbKQD6GhYeHh3eal3/Uzw/D8iGD9fg4ylrw8PDwNvHaRUSB6UJ40cYQNzMReHh4eFt5K4nv3lg23/rzYoaHh4d3gpfErG1A0L6s9Tt8/Vfh4eHhHeCtlIF8425b7fYA7Oa5eHh4eFt51wtKfrprsKAd7YpKFB4eHt4BXlse2jGs/KW041ltg46Hh4e3l9du6+0mnh9izYrQzXfw8PDwHuEljBaQt+/tuEAxNICHh4e3iTfbvvPXsV4kZkdoeHh4eOd4bSiQjFK1k1/Ju38H101LjYeHh7eJ10axs5AiL0jv+NpQA/Hw8PBGvLzxzY+gZiMIeTF45RceHh7e47ykgV5PAPLWuX0KHh4e3jlecviUbM0ro6vD3v96DXh4eHhbee/yygtDu/XnYXExZICHh4d3gNdutcmh197445lCgoeHh9fy8mLQRrHtkOusrb95Ch4eHt4x3koUmwwQtCVnQ8qCh4eH9zO8pDDsOjabxRx4eHh4v8abRQMbxqfKwQI8PDy807w2jJgVidnR1yzqxcPDwzvHm33Iz2OIWWOdv1w8PDy8B3n/AMRzqzjxD/KmAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
