@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python基础（10）——文件IO、异常处理、StringIO、BytesIO | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,文件IO,异常处理,StringIO,BytesIO">
+    <meta name="description" content="Python基础（10）——文件IO、异常处理、StringIO、BytesIO文件IOIO操作，使用open() 函数，还可以使用with上下文关键字来确保打开的文件操作符在退出时被关闭。 12with open(path, mode [, encoding]) as f:	操作... f.read([size]) 从文件读取指定的字节数，如果未给定或为负则读取所有。f.write() 写文件">
+<meta name="keywords" content="Python,文件IO,异常处理,StringIO,BytesIO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础（10）——文件IO、异常处理、StringIO、BytesIO">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Python基础（10）——文件IO、异常处理、StringIO、BytesIO文件IOIO操作，使用open() 函数，还可以使用with上下文关键字来确保打开的文件操作符在退出时被关闭。 12with open(path, mode [, encoding]) as f:	操作... f.read([size]) 从文件读取指定的字节数，如果未给定或为负则读取所有。f.write() 写文件">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/open()函数的mode方式详解.png">
+<meta property="og:updated_time" content="2018-05-29T03:20:18.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础（10）——文件IO、异常处理、StringIO、BytesIO">
+<meta name="twitter:description" content="Python基础（10）——文件IO、异常处理、StringIO、BytesIO文件IOIO操作，使用open() 函数，还可以使用with上下文关键字来确保打开的文件操作符在退出时被关闭。 12with open(path, mode [, encoding]) as f:	操作... f.read([size]) 从文件读取指定的字节数，如果未给定或为负则读取所有。f.write() 写文件">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/open()函数的mode方式详解.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python基础（10）——文件IO、异常处理、StringIO、BytesIO</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python基础（10）——文件IO、异常处理、StringIO、BytesIO</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-29T02:34:33.000Z" itemprop="datePublished" class="page-time">
+  2018-05-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Python基础（10）——文件IO、异常处理、StringIO、BytesIO"><span class="post-toc-number">1.</span> <span class="post-toc-text">Python基础（10）——文件IO、异常处理、StringIO、BytesIO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#文件IO"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">文件IO</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#os模块"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">os模块</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#异常处理"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">异常处理</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#StringIO"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">StringIO</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#BytesIO"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">BytesIO</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Python基础（10）——文件IO、异常处理、StringIO、BytesIO"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python基础（10）——文件IO、异常处理、StringIO、BytesIO</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-29 10:34:33" datetime="2018-05-29T02:34:33.000Z"  itemprop="datePublished">2018-05-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Python基础（10）——文件IO、异常处理、StringIO、BytesIO"><a href="#Python基础（10）——文件IO、异常处理、StringIO、BytesIO" class="headerlink" title="Python基础（10）——文件IO、异常处理、StringIO、BytesIO"></a>Python基础（10）——文件IO、异常处理、StringIO、BytesIO</h1><h2 id="文件IO"><a href="#文件IO" class="headerlink" title="文件IO"></a>文件IO</h2><p>IO操作，使用<code>open()</code> 函数，还可以使用<code>with</code>上下文关键字来确保打开的文件操作符在退出时被关闭。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> open(path, mode [, encoding]) <span class="keyword">as</span> f:</span><br><span class="line">	操作...</span><br></pre></td></tr></table></figure>
+<p><code>f.read([size])</code> 从文件读取指定的字节数，如果未给定或为负则读取所有。<br><code>f.write()</code> 写文件 # 如果要写入字符串以外的数据,先将他转换为字符串<br><code>f.close()</code> 关闭文件<br><code>f.readline([size])</code> 读取整行内容,包括\n字符, 如果给定参数则从文件开始读取指定的字符个数<br><code>f.readlines([sizeint])</code> 读取所有行并返回列表，若给定<code>sizeint&gt;0</code>，返回总和大约为<code>sizeint</code>字节的行, 实际读取值可能比 <code>sizeint</code> 较大, 因为需要填充缓冲区。<br><code>f.tell()</code> 返回一个整数,表示当前文件指针的位置(就是到文件头的比特数).<br><code>f.seek(偏移量,[起始位置])</code> 用来移动文件指针 <code>#偏移量:单位:比特,可正可负起始位置:0-文件头,默认值;1-当前位置;2-文件尾</code></p>
+<p>mode模式：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./open()函数的mode方式详解.png" alt="open()函数的mode方式详解" title="open()函数的mode方式详解">
+                </div>
+                <div class="image-caption">open()函数的mode方式详解</div>
+            </figure>
+<h3 id="os模块"><a href="#os模块" class="headerlink" title="os模块"></a>os模块</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.getcwd() <span class="comment"># 返回当前的工作目录 # 获取绝对路径</span></span><br><span class="line">os.listdir(path) <span class="comment"># 返回指定的文件夹包含的文件或文件夹的名字的列表</span></span><br><span class="line">os.mkdir(path) <span class="comment"># 在当前目录下创建新的目录</span></span><br><span class="line">os.rmdir(path) <span class="comment"># 删除目录, 只能删除空目录</span></span><br><span class="line">os.rename(src, dst) <span class="comment"># 对文件进行重命名</span></span><br><span class="line">os.stat(file) <span class="comment"># 获取文件属性</span></span><br><span class="line">os.remove(file) <span class="comment"># 删除文件 #可以将本文件删除</span></span><br><span class="line">os.path.join(path1, path2) <span class="comment"># 路径拼接</span></span><br><span class="line">os.path.split(path) <span class="comment"># 拆分路径 # 返回一个元组(目录, 最后一个文件/目录名称)</span></span><br><span class="line">os.path.splitext(path) <span class="comment"># 获取文件的或站名</span></span><br><span class="line">os.path.exists(path) <span class="comment"># 判断文件/目录是否存在</span></span><br><span class="line">os.path.isfile(path) <span class="comment"># 判断是否是文件</span></span><br><span class="line">os.path.getsize(file) <span class="comment"># 获取文件的大小</span></span><br><span class="line">os.path.dirname(path) <span class="comment"># 获取当前文件的目录</span></span><br><span class="line">os.path.basename(path) <span class="comment"># 获取当前文件/目录名</span></span><br></pre></td></tr></table></figure>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>在Python中处理异常使用<code>try...except...[else...][finally...]</code>关键字。</p>
+<p>格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">try</span>语句</span><br><span class="line"><span class="keyword">except</span> 异常类<span class="number">1</span> <span class="keyword">as</span> 变量<span class="number">1</span>:</span><br><span class="line">    异常处理语句<span class="number">1</span></span><br><span class="line"><span class="keyword">except</span> 异常类<span class="number">2</span> <span class="keyword">as</span> 变量<span class="number">2</span>:</span><br><span class="line">    异常处理语句<span class="number">2</span></span><br><span class="line">...</span><br><span class="line">[<span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">else</span>语句]</span><br><span class="line">[<span class="keyword">finally</span>:</span><br><span class="line">    <span class="keyword">finally</span>语句]</span><br></pre></td></tr></table></figure>
+<p>执行顺序：进入try语句块，如果发生错误，依次匹配except中的异常类，匹配成功进入该异常处理块，如果不报错，会执行else中的语句，而finally不管有没有报错都会执行…</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">div</span><span class="params">(x , y)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = x / y</span><br><span class="line">    <span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:</span><br><span class="line">        print(<span class="string">'除数不能为0'</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(res)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        print(<span class="string">'Anyway，I always run'</span>)</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">	div(<span class="number">10</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">	main()</span><br></pre></td></tr></table></figure>
+<h2 id="StringIO"><a href="#StringIO" class="headerlink" title="StringIO"></a>StringIO</h2><p>很多时候，数据读写不一定是文件，也可以在内存中读写，而且更快。</p>
+<p>StringIO模块主要用于在内存缓冲区中读写数据。它只有一个StringIO类，所以它的可用方法都在类中。此类中的大部分函数都与对文件的操作方法类似。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> StringIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = StringIO()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">'hello'</span>)</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">' '</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">'world!'</span>)</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(f.getvalue())</span><br><span class="line">hello world!</span><br><span class="line"></span><br><span class="line"><span class="comment"># getvalue() 方法用于获得写入后的str。</span></span><br></pre></td></tr></table></figure>
+<h2 id="BytesIO"><a href="#BytesIO" class="headerlink" title="BytesIO"></a>BytesIO</h2><p>StringIO操作的只能是str，如果要操作二进制数据，就需要使用BytesIO。BytesIO实现了在内存中读写bytes，先创建一个BytesIO对象，然后写入一些bytes。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f = BytesIO()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>f.write(<span class="string">'中文'</span>.encode(<span class="string">'utf-8'</span>))</span><br><span class="line"><span class="number">6</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(f.getvalue())</span><br><span class="line"><span class="string">b'\xe4\xb8\xad\xe6\x96\x87'</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-05-29T03:20:18.070Z" itemprop="dateUpdated">2018-05-29 11:20:18</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BytesIO/">BytesIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/StringIO/">StringIO</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常处理/">异常处理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件IO/">文件IO</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/&title=《Python基础（10）——文件IO、异常处理、StringIO、BytesIO》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/&title=《Python基础（10）——文件IO、异常处理、StringIO、BytesIO》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（10）——文件IO、异常处理、StringIO、BytesIO》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/29/Python基础（11）——面向对象基础/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python基础（11）——面向对象基础</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/29/Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'false' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/&title=《Python基础（10）——文件IO、异常处理、StringIO、BytesIO》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/&title=《Python基础（10）——文件IO、异常处理、StringIO、BytesIO》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（10）——文件IO、异常处理、StringIO、BytesIO》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD6UlEQVR42u3aS3LbQAwFQN7/0so2LofKe8DQ1qK5crFkCtNcQPhcV3y9/rpm9+/ufP+vPJ7vT37//GMXDhw4cOCIj/r+0fmRZgdLnrmhf39GHDhw4MBxliNJZsmBiy8uU+zZpH57HwcOHDhw/DhHUkQlIeZJdJOAceDAgQPH53PkSXFT1G1SLw4cOHDg+ASOJE3OEnDesNun5Ly5eaBXigMHDhw4unxXJ91P/vuR/Q4cOHDgwFGOiPJEmLcO88S5KSlfowsHDhw4cOw59ssEbdprj922+WbEOHDgwIHjLEcbStJATFJyvnKXJ+x20eHavxkcOHDgwBEnsPYYZ8dRszKv/Vnw5Q4OHDhw4HiAY7N2cPZg7z+zKc9uY8aBAwcOHGuOzZclA57NUCo/2GwxrkjeOHDgwIEj5pg12jYtwlk6n7UOo/WFuxIOBw4cOHAsOPbFVZss25SZlIhtJDhw4MCB4wmOfE2hbRHmA6ck6HbNYlVk4sCBAweONUe7CpAn5k0oyf1ZwVYkZhw4cODAcZRjVnTNBkL5CsJsPJa3FHHgwIEDx4ajLaLy5JeUbcVAaJRK60UKHDhw4MCx5sgPlie/aLQzaiy2Kw4HUjUOHDhw4Bhx5KOgtoRLPtm+sXboVcePAwcOHDgW8bdDpuR++/fZ3wub14ADBw4cOPYc+bAnOVJOOWNqFyOG8ePAgQMHjkX8SbizIz3RfGxHUHUix4EDBw4ca468nEvGRXmIV3xt1vU2T8aBAwcOHPs5y6mFgxY33yU4VdTdfgYHDhw4cBziODVqmq0gnB1lzV7Ml0SLAwcOHDjWHPumWz7ySdpzLfqppQocOHDgwPEcRx5oOxbap95NQ7NoDuLAgQMHjhFHMoyZNd1m7b8ca1ZY1pHjwIEDB46SY7aI0KbnWRrOk2t7imIKhwMHDhw4So521JQUQqcKv7NJPXklOHDgwIHjCY48lbajpja4/AkbUBw4cODAcZajXWVo1+POlmdJKi0S6l1FiwMHDhw41hxtQzBpC0brAnG47Rgs/0Fw5T9IcODAgQNHzJEEmhdjs2W19vD7IvMf93HgwIEDx5pjc+w8xSZJccPXjqP+83kcOHDgwLHgeJVXXgRuire2sJwVh9fsMDhw4MCB49CVD4RmhVPbFswXF/KfBThw4MCB4xTH5sueGE21awqHEy0OHDhw4DjEsUmESdCb5t0swtmpceDAgQPHz3NsGojt8sEmweepHQcOHDhw/C7HZvmgHVO9h8vTcNG+xIEDBw4chziS5mA75skP3H77pnV4bOyEAwcOHDjWCw1Fi20R6GxVrj38prGIAwcOHDhunvkHRkDYu4zhu2cAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

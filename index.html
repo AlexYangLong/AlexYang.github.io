@@ -17,6 +17,8 @@
     <title>AlexYang&#39;s World | AlexYang的博客世界</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
+    <meta name="theme-color" content="#3F51B5">
+    
     
     <meta name="keywords" content="Python;Web">
     <meta name="description" content="学习弯道超车的技巧！">
@@ -33,8 +35,8 @@
     
         <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
     
-    <link rel="shortcut icon" href="/">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -50,19 +52,61 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap" style="background-image:url(/)">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/">
+          <img src="/img/avatar.jpg">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">AlexYang</h5>
-          <a href="mailto:undefined" class="mail">
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
         </hgroup>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
       <ul class="nav">
+        
+            <li class="waves-block waves-effect active">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
         
       </ul>
     </div>
@@ -87,6 +131,10 @@
             </a>
         </div>
         
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
         
     </div>
 </header>
@@ -139,7 +187,14 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（14）——进程和线程线程：是操作系统...
+        Python基础（14）——进程和线程线程：是操作系统分配CPU的基本单元
+进程：是操作系统分配内存的基本单元，一个进程由一个或多个线程构成
+多进程、多线程：加速程序执行，提升性能；改善用户体验
+​                  编写麻烦，调试更麻烦；对其他进程、线程不友好；占用更多资源
+单进程 / 单线程模拟下载任务例子：
+
+                
+             ...
     
 
         <a href="/2018/05/29/Python基础（14）——进程和线程/" class="post-more waves-effect waves-button">
@@ -186,7 +241,7 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（13）——网络编程入门基于传输层协议...
+        Python基础（13）——网络编程入门基于传输层协议的套接字编程套接字这个词对很多不了解网络编程的人来说显得非常晦涩和陌生，其实说得通俗点，套接字就是一套用C语言写成的应用程序开发库，主要用于实现进程间通信和网络编程，在网络应用开发中被广泛使用。在Python中也可以基于套接字来使用传输层提供的传输服务，并基于此开发自己的网络应用。实际开发中使用的套接字可以分为三类：流套接字（TCP套接字...
     
 
         <a href="/2018/05/29/Python基础（13）——网络编程入门/" class="post-more waves-effect waves-button">
@@ -233,7 +288,34 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（12）——正则表达式正则的基本符号下...
+        Python基础（12）——正则表达式正则的基本符号下面的表示总结了一些正则的基本符号：
+
+
+
+符号
+解释
+示例
+说明
+
+
+
+
+.
+匹配任意字符
+b.t
+可以匹配bat / but / b#t / b1t等
+
+
+\w
+匹配字母/数字/下划线
+b\wt
+可以匹配bat / b1t / b_t等但不能匹配b#t
+
+
+\s
+匹配空白字符（包括\r、\n、\t等）
+love\syou
+可以匹配lov...
     
 
         <a href="/2018/05/29/Python基础（12）——正则表达式/" class="post-more waves-effect waves-button">
@@ -280,7 +362,9 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（11）——面向对象基础在Python...
+        Python基础（11）——面向对象基础在Python中，所有数据类型都可以视为对象，当然也可以自定义对象。自定义的对象数据类型就是面向对象中的类（Class）的概念。
+面向对象的三个基本特征是：封装、继承、多态。
+封装封装是实现面向对象程序设计的第一步，封装就是将数据或函数等集合在一个个的单元中（我们称之为类）。被封装的对象通常被称为抽象数据类型。 隐藏复杂的现实细节，暴露简单的调用接口。...
     
 
         <a href="/2018/05/29/Python基础（11）——面向对象基础/" class="post-more waves-effect waves-button">
@@ -327,7 +411,9 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（10）——文件IO、异常处理、Str...
+        Python基础（10）——文件IO、异常处理、StringIO、BytesIO文件IOIO操作，使用open() 函数，还可以使用with上下文关键字来确保打开的文件操作符在退出时被关闭。
+12with open(path, mode [, encoding]) as f:	操作...
+f.read([size]) 从文件读取指定的字节数，如果未给定或为负则读取所有。f.write() 写...
     
 
         <a href="/2018/05/29/Python基础（10）——文件IO、异常处理、StringIO、BytesIO/" class="post-more waves-effect waves-button">
@@ -374,7 +460,14 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（9）——函数、装饰器、迭代器、生成器...
+        Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域函数定义函数，使用 def 关键字。
+结构：
+123def 函数名(参数列表...):	语句...	return 返回值...
+函数的参数：
+1、不定长参数： *args
+2、关键字参数：**kwargs
+匿名函数: 关键字 lambda      eg：qm = lambda x: x ** x
+偏函数: 导入模块 impo...
     
 
         <a href="/2018/05/29/Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域/" class="post-more waves-effect waves-button">
@@ -421,7 +514,9 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        常见的字符串函数1、splitsplit(str=’ ...
+        常见的字符串函数1、splitsplit(str=’ ‘[,num])  对字符串进行切片，并返回一个列表，str 表示按此字符串进行分割，默认是空格，num 表示最多分割多少次
+12str1 = 'aaa sss ddd 'print(str1.split(' ', 3))  # ['aaa', 'sss', 'ddd', '']
+2、splitlinessplitlines([keepe...
     
 
         <a href="/2018/05/28/Python基础（8）——常见的字符串函数/" class="post-more waves-effect waves-button">
@@ -469,7 +564,13 @@
 
     
         流程控制：分支与循环流程控制语句主要分为三种：
-​  ...
+​    1、顺序语句：顾名思义，就是按照顺序从头一句一句往下执行。
+​    2、分支语句
+​    3、循环语句
+分支语句在Python中，要构造分支结构可以使用if、elif和else关键字。
+结构：
+1234567if 表达式1:	语句1elif 表达式2:	语句2[...]else:	语句n
+执行顺序：先判断表达式1 的值，如果为Tr...
     
 
         <a href="/2018/05/28/Python基础（7）——流程控制：分支与循环/" class="post-more waves-effect waves-button">
@@ -516,7 +617,11 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（6）——list、tuple、dic...
+        Python基础（6）——list、tuple、dict与set之间的转换list、tuple、dict与set之间的转换list和tuple是有序的，dict和set是无序的。
+list和dict是可变的，tuple和set是“不可变的”。
+dict具有极快的查找速度，不会因为元素个数的增多而变慢，相应的，占用的空间大；
+而list占用的空间较小，但是查找速度会随着元素个数的增多而变慢。
+...
     
 
         <a href="/2018/05/28/Python基础（6）——list、tuple、dict、set之间的转换/" class="post-more waves-effect waves-button">
@@ -563,7 +668,10 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（5）——集合set集合setset和...
+        Python基础（5）——集合set集合setset和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。
+作用: 一般是对list ，tuple中的元素进行去重的，求交集、并集、差集等
+set的一些常用操作：
+1234567891011121314151617181920212223242526272829303132333435...
     
 
         <a href="/2018/05/28/Python基础（5）——集合set/" class="post-more waves-effect waves-button">
@@ -603,6 +711,15 @@
             <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
         </p>
 		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
 
     </div>
     <div class="bottom">
@@ -623,14 +740,60 @@
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/&title=AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/&title=AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=AlexYang's World&url=http://alexyanglong.github.io/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABzElEQVR42u3ay27CMBAFUP7/p6lUdcGiTu6MH4XqeBVBAsdZjObhxyNez+/1ev26rp8a3Xn97NTCxcWd5j4v14ibbCbfQGLAxcU9z82DVzXA5Z9cG3Bxcd+Tm18nd+Li4v4P7giUpES4uLifyE2KnzzRGf1+nh4tqNVwcXEnuL2G6drr7f1dXFzcRVOJ6iAkaZX2/vfnWVxc3CPcpJ2xqoFyvbG8HMLFxd3NTW7Kh6/V4xflp3BxcQ9yZwYh+xKdX57CxcU9zp0ZkMwc6iqUUri4uH/KrfYqV4XCGzQuLu4Rbm+IUm2O5JvZMl7FxcVtcfN0pAftpVNT815cXNxF3PnSZeaYRSF5wsXFPcJNio1kINoLVQvmw7i4uEu5vYFHL3jlv9AcpeDi4i7iVlsSefDqtVyjwIqLi7uZ29xfnBL1wtzwpeDi4h7kJm3N3jbyzwuBDBcX9wg3X9UCqVdWNbMkXFzcRdzeIYy8C7vvW1xc3N3c3nHMZN9JCXRd8BS6OLi4uBu41fZo0troNVhvXhMuLu6bcXslU695ejNkxcXF/RBu0uzIj18MAx8uLu5B7nyCUt3A9rYILi7uwYZp0jzNg1ryanBxcQ9yvwCX1k3U9hPG7wAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: , REWARD: false };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.2"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -650,14 +813,33 @@ var BLOG = { ROOT: '/', SHARE: , REWARD: false };
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.2" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
 
 
 
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
 
 
 

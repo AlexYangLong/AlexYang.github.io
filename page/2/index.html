@@ -17,6 +17,8 @@
     <title>AlexYang&#39;s World | AlexYang的博客世界</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
+    <meta name="theme-color" content="#3F51B5">
+    
     
     <meta name="keywords" content="Python;Web">
     <meta name="description" content="学习弯道超车的技巧！">
@@ -33,8 +35,8 @@
     
         <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
     
-    <link rel="shortcut icon" href="/">
-    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
     <script>window.lazyScripts=[]</script>
 
     <!-- custom head -->
@@ -50,19 +52,61 @@
     <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
         <i class="icon icon-lg icon-close"></i>
     </a>
-    <div class="brand-wrap" style="background-image:url(/)">
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
       <div class="brand">
         <a href="/" class="avatar waves-effect waves-circle waves-light">
-          <img src="/">
+          <img src="/img/avatar.jpg">
         </a>
         <hgroup class="introduce">
           <h5 class="nickname">AlexYang</h5>
-          <a href="mailto:undefined" class="mail">
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
         </hgroup>
       </div>
     </div>
     <div class="scroll-wrap flex-col">
       <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
         
       </ul>
     </div>
@@ -87,6 +131,10 @@
             </a>
         </div>
         
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
         
     </div>
 </header>
@@ -139,7 +187,9 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（4）——字典dict字典dictPy...
+        Python基础（4）——字典dict字典dictPython内置了字典：dict的支持，dict全称dictionary，使用键-值（key-value）存储，具有极快的查找速度。
+注意事项:​    1、在字典中键(key)的值必须是唯一​    2、在字典中可以存放多个键值对​    3、在字典中键(key)必须是不可变类型，字符串 、整数等都可以作为键(key)
+下面是字典dict的...
     
 
         <a href="/2018/05/28/Python基础（4）——字典dict/" class="post-more waves-effect waves-button">
@@ -186,7 +236,9 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（3）——元组tuple元组tuple...
+        Python基础（3）——元组tuple元组tuplePython还有另一种有序列表叫元组：tuple。tuple和list非常类似，但是tuple一旦初始化就不能修改。
+下面是元组tuple的一些常见操作：
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505...
     
 
         <a href="/2018/05/28/Python基础（3）——元组tuple/" class="post-more waves-effect waves-button">
@@ -233,7 +285,9 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（2）——列表list列表listPy...
+        Python基础（2）——列表list列表listPython还内置了一种数据类型是列表：list。list是一种有序的集合，可以随时添加和删除其中的元素。
+下面是列表list的一些常见操作：
+1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545...
     
 
         <a href="/2018/05/28/Python基础（2）——列表list/" class="post-more waves-effect waves-button">
@@ -280,7 +334,8 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Python基础（1）——数据类型与基础语法数据类型计...
+        Python基础（1）——数据类型与基础语法数据类型计算机中的变量是实际存在的数据或者说是存储器中存储数据的一块内存空间，变量的值可以被读取和修改，这是所有计算和控制的基础。计算机能处理的数据有很多中类型，除了数值之外还可以处理文本、图形、音频、视频等各种各样的数据，那么不同的数据就需要定义不同的存储类型。Python中的数据类型很多，部分如下：
+整型（int）：Python中可以处理任意大...
     
 
         <a href="/2018/05/28/Python基础（1）——数据类型与基础语法/" class="post-more waves-effect waves-button">
@@ -327,7 +382,14 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Hexo快速搭建静态Blog网站声明：以下所有操作都是...
+        Hexo快速搭建静态Blog网站声明：以下所有操作都是在windows操作系统下进行。
+什么是HexoHexo 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。
+安装在安装Hexo前需要确保电脑已经安装以下程序 :
+
+Node.js
+Git
+
+这两个程序的安装很简单，windows用户可以使用安装程序进行...
     
 
         <a href="/2018/05/28/Hexo快速搭建静态Blog网站/" class="post-more waves-effect waves-button">
@@ -372,7 +434,8 @@
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        Welcome to Hexo! This is yo...
+        Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Qu...
     
 
         <a href="/2018/05/25/hello-world/" class="post-more waves-effect waves-button">
@@ -406,6 +469,15 @@
             <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
         </p>
 		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
 
     </div>
     <div class="bottom">
@@ -426,14 +498,60 @@
 <a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
 
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/page/2/&title=AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/page/2/&title=AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/page/2/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=AlexYang's World&url=http://alexyanglong.github.io/page/2/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/page/2/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAK4AAACuCAAAAACKZ2kyAAABwklEQVR42u3aQW7DMAwEwPz/0+61RRFlScpqUoxOgZHY4xwEcsXHI17Xt5VcX38n+dVo4eLijrnXcs25v7//7PPagIuLe56b3PoZd32f9V+TG3BxcT+Rm1zBxcX9r9x1mZLQcXFxP4WbND+7opP1lW29Gi4u7oA7jzPmn2/Jd3FxcVvcq7XmxVDv6bi4uGe464Ijb5CSl8nbJ1xc3L/l9n6ctzq91356f1xc3IPc6saUxJp7Rzd+bGS4uLhHuEl8mWxGvUPWBI2Li3ueu6sE6bVPhTEvXFzcI9w8uOwNY+UHKoUWCxcX92Zur1jphaTVV41AuLi4N3PvOAjphSBPbbi4uEe4ecS599h1MvKFi4t7NzeJSvNipVoeVTdNXFzcM9w8ysyPSQrjFMVn4eLinuHmzczo8KMYsrzYwnBxcW/m9oqPXjE0CURenPzg4uJu5V7F1ctdkgh12+AFLi7umJuvPELd9aqjF8DFxR1ze4/JR7iqh7KjOTJcXNyt3GrPlLdD1RYoikVwcXHfhrs3AK1GMLi4uO/JrTYzeQGUlEe4uLjnuXmBkm9qvWGObbEILi7ugDua6hoPclXjVFxc3Ju5X1K5TdSXX828AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
     <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 <script>
-var BLOG = { ROOT: '/', SHARE: , REWARD: false };
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
 
 
 </script>
 
-<script src="/js/main.min.js?v=1.7.2"></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
 
 
 <div class="search-panel" id="search-panel">
@@ -453,14 +571,33 @@ var BLOG = { ROOT: '/', SHARE: , REWARD: false };
 </li>
 </template>
 
-<script src="/js/search.min.js?v=1.7.2" async></script>
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
 
 
 
 
 
 
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
 
 
 
