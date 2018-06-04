@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux的基本使用 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux">
+    <meta name="description" content="#Linux的基本使用                                                                                              Linux简介              操作系统发展史图：">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux的基本使用">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/06/04/Linux的基本使用/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="#Linux的基本使用                                                                                              Linux简介              操作系统发展史图：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/06/04/Linux的基本使用/Linux简介.jpg">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/06/04/Linux的基本使用/操作系统发展史.png">
+<meta property="og:updated_time" content="2018-06-04T12:26:14.602Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux的基本使用">
+<meta name="twitter:description" content="#Linux的基本使用                                                                                              Linux简介              操作系统发展史图：">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/06/04/Linux的基本使用/Linux简介.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux的基本使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux的基本使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-04T11:57:18.923Z" itemprop="datePublished" class="page-time">
+  2018-06-04
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+
+<article id="post-Linux的基本使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux的基本使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-04 19:57:18" datetime="2018-06-04T11:57:18.923Z"  itemprop="datePublished">2018-06-04</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <p>#Linux的基本使用</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./Linux简介.jpg" alt="Linux简介" title="">
+                </div>
+                <div class="image-caption">Linux简介</div>
+            </figure>
+<p>操作系统发展史图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./操作系统发展史.png" alt="操作系统发展史" title="">
+                </div>
+                <div class="image-caption">操作系统发展史</div>
+            </figure>
+<p>##Linux的基本命令（centos7）</p>
+<p><code>who</code> 或 <code>w</code>：查看当前登录的所有用户</p>
+<p><code>who am i</code> 或 <code>whoami</code>：查看当前登录用户</p>
+<p><code>last</code>：查看之前登录过的用户历史记录</p>
+<p><code>clear</code>：清屏</p>
+<p><code>ps</code>：查看进程状态</p>
+<p>​    <code>ps -ef</code>：查看进程</p>
+<p>​    <code>ps -aux</code>：查看进程</p>
+<p><code>kill</code> ： 进程号：杀掉进程</p>
+<p><code>netstat -nap</code>：查看进程、端口、进程号</p>
+<p><code>adduser 用户名</code>：创建新用户</p>
+<p><code>userdel 用户名</code>：删除用户</p>
+<p><code>passwd [用户名]</code>：修改用户密码，不加用户名是修改的root的密码</p>
+<p><code>ssh 用户名@ip地址</code>：远程安全连接其他的服务器</p>
+<p><code>logout</code> 或 <code>exit</code>：退出</p>
+<p><code>reboot</code>：重启服务器</p>
+<p><code>shutdown</code>：关闭服务器</p>
+<p><code>init 0</code>：关机</p>
+<p><code>init 6</code>：重启</p>
+<p><code>uname</code>：查看当前系统</p>
+<p><code>hostname</code>：查看主机名</p>
+<p><code>history</code>：查看历史命令，默认保存最近1000条，可以使用 HISTSIZE=新值 来修改保存的条数</p>
+<p>​    <code>!num(命令行号)</code>：重新执行改行命令</p>
+<p><code>man 命令</code>：查看’命令‘的使用方式</p>
+<p><code>info 命令</code>：查看’命令‘的使用方式，更详细</p>
+<p><code>命令 --help</code>：查看’命令‘的参数使用方法</p>
+<p><code>whatis 命令</code>：查看命令的简短描述</p>
+<p><code>pwd</code>：打印当前工作目录路径 - print working directory</p>
+<p><code>whereis 命令</code>：查找包含 ’命令‘ 所有的目录路径</p>
+<p><code>which 命令</code>：查找到第一个含有 ’命令‘ 的目录路径</p>
+<p><code>su 用户名</code>：切换到该用户，但是不会切换到该用户的文件目录</p>
+<p><code>su - 用户名</code>：切换到该用户，并且切换到该用户的文件目录</p>
+<p><code>sudo 命令操作</code>：以管理员身份执行</p>
+<p><code>mkdir 目录名</code>：创建目录</p>
+<p><code>rmdir 目录名</code>：删除空目录</p>
+<p><code>rm 目录名/文件名</code>：删除目录或者文件，可以加参数</p>
+<p>​    -i：交互式删除，有提示 interactive</p>
+<p>​    -f：不用提示，直接删除 force</p>
+<p>​    -r：递归删除目录下的内容  recursive</p>
+<p><code>ls</code>：查看当前目录下的所有文件和目录（非隐藏），可以加参数</p>
+<p>​    -l：查看当前目录下的所有文件和目录，长格式（非隐藏）</p>
+<p>​    -a：查看当前目录下的所有文件和目录</p>
+<p>​    -al  或 -l -a：查看当前目录下的所有文件和目录，长格式</p>
+<p>​    -r：反转显示目录下的文件和目录，按字母表降序</p>
+<p>​    -R：递归显示目录下的文件和目录</p>
+<p><code>touch 文件名</code>：没有该文件就创建一个空文件，有只是改变其时间戳，可以修改文件的三个时间：修改内容的时间，更改权限的时间，最后访问的时间</p>
+<p><code>cd 目录</code>：切换目录  - change directory</p>
+<p>​    <code>cd /root</code>：回到root主目录 （/root  绝对路径） （/root：root用户主目录，/etc：放置配置文件目录</p>
+<p>/home：其他用户的用户主目录，/usr：用户数据、用户应用目录）</p>
+<p>​    <code>cd ~</code>：回到当前用户主目录</p>
+<p>​    <code>cd ..</code>：回到上一级</p>
+<p>​    <code>cd /</code>：回到根目录</p>
+<p><code>cp 文件名 路径</code>：将文件拷贝到路径下，可以重命名</p>
+<p><code>scp 本地文件 用户名@ip地址:路径</code>：将本地文件安全拷贝到目标服务器的某路径下</p>
+<p><code>sftp 用户名@ip地址</code>：安全的远程文件传输</p>
+<p><code>mv 文件名/目录 路径</code>：将文件/目录剪切（移动）到路径下，可以重命名</p>
+<p><code>cat 文件名</code>：查看文件所有内容</p>
+<p>​    <code>cat 文件名 -n</code>：查看文件内容并显示行号</p>
+<p>​    <code>cat 文件名| more 或 less</code>：一页一页查看</p>
+<p>​    <code>cat 文件名| grep pattern</code>：搜索文件中的内容，匹配模式pattern匹配的字符串</p>
+<p><code>head  -n 文件</code>：查看文件前 n 行</p>
+<p><code>tail -n 文件</code>：查看文件最后 n 行</p>
+<p><code>wget 资源路径</code>：联网获取资源</p>
+<p>​    <code>wget -O filename 资源路径</code>：获取资源并给资源重命名</p>
+<p><code>grep pattern 文件1</code>：搜索文件1中的内容，匹配模式pattern匹配的字符串</p>
+<p><code>find</code>：查找文件或目录</p>
+<p><code>jobs</code>：查看正在执行的后台任务列表</p>
+<p><code>fg %n</code>：将编号为 n 的后台任务拿到前台执行</p>
+<p><code>bg %n</code>：将编号为 n 的后台暂停任务继续在后台执行</p>
+<p><code>top</code>：查看CPU的状态</p>
+<p><code>wc 文件</code>：统计文件的行数、单词数、字符数，可以加参数</p>
+<p>​    -l：行数</p>
+<p>​    -w：单词数</p>
+<p><code>uniq 文件</code>：将文件中的内容去重显示，注意只能去相邻的重复的，不改变原文件内容</p>
+<p><code>sort 文件</code>：将文件中的内容进行排序显示，不改变原文件内容</p>
+<p><code>diff 文件1 文件2</code>：比较两个文件的差异，并显示不同之处</p>
+<p><code>file 文件</code>：显示文件的性质</p>
+<p><code>date</code>：查看当前时间</p>
+<p><code>cal</code>：查看日历</p>
+<p><code>echo</code>：回声命令</p>
+<p>​    <code>echo string</code>：在屏幕上输出string</p>
+<p>​    <code>echo string &gt; 文件</code>：将string输出到文件中</p>
+<p>​    <code>echo $a</code>：在屏幕上打印变量a的值</p>
+<p><code>ln</code>：创建链接</p>
+<p><code>ln 路径1/文件1 路径2/文件2</code>：给路径1下的文件1在路径2下创建名为文件2的硬链接，存储的是文件1内容的引用，相当于备份，但是不会占用空间</p>
+<p><code>ln -s 路径1/文件1 路径2/文件2</code>：给路径1下的文件1在路径2下创建名为文件2的软链接，相当于快捷方式，不是引用</p>
+<p><code>gzip 文件名</code>：压缩</p>
+<p><code>gunzip 文件名</code>：解压缩</p>
+<p><code>xz</code>：压缩、解压缩，可以加参数</p>
+<p>​    <code>xz -z 文件名</code>：压缩</p>
+<p>​    -0 … -9：压缩比，值越大，压缩率越大</p>
+<p>​    <code>xz -d 文件名</code>：解压缩</p>
+<p><code>tar</code>：归档</p>
+<p>​    -x：抽取，解归档</p>
+<p>​    -v：显示解归档的过程</p>
+<p>​    -f：指定文件名</p>
+<p>​    <code>tar -xvf 文件名</code>：解归档使用</p>
+<p>​    -t：查看归档文件的内容</p>
+<p>​    -c：归档</p>
+<p>​    <code>tar -cvf 归档文件名 源文件路径</code>：归档使用</p>
+<p><code>alias 名称=&#39;命令 [参数]&#39;</code>：给 ‘命令 参数’ 起别名</p>
+<p><code>unalias 名称</code>：取消别名</p>
+<p><code>!v</code>：把刚刚以v开头的命令在执行一遍</p>
+<p>&amp;：后台执行</p>
+<p>>文件2：输出重定向，将运行结果输出到文件2</p>
+<p>2&gt; 文件3：错误重定向，将错误输出到文件3</p>
+<p>>&gt; 文件4：追加输出重定向，将运行结果追加输出到文件4</p>
+<p>&lt;：输入重定向</p>
+<p>##vi / vim 编辑器的使用：</p>
+<p><code>i</code> 或 <code>a</code>：进入编辑模式</p>
+<p><code>ESC</code>：退出编辑模式，进入命令模式</p>
+<p><code>:</code> ：在命令模式下，按 : 键进入末行模式</p>
+<p>###在命令模式下：</p>
+<p><code>yy</code>：复制本行</p>
+<p><code>num yy</code>：复制num行</p>
+<p><code>p</code>：粘贴</p>
+<p><code>dd</code>：删除本行</p>
+<p><code>num dd</code>：删除num行</p>
+<p><code>dw</code>：删除一个单词</p>
+<p><code>dG</code>：删除所有内容</p>
+<p><code>d$</code>：从当前位置删除到行末尾</p>
+<p><code>u</code>：撤销</p>
+<p><code>G</code>：去到最后一行</p>
+<p><code>num G</code>：去到num行</p>
+<p><code>gg</code>：回到第一行</p>
+<p><code>Ctrl y</code>：向上翻一行</p>
+<p><code>Ctrl e</code>：向下翻一行</p>
+<p><code>Ctrl f</code>：向下翻一页</p>
+<p><code>Ctrl b</code>：向上翻一页</p>
+<p><code>ZZ</code>：保存并退出</p>
+<p>###在末行模式下：</p>
+<p><code>:!系统命令</code>：在vim编辑器执行系统命令，执行完后回车，回到vim编辑器  eg： :!cal </p>
+<p><code>:wq</code>：保存并退出</p>
+<p><code>:q!</code>：不保存退出</p>
+<p><code>:set nu</code>：显示行号</p>
+<p><code>:set nonu</code>：取消行号</p>
+<p><code>:syntax off</code>：关闭高亮语法    :syntax on：开启高亮语法</p>
+<p><code>:set ts=4</code>：将制表键设置为4个空格</p>
+<p><code>/string</code>：搜索string， 按 n 键向下搜索， 按 N 键向上搜索</p>
+<p><code>:1,$s/string1/string2/g</code>：将文件中从第一行到最后一行的所有string1换成string2</p>
+<p><code>:inoremap 快捷键名 对应的代码</code>  ：自定义快捷键   eg： :inoremap pymain if <strong>name</strong> == ‘<strong>main</strong>‘</p>
+<p>##文件、目录权限：</p>
+<p>-             rwx                  rwx                    rwx:</p>
+<p>类型      所有者权限     同组用户权限    其他用户权限</p>
+<p>类型：文件（-）、目录（d）、链接（l）</p>
+<p>r：read  4        - 0b(100)</p>
+<p>w：write   2     - 0b(10)</p>
+<p>x：excute  1     - 0b(1)</p>
+<p><code>chmod 权限 文件/目录</code>：修改文件/目录的权限</p>
+<p><code>chmod 777 文件/目录</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-04T12:26:14.602Z" itemprop="dateUpdated">2018-06-04 20:26:14</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/&title=《Linux的基本使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/&title=《Linux的基本使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux的基本使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/06/04/在Linux（CentOS7）下构建安装Python3.x/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">在Linux（CentOS7）下构建安装Python3.x</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/04/JavaScript总结/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">JavaScript总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/&title=《Linux的基本使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/&title=《Linux的基本使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux的基本使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/06/04/Linux的基本使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJElEQVR42u3aS27DMAwFwNz/0uk2QGv7kXIKWBytgqSVNV4Q4uf1itf7Y31+c/T59zrf+egpNy8MDIzHMt6n6/wB+SHyX5OX8sc+GBgYAxhJKExIvaCZhPKLM2NgYGDEx8oDd/49BgYGRo+xfqDzPTEwMDB6SWx+BTz/m/XiHQYGxjTGXUnmNz5/pb+BgYHxKMa7uKqB9d7wengqDAyMrRl5gOslq9XWwsp5MDAwJjDyNLU6hFEtrjUHxTAwMIYxes2Au5qa1ZIfBgbGHEaeUiYluR6vOl6GgYExjZEHu+SamCeiK+1PDAyMCYx8ozwQV1Pc/GVdTItgYGAMY+RJbK+I1hv/OtwBAwNjJKN6KcxHK3qv7CKUY2BgbM3oBdOVB/eujIUkGQMDYztGPuaVr2pe2RvdKNf8MDAwHsvIE8he07FamFu6GmJgYAxg9Ma/qiluNezmqTIGBsZkRq8l0GsPXJTS8lQWAwNjU8bK8MQNh2g1O8sTIhgYGFsw/qfE37tKXuyMgYExhpGH15XSf17PLzQeMDAwBjDWh7TW0+BqwMXAwJjA6AW7anGtl7IWBjgwMDC2ZlTD3PqBcl4vecbAwNiV0Usae0e8K+CWL4gYGBhbMAol+GLbMtm5+r/RzAgGBsZgRt6S7F0o8yLgUsDFwMAYwEhKbPkwR68tcUPAxcDAeBQjL/RXW4xJWlvdGQMDYxpjJe3MC/ffGLbAwMAYwPgBAVhgvjsf8PoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
