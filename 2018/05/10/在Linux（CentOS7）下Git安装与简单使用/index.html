@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>在Linux（CentOS7）下Git安装与简单使用 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,Git使用">
+    <meta name="description" content="在Linux（CentOS7）下Git安装与简单使用安装下载与解压123wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.17.0.tar.gztar -xvf git-2.17.0.tar.gzcd git-2.17.0 移除旧版本1yum remove git 安装依赖库12yum install libcurl-d">
+<meta name="keywords" content="Linux,Git使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Linux（CentOS7）下Git安装与简单使用">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="在Linux（CentOS7）下Git安装与简单使用安装下载与解压123wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.17.0.tar.gztar -xvf git-2.17.0.tar.gzcd git-2.17.0 移除旧版本1yum remove git 安装依赖库12yum install libcurl-d">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-05T09:33:41.979Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Linux（CentOS7）下Git安装与简单使用">
+<meta name="twitter:description" content="在Linux（CentOS7）下Git安装与简单使用安装下载与解压123wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.17.0.tar.gztar -xvf git-2.17.0.tar.gzcd git-2.17.0 移除旧版本1yum remove git 安装依赖库12yum install libcurl-d">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在Linux（CentOS7）下Git安装与简单使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在Linux（CentOS7）下Git安装与简单使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-09T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-10
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在Linux（CentOS7）下Git安装与简单使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">在Linux（CentOS7）下Git安装与简单使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#下载与解压"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">下载与解压</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#移除旧版本"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">移除旧版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装依赖库"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">安装依赖库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#执行"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">执行</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置环境变量"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">配置环境变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#重新加载环境变量"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">重新加载环境变量</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#测试，查看git版本"><span class="post-toc-number">1.1.7.</span> <span class="post-toc-text">测试，查看git版本</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#简单使用"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">简单使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#建立本地仓库"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">建立本地仓库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#把文件纳入版本控制"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">把文件纳入版本控制</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看放入暂存区文件的状态"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">查看放入暂存区文件的状态</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#提交暂存区文件到本地仓库"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">提交暂存区文件到本地仓库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看日志"><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">查看日志</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回滚到某个版本"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">回滚到某个版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#显示版本包括历史版本"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">显示版本包括历史版本</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#撤回暂存区内容"><span class="post-toc-number">1.2.8.</span> <span class="post-toc-text">撤回暂存区内容</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#添加远端仓库"><span class="post-toc-number">1.2.9.</span> <span class="post-toc-text">添加远端仓库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#将本地仓库和远端仓库同步"><span class="post-toc-number">1.2.10.</span> <span class="post-toc-text">将本地仓库和远端仓库同步</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建分支"><span class="post-toc-number">1.2.11.</span> <span class="post-toc-text">创建分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查看所有分支"><span class="post-toc-number">1.2.12.</span> <span class="post-toc-text">查看所有分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#切换分支"><span class="post-toc-number">1.2.13.</span> <span class="post-toc-text">切换分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#合并分支"><span class="post-toc-number">1.2.14.</span> <span class="post-toc-text">合并分支</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除仓库中的文件"><span class="post-toc-number">1.2.15.</span> <span class="post-toc-text">删除仓库中的文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#克隆项目到本地"><span class="post-toc-number">1.2.16.</span> <span class="post-toc-text">克隆项目到本地</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#推送到服务器"><span class="post-toc-number">1.2.17.</span> <span class="post-toc-text">推送到服务器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#拉取服务器代码"><span class="post-toc-number">1.2.18.</span> <span class="post-toc-text">拉取服务器代码</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-在Linux（CentOS7）下Git安装与简单使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在Linux（CentOS7）下Git安装与简单使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-10 00:00:00" datetime="2018-05-09T16:00:00.000Z"  itemprop="datePublished">2018-05-10</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="在Linux（CentOS7）下Git安装与简单使用"><a href="#在Linux（CentOS7）下Git安装与简单使用" class="headerlink" title="在Linux（CentOS7）下Git安装与简单使用"></a>在Linux（CentOS7）下Git安装与简单使用</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="下载与解压"><a href="#下载与解压" class="headerlink" title="下载与解压"></a>下载与解压</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.17.0.tar.gz</span><br><span class="line">tar -xvf git-2.17.0.tar.gz</span><br><span class="line">cd git-2.17.0</span><br></pre></td></tr></table></figure>
+<h3 id="移除旧版本"><a href="#移除旧版本" class="headerlink" title="移除旧版本"></a>移除旧版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum remove git</span><br></pre></td></tr></table></figure>
+<h3 id="安装依赖库"><a href="#安装依赖库" class="headerlink" title="安装依赖库"></a>安装依赖库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install libcurl-devel</span><br><span class="line">yum install autoconf automake libtool</span><br></pre></td></tr></table></figure>
+<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make configure</span><br></pre></td></tr></table></figure>
+<p>显示：</p>
+<p>GIT_VERSION = 2.17.0</p>
+<p>GEN configure</p>
+<p>配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=/usr/local/git --with-iconv --with-curl --with-expat=/usr/local/lib</span><br></pre></td></tr></table></figure>
+<p>构建安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<p>在文件末尾追加上下面命令:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PATH=$PATH:/usr/local/git/bin</span><br><span class="line">export PATH</span><br></pre></td></tr></table></figure>
+<h3 id="重新加载环境变量"><a href="#重新加载环境变量" class="headerlink" title="重新加载环境变量"></a>重新加载环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bash_profile</span><br></pre></td></tr></table></figure>
+<h3 id="测试，查看git版本"><a href="#测试，查看git版本" class="headerlink" title="测试，查看git版本"></a>测试，查看git版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure>
+<p>出现Git的版本信息则安装成功。</p>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><h3 id="建立本地仓库"><a href="#建立本地仓库" class="headerlink" title="建立本地仓库"></a>建立本地仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir &lt;directory&gt;</span><br><span class="line">cd &lt;directory&gt;</span><br><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h3 id="把文件纳入版本控制"><a href="#把文件纳入版本控制" class="headerlink" title="把文件纳入版本控制"></a>把文件纳入版本控制</h3><p>先将要进行版本控制的文件放入本地仓库，再将文件放入暂存区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd &lt;warehouse directory&gt;</span><br><span class="line">git add &lt;filename&gt;   # 将修改后的文件加入暂存区</span><br><span class="line">或者 git add .       #  将该目录下所有文件、目录加入暂存区</span><br></pre></td></tr></table></figure>
+<h3 id="查看放入暂存区文件的状态"><a href="#查看放入暂存区文件的状态" class="headerlink" title="查看放入暂存区文件的状态"></a>查看放入暂存区文件的状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+<h3 id="提交暂存区文件到本地仓库"><a href="#提交暂存区文件到本地仓库" class="headerlink" title="提交暂存区文件到本地仓库"></a>提交暂存区文件到本地仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &apos;本次提交文件的相关描述信息&apos;    # -m 后面添加的是本次提交的描述</span><br></pre></td></tr></table></figure>
+<p>如果提交报错,看否是没有配置全局用户名和邮箱（<code>user.name</code>、<code>user.email</code> ），可执行下面的命令解决:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &apos;your-name&apos;</span><br><span class="line">git config --global user.email &apos;your-email&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+<h3 id="回滚到某个版本"><a href="#回滚到某个版本" class="headerlink" title="回滚到某个版本"></a>回滚到某个版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard 版本号   # 版本号可在日志文件中查看</span><br></pre></td></tr></table></figure>
+<h3 id="显示版本包括历史版本"><a href="#显示版本包括历史版本" class="headerlink" title="显示版本包括历史版本"></a>显示版本包括历史版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br><span class="line">git reflog --pretty=oneline # 单行显示</span><br></pre></td></tr></table></figure>
+<h3 id="撤回暂存区内容"><a href="#撤回暂存区内容" class="headerlink" title="撤回暂存区内容"></a>撤回暂存区内容</h3><p>把暂存区的内容全撤回来(可以在本地做修改，然后再次add进暂存区做提交)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout --   #  撤回所有暂存区的文件、目录，这样就可以重新修改内容，让后在添加、提交</span><br><span class="line">git checkout -- [文件/目录]  #  将暂存区的该文件/目录撤回，这样就可以重新修改内容，让后在添加、提交</span><br></pre></td></tr></table></figure>
+<h3 id="添加远端仓库"><a href="#添加远端仓库" class="headerlink" title="添加远端仓库"></a>添加远端仓库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 远端仓库地址</span><br></pre></td></tr></table></figure>
+<h3 id="将本地仓库和远端仓库同步"><a href="#将本地仓库和远端仓库同步" class="headerlink" title="将本地仓库和远端仓库同步"></a>将本地仓库和远端仓库同步</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h3 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch [branch name]</span><br></pre></td></tr></table></figure>
+<h3 id="查看所有分支"><a href="#查看所有分支" class="headerlink" title="查看所有分支"></a>查看所有分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<h3 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout [branch name]</span><br></pre></td></tr></table></figure>
+<h3 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge [branch name]</span><br></pre></td></tr></table></figure>
+<h3 id="删除仓库中的文件"><a href="#删除仓库中的文件" class="headerlink" title="删除仓库中的文件"></a>删除仓库中的文件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm [filename]</span><br></pre></td></tr></table></figure>
+<h3 id="克隆项目到本地"><a href="#克隆项目到本地" class="headerlink" title="克隆项目到本地"></a>克隆项目到本地</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone 远端仓库地址</span><br></pre></td></tr></table></figure>
+<h3 id="推送到服务器"><a href="#推送到服务器" class="headerlink" title="推送到服务器"></a>推送到服务器</h3><p>提交到远程仓库，origin是原始名字，master是分支，第一次需要加参数 -u ，以后不用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br><span class="line">或</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<h3 id="拉取服务器代码"><a href="#拉取服务器代码" class="headerlink" title="拉取服务器代码"></a>拉取服务器代码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-05T09:33:41.979Z" itemprop="dateUpdated">2018-06-05 17:33:41</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git使用/">Git使用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/&title=《在Linux（CentOS7）下Git安装与简单使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/&title=《在Linux（CentOS7）下Git安装与简单使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Linux（CentOS7）下Git安装与简单使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/10/在Linux（CentOS7）下安装Nginx服务器/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">在Linux（CentOS7）下安装Nginx服务器</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/05/Linux的基本使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Linux Shell的基本使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/&title=《在Linux（CentOS7）下Git安装与简单使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/&title=《在Linux（CentOS7）下Git安装与简单使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Linux（CentOS7）下Git安装与简单使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下Git安装与简单使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADHElEQVR42u3azVLCYAwFUN7/pXHrjFO8SVql4XTFYIWez8U1P49HfD0Pru8/PXr9/Z2f97z+rtf3H33+aRc2Njb2TdjPl9fkQY/eye+vHkpiwcbGxt7KPvqC6tEcxdVr0uvvSmIyt2BjY2Nj54VHcijVwMuPAxsbGxs7iZxewZDHWN4dwsbGxsbOy4xqsFUPojdOuLCXho2Njf327ElIvNvrS+bb2NjY2G/Mfrau6mf21muqravC82NjY2MvYldD4i9jJi9LmmtA2NjY2IvYVXDS0KmOfpP3J4MHbGxs7K3sScHQi5Y83vJxRfkPgI2Njb2I3Vud6bWWqsPaariWx73Y2NjYK9hR26UYRb1VnitKoF+qLmxsbOx17Co4vz/vb+XjhKTx9Oj9MjY2NvYN2dUPqpYiPUYyGOiVPdjY2Nib2NVCotoSunokUD3EqJeGjY2NfVt2L7QmUTcZQvRaWo88D7GxsbFvyL46wHrrNb2jKddh2NjY2CvYvSFB/q9/vqz5N6NibGxs7B3s3qNXm/hnLQZVQxQbGxv7E9j5Y+Vj2uoBnbUkVF4DwsbGxl7Engxuqwc3WeKphlweftjY2Ng72NVS4aySIDnKf/gLY2NjY9+EPRnE9kbCvVIhP7LRiBcbGxv75uxeiz8pGCbUaisqkmJjY2MvZU9Wbart/iT8eiVHVLRgY2NjfwA7b/FX20l5EOZXdYyBjY2NvYl9VsxUS4i8aJks5USjZWxsbOx17N6U+KwG06T4qYYZNjY29g72pPCYLOXMj3W0WoSNjY29iF2NgeZgNR5F9O7sDZKxsbGxd7AnSzm9ge6kOMkHA7+EGTY2NvYidrWtkzxQ7wgm9UKzTMLGxsZewZ4vx/SKk3kU9Y4YGxsbex+716CvzpDziJov9EwCDxsbG/u+7DxaetdZQ+JJOTRKVGxsbOybsCcNnWrrPx/f5gdUXUjCxsbG/kx2tb7pkeaLPtERY2NjY38ke7JwU20STYqQRzXfsLGxsVewq0HSKzwmA4nk/fwebGxs7E3seYMm+bjqo/SGysk3YmNjYy9ifwE0apa6epHeLwAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

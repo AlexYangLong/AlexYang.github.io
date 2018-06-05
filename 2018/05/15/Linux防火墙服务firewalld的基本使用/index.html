@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Linux防火墙服务firewalld的基本使用 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,firewalld">
+    <meta name="description" content="Linux防火墙服务firewalld的基本使用​    防火墙是一种位于内部网络与外部网络之间的网络安全系统。一项信息安全的防护系统，依照特定的规则，允许或是限制传输的数据通过。防火墙通常工作在网络层，即IPv4或IPv6的IP包上。 什么是firewalld​    firewalld即Dynamic Firewall Manager of Linux systems，Linux系统的动态防火">
+<meta name="keywords" content="Linux,firewalld">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux防火墙服务firewalld的基本使用">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Linux防火墙服务firewalld的基本使用​    防火墙是一种位于内部网络与外部网络之间的网络安全系统。一项信息安全的防护系统，依照特定的规则，允许或是限制传输的数据通过。防火墙通常工作在网络层，即IPv4或IPv6的IP包上。 什么是firewalld​    firewalld即Dynamic Firewall Manager of Linux systems，Linux系统的动态防火">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-07T08:22:13.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux防火墙服务firewalld的基本使用">
+<meta name="twitter:description" content="Linux防火墙服务firewalld的基本使用​    防火墙是一种位于内部网络与外部网络之间的网络安全系统。一项信息安全的防护系统，依照特定的规则，允许或是限制传输的数据通过。防火墙通常工作在网络层，即IPv4或IPv6的IP包上。 什么是firewalld​    firewalld即Dynamic Firewall Manager of Linux systems，Linux系统的动态防火">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Linux防火墙服务firewalld的基本使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Linux防火墙服务firewalld的基本使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-14T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux防火墙服务firewalld的基本使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">Linux防火墙服务firewalld的基本使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是firewalld"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">什么是firewalld</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#firewalld的基本使用"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">firewalld的基本使用</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#使用firewalld-cmd配置防火墙"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">使用firewalld-cmd配置防火墙</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#如何添加-删除一个端口（在防火墙上凿洞）"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">如何添加/删除一个端口（在防火墙上凿洞）</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Linux防火墙服务firewalld的基本使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Linux防火墙服务firewalld的基本使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-15 00:00:00" datetime="2018-05-14T16:00:00.000Z"  itemprop="datePublished">2018-05-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Linux防火墙服务firewalld的基本使用"><a href="#Linux防火墙服务firewalld的基本使用" class="headerlink" title="Linux防火墙服务firewalld的基本使用"></a>Linux防火墙服务firewalld的基本使用</h1><p>​    防火墙是一种位于内部网络与外部网络之间的网络安全系统。一项信息安全的防护系统，依照特定的规则，允许或是限制传输的数据通过。防火墙通常工作在网络层，即IPv4或IPv6的IP包上。</p>
+<h2 id="什么是firewalld"><a href="#什么是firewalld" class="headerlink" title="什么是firewalld"></a>什么是firewalld</h2><p>​    firewalld即Dynamic Firewall Manager of Linux systems，Linux系统的动态防火墙管理器。firewalld是一个服务，用于配置网络连接，从而哪些内外部网络的数据包可以允许穿过网络或阻止穿过网络。</p>
+<p>​    firewalld允许两种类型的配置：永久类型和运行时类型。运行时类型的配置在防火墙被重启后会丢失相应的规则配置；而永久类型的配置即使遇到系统重启，也会保留生效。</p>
+<p>​    对应于上面两种类型的配置，firewalld相应的有两个目录：针对运行时类型配置的目录/usr/lib/firewall；以及针对永久类型配置的目录/etc/firewall。</p>
+<h2 id="firewalld的基本使用"><a href="#firewalld的基本使用" class="headerlink" title="firewalld的基本使用"></a>firewalld的基本使用</h2><p>启动服务： <code>systemctl start firewalld.service</code> 或 <code>systemctl start firewalld</code></p>
+<p>查看状态：<code>systemctl status firewalld.service</code> 或 <code>systemctl status firewalld</code></p>
+<p>停止服务：<code>systemctl stop firewalld.service</code> 或 <code>systemctl stop firewalld</code></p>
+<p>重启服务：<code>systemctl restart firewalld.service</code> 或 <code>systemctl restart firewalld</code></p>
+<p>设置开机自启：<code>systemctl enable firewalld.service</code> 或 <code>systemctl enable firewalld</code></p>
+<p>取消开机自启：<code>systemctl disable firewalld.service</code> 或 <code>systemctl disable firewalld</code></p>
+<p>查看是否开机自启：<code>systemctl is-enabled firewalld.service</code> 或 <code>systemctl is-enabled firewalld</code></p>
+<p>systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。</p>
+<h2 id="使用firewalld-cmd配置防火墙"><a href="#使用firewalld-cmd配置防火墙" class="headerlink" title="使用firewalld-cmd配置防火墙"></a>使用firewalld-cmd配置防火墙</h2><p>查看版本： <code>firewall-cmd --version</code></p>
+<p>查看帮助：<code>firewall-cmd --help</code></p>
+<p>显示状态： <code>firewall-cmd --state</code></p>
+<p>查看所有打开的端口： <code>firewall-cmd --zone=public --list-ports</code></p>
+<p>重新加载防火墙规则： <code>firewall-cmd --reload</code></p>
+<p>查看区域信息:  <code>firewall-cmd --get-active-zones</code></p>
+<p>查看指定接口所属区域： <code>firewall-cmd --get-zone-of-interface=eth0</code></p>
+<p>拒绝所有包：<code>firewall-cmd --panic-on</code></p>
+<p>取消拒绝状态：<code>firewall-cmd --panic-off</code></p>
+<p>查看是否拒绝： <code>firewall-cmd --query-panic</code></p>
+<h2 id="如何添加-删除一个端口（在防火墙上凿洞）"><a href="#如何添加-删除一个端口（在防火墙上凿洞）" class="headerlink" title="如何添加/删除一个端口（在防火墙上凿洞）"></a>如何添加/删除一个端口（在防火墙上凿洞）</h2><p>添加端口（凿洞）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=端口/tcp --permanent</span><br></pre></td></tr></table></figure>
+<p>–permanent永久生效，没有此参数重启后失效</p>
+<p>重新载入防火墙配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<p>查看端口在防火墙配置中的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone= public --query-port=端口/tcp</span><br></pre></td></tr></table></figure>
+<p>删除端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone= public --remove-port=端口/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-07T08:22:13.426Z" itemprop="dateUpdated">2018-06-07 16:22:13</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/firewalld/">firewalld</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/&title=《Linux防火墙服务firewalld的基本使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/&title=《Linux防火墙服务firewalld的基本使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux防火墙服务firewalld的基本使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/17/使用Python代码操作MySQL5.x数据库/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">使用Python代码操作MySQL5.x数据库</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/13/在Linux（CentOS7）下安装Redis/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">在Linux（CentOS7）下安装Redis</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/&title=《Linux防火墙服务firewalld的基本使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/&title=《Linux防火墙服务firewalld的基本使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Linux防火墙服务firewalld的基本使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/15/Linux防火墙服务firewalld的基本使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADIUlEQVR42u3aQZLiQAwEQP7/afY6h8VbJXkjxk36RICNO81BqNSvV3y8fxzJOT/PfMfH9fdc3/f1Pw5sbGzsh7A3S7le3KdPZ1ddrza3YGNjY5/Kvi4Mn5aelJAWn7zTrgQbGxsb+/p1DmuLU160sLGxsbFbdhv3zBbdNi3Y2NjY38zeFIlZxN8+ynxtN2dp2NjY2L+enU9Ff//r/zLfxsbGxv7F7Hd5zBqAvGlJIqobFNjY2NgHsfMCkDcVm6oxK5/D9WNjY2Mfx96PTttoKY+H2pYjuhYbGxv7OPZsZHvXp7M1bIouNjY29nnsvPxcl6INeLOJs94eio2NjX0Quw3ok4Apj/KTa9t38tECNjY29knsu8L39vb7se4NgwRsbGzsx7Jn0X/biuybmc0moWIwgI2Njf1w9v51XvA21LyAYWNjY38zO4+KkqvyMrPZBpR/GzY2NvZJ7DaOaUvIZmPNbHNPe3dsbGzsp7Nnf/ST5mTf3rSkIvDCxsbGPog922SzGevm77ehUhtpYWNjY5/EbiOhdjyQB0DJD7B5KNjY2Njnsfd/7vdDgrZY5vg6P8PGxsZ+ILv9f57H/fnmm9kgIR9XrB4HNjY29qPYm27mrqFCHvHn4NfmV8LGxsb+9ew2vk8KQ05q77IfLf9lvo2NjY39cHYb3+fl6q5HlgdG9QAYGxsb+wj2bCSwX1zSZrSwvLHBxsbGPondthObMpPwkoeblMzIgo2NjX0Eu+5agofSnjnb7jMLm7CxsbHPY29K1GyosBkG17B23IuNjY19BDspGLNNPLPtm5uHiI2Njf1t7FmU05aNfai0GTl8zNKwsbGxj2DPYppNS9OWq1l5i0IlbGxs7Mey3+Vx/XWzDUDtMHi2hlde37CxsbEfxW7Lxuwr2nHCrPGYFV1sbGzsM9ht0dqXwHtHCO2asbGxsU9l5wPgfdhU516LIvpxtdjY2Nhfz86HAUkslYxsNw3JP6Yi2NjY2F/G3g9x2+1ByXrqUAwbGxv7OHZScvZbJ2fFL6Em52NjY2Ofyl5FM4sFtWHTbKjQDh6wsbGxH8X+A437r1uyfLU4AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
