@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>HTML+CSS总结 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="HTML,CSS">
+    <meta name="description" content="HTML+CSS总结Web前端主要包含三部分内容： 1、Tag：HTML标签，用来装要显示的内容、数据。 2、CSS：Display，对要显示的内容进行渲染。 3、JavaScript：Behavior，交互、行为，使用户具有更好的体验。 HTML​    HTML （Hyper Text Markup Language，超文本标记语言）是用来描述网页的一种语言，它包含了一系列的标签。 ​">
+<meta name="keywords" content="HTML,CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML+CSS总结">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="HTML+CSS总结Web前端主要包含三部分内容： 1、Tag：HTML标签，用来装要显示的内容、数据。 2、CSS：Display，对要显示的内容进行渲染。 3、JavaScript：Behavior，交互、行为，使用户具有更好的体验。 HTML​    HTML （Hyper Text Markup Language，超文本标记语言）是用来描述网页的一种语言，它包含了一系列的标签。 ​">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-05T02:05:33.676Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML+CSS总结">
+<meta name="twitter:description" content="HTML+CSS总结Web前端主要包含三部分内容： 1、Tag：HTML标签，用来装要显示的内容、数据。 2、CSS：Display，对要显示的内容进行渲染。 3、JavaScript：Behavior，交互、行为，使用户具有更好的体验。 HTML​    HTML （Hyper Text Markup Language，超文本标记语言）是用来描述网页的一种语言，它包含了一系列的标签。 ​">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">HTML+CSS总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">HTML+CSS总结</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-24T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-04-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web前端/">Web前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#HTML-CSS总结"><span class="post-toc-number">1.</span> <span class="post-toc-text">HTML+CSS总结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#HTML"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">HTML</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CSS"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">CSS</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS选择器"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">CSS选择器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标签使用哪个CSS样式进行渲染的三个原则："><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">标签使用哪个CSS样式进行渲染的三个原则：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS盒子模型"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">CSS盒子模型</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标签常用的CSS样式"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">标签常用的CSS样式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#边框"><span class="post-toc-number">1.2.4.1.</span> <span class="post-toc-text">边框</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#字体"><span class="post-toc-number">1.2.4.2.</span> <span class="post-toc-text">字体</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#文本"><span class="post-toc-number">1.2.4.3.</span> <span class="post-toc-text">文本</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS-定位："><span class="post-toc-number">1.2.5.</span> <span class="post-toc-text">CSS 定位：</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS-设置字符集"><span class="post-toc-number">1.2.6.</span> <span class="post-toc-text">CSS 设置字符集</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#CSS-hack-technology-（CSS黑科技）"><span class="post-toc-number">1.2.7.</span> <span class="post-toc-text">CSS hack technology （CSS黑科技）</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-HTML+CSS总结"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">HTML+CSS总结</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-25 00:00:00" datetime="2018-04-24T16:00:00.000Z"  itemprop="datePublished">2018-04-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web前端/">Web前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="HTML-CSS总结"><a href="#HTML-CSS总结" class="headerlink" title="HTML+CSS总结"></a>HTML+CSS总结</h1><p>Web前端主要包含三部分内容：</p>
+<p>1、Tag：HTML标签，用来装要显示的内容、数据。</p>
+<p>2、CSS：Display，对要显示的内容进行渲染。</p>
+<p>3、JavaScript：Behavior，交互、行为，使用户具有更好的体验。</p>
+<h2 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h2><p>​    HTML （Hyper Text Markup Language，超文本标记语言）是用来描述网页的一种语言，它包含了一系列的标签。</p>
+<p>​    html：此标签可告知浏览器其自身是一个 HTML 文档。<code>&lt;html&gt;</code> 与 <code>&lt;/html&gt;</code> 标签限定了文档的开始点和结束点，在它们之间是文档的头部和主体。</p>
+<p>​    head：此标签用于定义文档的头部，它是所有头部元素的容器。<code>&lt;head&gt;</code> 中的元素可以引用脚本、指示浏览器在哪里找到样式表、提供元信息等等。文档的头部描述了文档的各种属性和信息，包括文档的标题、在 Web 中的位置以及和其他文档的关系等。绝大多数文档头部包含的数据都不会真正作为内容显示给读者。下面这些标签可用在 head 部分：<code>&lt;base&gt;</code> 、<code>&lt;link&gt;</code> 、<code>&lt;meta&gt;</code> 、<code>&lt;style&gt;</code> 、<code>&lt;script&gt;</code> 和 <code>&lt;title&gt;</code> 。<code>&lt;title&gt;</code> 定义文档的标题，它是 head 部分中唯一必需的元素。</p>
+<p>​    body：此标签定义文档的主体。包含文档的所有要进行显示的内容（比如文本<code>&lt;span&gt;</code> <code>&lt;p&gt;</code> 、上标<code>&lt;sup&gt;</code> 、下标<code>&lt;sub&gt;</code> 、超链接<code>&lt;a&gt;</code>、图像<code>&lt;img&gt;</code>、表格<code>&lt;table&gt;</code> 、列表<code>&lt;ul&gt;</code> <code>&lt;ol&gt;</code> <code>&lt;dl&gt;</code> 、逻辑语义块<code>&lt;header&gt;</code> <code>&lt;section&gt;</code> <code>&lt;aside&gt;</code> <code>&lt;footer&gt;</code> <code>&lt;div&gt;</code> 、标题<code>&lt;h1&gt;</code>~<code>&lt;h6&gt;</code> 、换行<code>&lt;br&gt;</code> 、内嵌块<code>&lt;iframe&gt;</code> 、表单元素<code>&lt;form&gt;</code> <code>&lt;input&gt;</code> <code>&lt;button&gt;</code> <code>&lt;select&gt;</code> 、音频<code>&lt;audio&gt;</code> 、视频<code>&lt;video&gt;</code>等等）。</p>
+<p>​    除此之外，每个标签都有自己特有的属性，例如<code>&lt;a&gt;</code> 标签有href属性、每个标签都有的class属性等等。并且还支持自定义属性，即开发人员自己定义一个不存在的属性。</p>
+<h2 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h2><p>​    CSS（Cascading Style Sheets，层叠样式表）是用来渲染HTML标签的显示样式的一种语言。根据CSS在HTML页面的位置的不同，可以分为三类：</p>
+<p>​    内部样式表：写在<code>&lt;head&gt;</code>的<code>&lt;style&gt;</code>标签内，多用于首页。加载快。</p>
+<p>​    外部样式表：脱离HTML页面，写在外部，可以用于其他页面。所有页面可以共享同一个样式，便于风格统一；使内容和显示分离。</p>
+<p>​    内嵌（行内）样式表：写在每个标签的style属性内，不常用。不易于扩展。</p>
+<h3 id="CSS选择器"><a href="#CSS选择器" class="headerlink" title="CSS选择器"></a>CSS选择器</h3><p>通配符选择器： *</p>
+<p>标签选择器： &lt;标签名&gt;</p>
+<p>类选择器： .class</p>
+<p>id选择器： #id</p>
+<p>并列选择器：selector1 , selector2</p>
+<p>后代选择器： 父 空格(所有后代)、父&gt;(儿子后代)</p>
+<p>兄弟选择器： ~ (所有兄弟)</p>
+<p>相邻兄弟选择器： +  (必须是相邻兄弟)</p>
+<h3 id="标签使用哪个CSS样式进行渲染的三个原则："><a href="#标签使用哪个CSS样式进行渲染的三个原则：" class="headerlink" title="标签使用哪个CSS样式进行渲染的三个原则："></a>标签使用哪个CSS样式进行渲染的三个原则：</h3><p>​    1、就近原则： 哪个样式里标签更近就用哪个</p>
+<p>​    2、具体性原则： #id选择器 &gt; .class选择器 &gt; 标签选择器 &gt; 通配符选择器</p>
+<p>​    3、重要性原则： !important</p>
+<h3 id="CSS盒子模型"><a href="#CSS盒子模型" class="headerlink" title="CSS盒子模型"></a>CSS盒子模型</h3><p>CSS模型：Box Model （盒模型 ） ——  由内到外：</p>
+<p>内容 - padding - border - background-image - background-color - margin</p>
+<h3 id="标签常用的CSS样式"><a href="#标签常用的CSS样式" class="headerlink" title="标签常用的CSS样式"></a>标签常用的CSS样式</h3><h4 id="边框"><a href="#边框" class="headerlink" title="边框"></a>边框</h4><p><code>border</code> 设置对象边框的特性</p>
+<p><code>border-color</code> 设置或检索对象的边框颜色</p>
+<h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><p><code>font-size</code> 设置字体大小</p>
+<p><code>font-family</code> 规定文本的字体</p>
+<p><code>font-style</code> 规定文本的字体样式</p>
+<p><code>font-weight</code> 规定字体的粗细</p>
+<h4 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h4><p><code>color</code> 指定文本的颜色</p>
+<p><code>line-height</code> 设置行高</p>
+<p><code>text-align</code> 规定文本的水平对齐方式</p>
+<p><code>text-decoration</code> 规定添加到文本的装饰效果</p>
+<p>####内外边距</p>
+<p><code>padding</code> 简写属性在一个声明中设置所有填充属性。该属性可以有1到4个值 <code>padding-top</code> <code>padding-right</code> <code>padding-bottom</code> <code>padding-left</code> </p>
+<p><code>margin</code> 在一个声明中设置所有外边距属性，该属性可以有1到4个值 <code>margin-top</code>  <code>margin-right</code>  <code>margin-bottom</code>  <code>margin-left</code> </p>
+<p>####背景</p>
+<p><code>background-color</code> 设置或检索对象的背景颜色 </p>
+<p><code>background-image</code> 设置或检索对象的背景图像</p>
+<p>####display</p>
+<p><code>display: none</code> 此元素不会被显示。</p>
+<p><code>display: block</code> 此元素将显示为块级元素，此元素前后会带有换行符。</p>
+<p><code>display: inline</code> 此元素会被显示为内联元素，元素前后没有换行符。</p>
+<p><code>display: inline-block</code> 此元素会被显示为行内块元素，可以设置宽度、高度等，元素前后没有换行符。</p>
+<p>具有<code>hidden</code> 属性的元素是不可见的。</p>
+<h3 id="CSS-定位："><a href="#CSS-定位：" class="headerlink" title="CSS 定位："></a>CSS 定位：</h3><p><code>position: static</code>    正常文档流</p>
+<p><code>position: relative</code>   相对定位（相对于元素原来的位置，没有脱离文档流，对周围元素没有影响）</p>
+<p><code>position: absolute</code>   绝对定位（相对于父元素来设定位置，脱离了文档流，对周围元素有影响）</p>
+<p><code>position: fixed</code>   固定定位（相对于浏览器窗口来设定位置，脱离了文档流）</p>
+<h3 id="CSS-设置字符集"><a href="#CSS-设置字符集" class="headerlink" title="CSS 设置字符集"></a>CSS 设置字符集</h3><p><code>@charset : utf-8</code></p>
+<p>CSS 设置字体：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@font-face &#123;</span><br><span class="line">  font-family： ‘字体名称’</span><br><span class="line">  src：url(字体资源路径)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="CSS-hack-technology-（CSS黑科技）"><a href="#CSS-hack-technology-（CSS黑科技）" class="headerlink" title="CSS hack technology （CSS黑科技）"></a>CSS hack technology （CSS黑科技）</h3><p>z-index 索引，当脱离文档流时，元素显示优先级冲突，设置元素z-index属性值越大就渲染在越上方</p>
+<p>在有浮动的情况下 ，为了让父级元素计算出它的高度的方法：</p>
+<p>1、<code>clear:both</code> 清除浮动  </p>
+<p>2、在父元素的样式中加入 <code>overflow：auto</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-05T02:05:33.676Z" itemprop="dateUpdated">2018-06-05 10:05:33</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS/">CSS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTML/">HTML</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/&title=《HTML+CSS总结》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/&title=《HTML+CSS总结》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTML+CSS总结》 — AlexYang's World&url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/28/JavaScript总结/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">JavaScript总结</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/20/Python基础（14）——进程和线程/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python基础（14）——进程和线程</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/&title=《HTML+CSS总结》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/&title=《HTML+CSS总结》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《HTML+CSS总结》 — AlexYang's World&url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/04/25/HTML+CSS总结/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACKElEQVR42u3aS3KEMAxFUfa/abICm/skOlXIl1GK5qPDQLEkXxc+bnDsr9w/c3Xm5UOGDBmfZdSC67yFxMBjkyFDxjmM1aNX1/A0ml6/f+/yvAwZMmSAsPjrSXKXIUOGjD4jxayu5CQZMmTIqD2u8yspkn9Si8uQIeODDN4s+/+/fzLfkCFDxqcYd3j0F38k1cZRyZAhYzSDJzi+ZOTgoEAl4wcZMmQMZfAk2Emp5F5+Jl63ypAh4+OMzs21TWOdxd9DhDJkyBjK6Ce72jKx1s5b3iVDhoxjGPy2dNtE2ujf37vsGsqQIWMoo1YV1tJiWjC3QpchQ8YgBq90ebNsn4I7sOW/BxkyZBzDIKVsp7nPF5fxc2TIkDGaQZJjuoWCf45Oil8uEGXIkDGOkS7s+NigNjAgH7G1Z0SGDBkfZKTDSxJQCkgXiy/sGZEhQ8YHGbWGV6cc3SdontBlyJBxGqMzvCSpNg3uhamsDBkyBjFqi7O0QCVs3ux76BrKkCFjKKMD4603fiYdS8iQIeMERi3EWqM//TSoMJYhQ8YxjLdKUD4WvcIjWOHKkCFjBOMOD978Sj8Nf+ZFgpAhQ8YgRi3NdTaHkQ+UDiRkyJBxAoMXjbw11lkIFmOQIUPGAYxOE40PEmqDgWCzhQwZMmS8FHQ6tkRUGTJkyAi3aqXFKm/APRSxMmTIGM3gmxtIKz8dEpCloQwZMk5m8NKRJ+JaCu5EIkOGjKGMP8emiYc9Q9EdAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

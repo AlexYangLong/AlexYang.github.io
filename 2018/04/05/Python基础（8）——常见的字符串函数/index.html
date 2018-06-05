@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Python基础（8）——常见的字符串函数 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,字符串函数">
+    <meta name="description" content="常见的字符串函数1、splitsplit(str=’ ‘[,num])  对字符串进行切片，并返回一个列表，str 表示按此字符串进行分割，默认是空格，num 表示最多分割多少次 12str1 = &apos;aaa sss ddd &apos;print(str1.split(&apos; &apos;, 3))  # [&apos;aaa&apos;, &apos;sss&apos;, &apos;ddd&apos;, &apos;&apos;] 2、splitlinessplitlines([keepends">
+<meta name="keywords" content="Python,字符串函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python基础（8）——常见的字符串函数">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="常见的字符串函数1、splitsplit(str=’ ‘[,num])  对字符串进行切片，并返回一个列表，str 表示按此字符串进行分割，默认是空格，num 表示最多分割多少次 12str1 = &apos;aaa sss ddd &apos;print(str1.split(&apos; &apos;, 3))  # [&apos;aaa&apos;, &apos;sss&apos;, &apos;ddd&apos;, &apos;&apos;] 2、splitlinessplitlines([keepends">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-05T02:03:08.617Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python基础（8）——常见的字符串函数">
+<meta name="twitter:description" content="常见的字符串函数1、splitsplit(str=’ ‘[,num])  对字符串进行切片，并返回一个列表，str 表示按此字符串进行分割，默认是空格，num 表示最多分割多少次 12str1 = &apos;aaa sss ddd &apos;print(str1.split(&apos; &apos;, 3))  # [&apos;aaa&apos;, &apos;sss&apos;, &apos;ddd&apos;, &apos;&apos;] 2、splitlinessplitlines([keepends">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Python基础（8）——常见的字符串函数</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Python基础（8）——常见的字符串函数</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-04-04T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-04-05
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#常见的字符串函数"><span class="post-toc-number">1.</span> <span class="post-toc-text">常见的字符串函数</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、split"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1、split</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、splitlines"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2、splitlines</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、join"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3、join</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、max"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4、max</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、min"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5、min</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6、replace"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6、replace</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7、maketrans、translate"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">7、maketrans、translate</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8、startswith"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">8、startswith</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9、endswith"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">9、endswith</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10、encode"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">10、encode</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#11、decode"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">11、decode</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#12、isalpha"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">12、isalpha</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#13、isalnum"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">13、isalnum</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#14、isupper"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">14、isupper</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#15、islower"><span class="post-toc-number">1.15.</span> <span class="post-toc-text">15、islower</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#16、istitle"><span class="post-toc-number">1.16.</span> <span class="post-toc-text">16、istitle</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#17、isdigit"><span class="post-toc-number">1.17.</span> <span class="post-toc-text">17、isdigit</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#18、isnumeric"><span class="post-toc-number">1.18.</span> <span class="post-toc-text">18、isnumeric</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#19、isdecimal"><span class="post-toc-number">1.19.</span> <span class="post-toc-text">19、isdecimal</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#20、isspace"><span class="post-toc-number">1.20.</span> <span class="post-toc-text">20、isspace</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#21、len"><span class="post-toc-number">1.21.</span> <span class="post-toc-text">21、len</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#22、lower"><span class="post-toc-number">1.22.</span> <span class="post-toc-text">22、lower</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#23、upper"><span class="post-toc-number">1.23.</span> <span class="post-toc-text">23、upper</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#24、swapcase"><span class="post-toc-number">1.24.</span> <span class="post-toc-text">24、swapcase</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#25、capitalize"><span class="post-toc-number">1.25.</span> <span class="post-toc-text">25、capitalize</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#26、title"><span class="post-toc-number">1.26.</span> <span class="post-toc-text">26、title</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#27、center"><span class="post-toc-number">1.27.</span> <span class="post-toc-text">27、center</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#28、ljust"><span class="post-toc-number">1.28.</span> <span class="post-toc-text">28、ljust</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#29、rjust"><span class="post-toc-number">1.29.</span> <span class="post-toc-text">29、rjust</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#30、zfill"><span class="post-toc-number">1.30.</span> <span class="post-toc-text">30、zfill</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#31、count"><span class="post-toc-number">1.31.</span> <span class="post-toc-text">31、count</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#32、find"><span class="post-toc-number">1.32.</span> <span class="post-toc-text">32、find</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#33、rfind"><span class="post-toc-number">1.33.</span> <span class="post-toc-text">33、rfind</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#34、index"><span class="post-toc-number">1.34.</span> <span class="post-toc-text">34、index</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#35、rindex"><span class="post-toc-number">1.35.</span> <span class="post-toc-text">35、rindex</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#36、strip"><span class="post-toc-number">1.36.</span> <span class="post-toc-text">36、strip</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#37、lstrip"><span class="post-toc-number">1.37.</span> <span class="post-toc-text">37、lstrip</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#38、rstrip"><span class="post-toc-number">1.38.</span> <span class="post-toc-text">38、rstrip</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Python基础（8）——常见的字符串函数"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Python基础（8）——常见的字符串函数</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-04-05 00:00:00" datetime="2018-04-04T16:00:00.000Z"  itemprop="datePublished">2018-04-05</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Python/">Python</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="常见的字符串函数"><a href="#常见的字符串函数" class="headerlink" title="常见的字符串函数"></a>常见的字符串函数</h1><h2 id="1、split"><a href="#1、split" class="headerlink" title="1、split"></a>1、split</h2><p>split(str=’ ‘[,num])  对字符串进行切片，并返回一个列表，str 表示按此字符串进行分割，默认是空格，num 表示最多分割多少次</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str1 = <span class="string">'aaa sss ddd '</span></span><br><span class="line">print(str1.split(<span class="string">' '</span>, <span class="number">3</span>))  <span class="comment"># ['aaa', 'sss', 'ddd', '']</span></span><br></pre></td></tr></table></figure>
+<h2 id="2、splitlines"><a href="#2、splitlines" class="headerlink" title="2、splitlines"></a>2、splitlines</h2><p>splitlines([keepends=False])  按照行(‘\r’, ‘\r\n’, \n’)分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符，默认是False</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">str2 = <span class="string">'''aaaaaaaaaa</span></span><br><span class="line"><span class="string">ssssssssssssssssss</span></span><br><span class="line"><span class="string">dddddddd</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">print(str2.splitlines(keepends=<span class="keyword">True</span>))  <span class="comment"># ['aaaaaaaaaa\n', 'ssssssssssssssssss\n', 'dddddddd\n']</span></span><br><span class="line">print(str2.splitlines(keepends=<span class="keyword">False</span>))  <span class="comment"># ['aaaaaaaaaa', 'ssssssssssssssssss', 'dddddddd']</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、join"><a href="#3、join" class="headerlink" title="3、join"></a>3、join</h2><p>join()  用于将序列中的元素以指定的字符连接生成一个新的字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str3 = <span class="string">'asdfghj'</span></span><br><span class="line">list = [<span class="string">'a'</span>,<span class="string">'s'</span>,<span class="string">'e'</span>]</span><br><span class="line">print(<span class="string">'-'</span>.join(list))  <span class="comment"># 'a-s-e'</span></span><br><span class="line">print(<span class="string">'-'</span>.join(str3))  <span class="comment"># 'a-s-d-f-g-h-j'</span></span><br></pre></td></tr></table></figure>
+<h2 id="4、max"><a href="#4、max" class="headerlink" title="4、max"></a>4、max</h2><p>max()  返回给定参数的最大ASCII值的字符，参数可以为序列</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(max(<span class="string">'asdfghj'</span>))  <span class="comment"># 's'</span></span><br></pre></td></tr></table></figure>
+<h2 id="5、min"><a href="#5、min" class="headerlink" title="5、min"></a>5、min</h2><p>max()  返回字符串中最小ASCII值的字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(min(<span class="string">'asdfghj'</span>))  <span class="comment"># 'a'</span></span><br></pre></td></tr></table></figure>
+<h2 id="6、replace"><a href="#6、replace" class="headerlink" title="6、replace"></a>6、replace</h2><p>replace(old, new[, max])  把字符串中的 old（旧字符串） 替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max 次</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfghjkasasas'</span>.replace(<span class="string">'a'</span>, <span class="string">'1'</span>, <span class="number">2</span>))  <span class="comment"># '1sdfghjk1sasas'</span></span><br></pre></td></tr></table></figure>
+<h2 id="7、maketrans、translate"><a href="#7、maketrans、translate" class="headerlink" title="7、maketrans、translate"></a>7、maketrans、translate</h2><p>maketrans()  返回字符串转换后生成的新字符串</p>
+<p>translate(table)  返回按照table中给出的映射来进行翻译后的字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">trantab = str.maketrans(<span class="string">'abcd'</span>, <span class="string">'1234'</span>)</span><br><span class="line">print(<span class="string">'asdfghjkasasas'</span>.translate(trantab))  <span class="comment"># '1s4fghjk1s1s1s'</span></span><br></pre></td></tr></table></figure>
+<h2 id="8、startswith"><a href="#8、startswith" class="headerlink" title="8、startswith"></a>8、startswith</h2><p> startswith(str, beg=0,end=len(string))  方法用于检查字符串是否是以指定子字符串开头，如果是则返回 True，否则返回 False。如果参数 beg 和 end 指定值，则在指定范围内检查</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfghjkasasas'</span>.startswith(<span class="string">'asd'</span>))  <span class="comment"># True</span></span><br><span class="line">print(<span class="string">'asdfghjkasasas'</span>.startswith(<span class="string">'asd'</span>, <span class="number">2</span>, <span class="number">10</span>))  <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<h2 id="9、endswith"><a href="#9、endswith" class="headerlink" title="9、endswith"></a>9、endswith</h2><p>endswith(suffix[, start[, end]]):方法用于判断字符串是否以指定后缀结尾，如果以指定后缀结尾返回True，否则返回False。可选参数”start”与”end”为检索字符串的开始与结束位置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfghjkasasas'</span>.endswith(<span class="string">'ghj'</span>, <span class="number">0</span>, <span class="number">7</span>))  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<h2 id="10、encode"><a href="#10、encode" class="headerlink" title="10、encode"></a>10、encode</h2><p>encode()  指定的编码格式编码字符串。默认编码为 ‘utf-8’。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfg'</span>.encode(<span class="string">'utf-8'</span>))  <span class="comment"># b'asdfg'</span></span><br></pre></td></tr></table></figure>
+<h2 id="11、decode"><a href="#11、decode" class="headerlink" title="11、decode"></a>11、decode</h2><p>decode():以指定的编码格式解码 bytes 对象。默认编码为 ‘utf-8’。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print((<span class="string">'asdfg'</span>.encode(<span class="string">'utf-8'</span>)).decode(<span class="string">'utf-8'</span>))  <span class="comment"># 'asdfg'</span></span><br></pre></td></tr></table></figure>
+<h2 id="12、isalpha"><a href="#12、isalpha" class="headerlink" title="12、isalpha"></a>12、isalpha</h2><p>isalpha():方法检测字符串是否只由字母组成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfg12'</span>.isalpha())  <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<h2 id="13、isalnum"><a href="#13、isalnum" class="headerlink" title="13、isalnum"></a>13、isalnum</h2><p>isalnum():检测字符串是否由字母和数字组成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'123456asd'</span>.isalnum())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<h2 id="14、isupper"><a href="#14、isupper" class="headerlink" title="14、isupper"></a>14、isupper</h2><p>isupper():检测字符串中所有的字母是否都为大写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'ASDFGd'</span>.isupper())  <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<h2 id="15、islower"><a href="#15、islower" class="headerlink" title="15、islower"></a>15、islower</h2><p>islower():检测字符串是否由小写字母组成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'Asdfghjkrt5'</span>.islower())  <span class="comment"># False</span></span><br></pre></td></tr></table></figure>
+<h2 id="16、istitle"><a href="#16、istitle" class="headerlink" title="16、istitle"></a>16、istitle</h2><p>istitle():检测字符串中所有的单词拼写首字母是否为大写，且其他字母为小写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'My Name Is Alex'</span>.istitle())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<h2 id="17、isdigit"><a href="#17、isdigit" class="headerlink" title="17、isdigit"></a>17、isdigit</h2><p>isdigit():检测字符串是否只由数字组成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345678'</span>.isdigit())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<h2 id="18、isnumeric"><a href="#18、isnumeric" class="headerlink" title="18、isnumeric"></a>18、isnumeric</h2><p>isnumeric():检测字符串是否只由数字组成。这种方法是只针对unicode对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'1234567'</span>.isnumeric())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<h2 id="19、isdecimal"><a href="#19、isdecimal" class="headerlink" title="19、isdecimal"></a>19、isdecimal</h2><p>isdecimal():检查字符串是否只包含十进制字符。这种方法只存在于unicode对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'12345'</span>.isdecimal())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<h2 id="20、isspace"><a href="#20、isspace" class="headerlink" title="20、isspace"></a>20、isspace</h2><p>isspace():检测字符串是否只由空白字符组成</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'            '</span>.isspace())  <span class="comment"># True</span></span><br></pre></td></tr></table></figure>
+<h2 id="21、len"><a href="#21、len" class="headerlink" title="21、len"></a>21、len</h2><p>len():返回对象（字符、列表、元组等）长度或项目个数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(len(<span class="string">'asdfghj234567'</span>))  <span class="comment"># 13</span></span><br></pre></td></tr></table></figure>
+<h2 id="22、lower"><a href="#22、lower" class="headerlink" title="22、lower"></a>22、lower</h2><p>lower():转换字符串中所有大写字符为小写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'ASDasdfgerty3456'</span>.lower())  <span class="comment"># 'asdasdfgerty3456'</span></span><br></pre></td></tr></table></figure>
+<h2 id="23、upper"><a href="#23、upper" class="headerlink" title="23、upper"></a>23、upper</h2><p>upper():将字符串中的小写字母转为大写字母</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'ASDasdfgerty3456'</span>.upper())  <span class="comment"># 'ASDASDFGERTY3456'</span></span><br></pre></td></tr></table></figure>
+<h2 id="24、swapcase"><a href="#24、swapcase" class="headerlink" title="24、swapcase"></a>24、swapcase</h2><p>swapcase():用于对字符串的大小写字母进行转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'ASDasdfgerty3456'</span>.swapcase())  <span class="comment"># 'asdASDFGERTY3456'</span></span><br></pre></td></tr></table></figure>
+<h2 id="25、capitalize"><a href="#25、capitalize" class="headerlink" title="25、capitalize"></a>25、capitalize</h2><p>capitalize():将字符串的第一个字母变成大写,其他字母变小写</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asd WERtsd3456'</span>.capitalize())  <span class="comment"># 'Asd wertsd3456'</span></span><br></pre></td></tr></table></figure>
+<h2 id="26、title"><a href="#26、title" class="headerlink" title="26、title"></a>26、title</h2><p>title():返回”标题化”的字符串,就是说所有单词都是以大写开始</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'my name is Alex'</span>.title())  <span class="comment"># 'My Name Is Alex'</span></span><br></pre></td></tr></table></figure>
+<h2 id="27、center"><a href="#27、center" class="headerlink" title="27、center"></a>27、center</h2><p>center(width[, fillchar]):返回一个指定的宽度 width 居中的字符串，fillchar 为填充的字符，默认为空格</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asd1'</span>.center(<span class="number">10</span>, <span class="string">' '</span>))  <span class="comment"># '   asd1   '</span></span><br></pre></td></tr></table></figure>
+<h2 id="28、ljust"><a href="#28、ljust" class="headerlink" title="28、ljust"></a>28、ljust</h2><p>ljust(width[, fillchar]):返回一个原字符串左对齐,并使用fillchar填充至指定长度的新字符串。如果指定的长度小于原字符串的长度则返回原字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asd1'</span>.ljust(<span class="number">10</span>, <span class="string">' '</span>))  <span class="comment"># 'asd1      '</span></span><br></pre></td></tr></table></figure>
+<h2 id="29、rjust"><a href="#29、rjust" class="headerlink" title="29、rjust"></a>29、rjust</h2><p>rjust(width[, fillchar]):回一个原字符串右对齐,并使用fillchar填充至长度 width 的新字符串。如果指定的长度小于字符串的长度则返回原字符串</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asd1'</span>.rjust(<span class="number">10</span>, <span class="string">' '</span>))  <span class="comment"># '      asd1'</span></span><br></pre></td></tr></table></figure>
+<h2 id="30、zfill"><a href="#30、zfill" class="headerlink" title="30、zfill"></a>30、zfill</h2><p>zfill(width):返回指定长度的字符串，原字符串右对齐，前面填充0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asd1'</span>.zfill(<span class="number">10</span>))  <span class="comment"># '000000asd1'</span></span><br></pre></td></tr></table></figure>
+<h2 id="31、count"><a href="#31、count" class="headerlink" title="31、count"></a>31、count</h2><p>count():统计字符串里某个字符出现的次数。可选参数为在字符串搜索的开始与结束位置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'aaaaaaaqwertya'</span>.count(<span class="string">'a'</span>))  <span class="comment"># 8</span></span><br></pre></td></tr></table></figure>
+<h2 id="32、find"><a href="#32、find" class="headerlink" title="32、find"></a>32、find</h2><p>find():方法检测字符串中是否包含子字符串 str ，如果指定 beg（开始） 和 end（结束） 范围，则检查是否包含在指定范围内，如果指定范围内如果包含指定子字符串，返回的是子字符串在字符串中的起始位置（下标）。如果不包含，返回-1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfghjkl'</span>.find(<span class="string">'fg1'</span>))  <span class="comment"># -1</span></span><br></pre></td></tr></table></figure>
+<h2 id="33、rfind"><a href="#33、rfind" class="headerlink" title="33、rfind"></a>33、rfind</h2><p>rfind():返回字符串最后一次出现的位置（下标），如果没有匹配项则返回-1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfghjklfg'</span>.rfind(<span class="string">'fg'</span>))  <span class="comment"># 9</span></span><br></pre></td></tr></table></figure>
+<h2 id="34、index"><a href="#34、index" class="headerlink" title="34、index"></a>34、index</h2><p>index():方法检测字符串中是否包含子字符串 str ，如果指定 beg（开始） 和 end（结束） 范围，则检查是否包含在指定范围内，该方法与 python find()方法相似，但是没有匹配项时，报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfghjkl'</span>.index(<span class="string">'fg'</span>))  <span class="comment"># 3</span></span><br><span class="line">print(<span class="string">'asdfghjkl'</span>.index(<span class="string">'fg1'</span>))  <span class="comment"># ValueError: substring not found</span></span><br></pre></td></tr></table></figure>
+<h2 id="35、rindex"><a href="#35、rindex" class="headerlink" title="35、rindex"></a>35、rindex</h2><p>rindex():返回子字符串 str 在字符串中最后出现的位置（下标），该方法与 python rfind()方法相似，但是没有匹配项时，报错。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'asdfghjklfg'</span>.rindex(<span class="string">'fg'</span>))  <span class="comment"># 9</span></span><br><span class="line">print(<span class="string">'asdfghjkl'</span>.rindex(<span class="string">'fg1'</span>))  <span class="comment"># ValueError: substring not found</span></span><br></pre></td></tr></table></figure>
+<h2 id="36、strip"><a href="#36、strip" class="headerlink" title="36、strip"></a>36、strip</h2><p>strip():用于移除字符串头尾指定的字符（默认为空格）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'      asd   '</span>.strip())  <span class="comment"># 'asd'</span></span><br></pre></td></tr></table></figure>
+<h2 id="37、lstrip"><a href="#37、lstrip" class="headerlink" title="37、lstrip"></a>37、lstrip</h2><p>lstrip():方法用于截掉字符串左边的空格或指定字符（默认为空格）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'      asd   '</span>.lstrip())  <span class="comment"># 'asd   '</span></span><br></pre></td></tr></table></figure>
+<h2 id="38、rstrip"><a href="#38、rstrip" class="headerlink" title="38、rstrip"></a>38、rstrip</h2><p>rstrip():删除 string 字符串末尾的指定字符（默认为空格）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">'      asd   '</span>.rstrip())  <span class="comment"># '      asd'</span></span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-05T02:03:08.617Z" itemprop="dateUpdated">2018-06-05 10:03:08</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字符串函数/">字符串函数</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/&title=《Python基础（8）——常见的字符串函数》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/&title=《Python基础（8）——常见的字符串函数》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（8）——常见的字符串函数》 — AlexYang's World&url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/04/08/Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/03/Python基础（7）——流程控制：分支与循环/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Python基础（7）——流程控制：分支与循环</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/&title=《Python基础（8）——常见的字符串函数》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/&title=《Python基础（8）——常见的字符串函数》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Python基础（8）——常见的字符串函数》 — AlexYang's World&url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/04/05/Python基础（8）——常见的字符串函数/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADMUlEQVR42u3a0W7jMAwEQP//T+deD7hzs0spQKyOnoLUtTkyUJakriter79WcuXd53/vc/f57rfu1vWJhY2Njf0QdnK75AF3Qd/9NGffxfDzN2+2BhsbG/s4dpuKVhJhu2XJS2rvj42NjY2dp7ek/MjT2OyVYGNjY2NvKwDKhtT6lmFjY2P/Hnb+L37erL/D5+H+HGcbGzY2Nvap7Flq+c7PH5lvY2NjY38x+1Wu9UJiNtCdDQxuFdjY2NgHsVfKgFkhkWzKSnsriR8bGxv7PHbbxGnHq7PW0qz1v62RhI2Njf1AdnJoZlYkfC4FtoNnbGxs7PPYefM9CTQPpS0YWtibDcXGxsY+iJ0A2oTUbk0ST3tNsnHY2NjYZ7BnbZ2VZlB+z3yUmz/32hsiNjY29tewk5JgPRW17f52nFA8BRsbG/sg9izQ2fwhubJuDM1qL2xsbOyD2Pne5AG1x3fy5LerHMLGxsY+ib0yTG1LiLxgaMfP7WgBGxsb+yT27EhN3rJvB7qvYM0Kp/8MerGxsbGPYLeYPDnlRUi+9TP2tf4OsbGxsb+YvXLUZtfAeKU6GL4wbGxs7EPZ7VB2JfnNUtr6MAMbGxv7PHZSMOTXtKOFPLiVDX3jwsbGxn44OykVkrFrm5ZmhzJz8JtosbGxsQ9iJwODT48N8gTWbv3VLmxsbOwHslcaQO2QYKXF344ool4aNjY29kHs/JF5yZEEMWtCrQwbsLGxsc9j5//cfyK4XYCljho2Njb2w9nJeGBvOZEftVk/9Hn7DTY2NvZB7PyP/qzwaMuPdmgxHOhiY2NjH8qeJbBZQK/RasfSUQLDxsbG/gXs5JErwbXlSntwZ0MvDRsbG/sh7OQxG8arQUN/Q5nRdtSwsbGxH8veVQysrJUU1ba3rlklhI2Njf3F7Da4dlPaI5jt6CJvXQ03AhsbG/sh7PxY5HqbaXbIZv24Z/0msbGxsR/InjV01ke2swbThrIHGxsbG3tU8bSly0qp82ZDsbGxsX8xe9ZU+hyybYRhY2Njn8pOmkpJQyc/9LN3cNsOErCxsbFPYtftmPKbNlHl98zvNjx4hI2Njf3t7D88KXy4JXTgaQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
