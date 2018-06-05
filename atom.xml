@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://alexyanglong.github.io/"/>
-  <updated>2018-06-05T11:29:34.404Z</updated>
+  <updated>2018-06-05T12:21:05.803Z</updated>
   <id>http://alexyanglong.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django -- 创建第一个Django项目</title>
+    <link href="http://alexyanglong.github.io/2018/05/22/Django----%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%80%E4%B8%AADjango%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://alexyanglong.github.io/2018/05/22/Django----创建第一个Django项目/</id>
+    <published>2018-05-21T16:00:00.000Z</published>
+    <updated>2018-06-05T12:21:05.803Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Django-–-创建第一个Django项目"><a href="#Django-–-创建第一个Django项目" class="headerlink" title="Django – 创建第一个Django项目"></a>Django – 创建第一个Django项目</h1><p>在开始创建Django项目之前，先要理解两个概念：请求与响应、MVC（在Django中称为MTV）。</p><h2 id="什么是请求与响应"><a href="#什么是请求与响应" class="headerlink" title="什么是请求与响应"></a>什么是请求与响应</h2><p>请求：又称为HTTP请求，指从客户端到服务器端的请求消息。包括：请求行、请求头、消息体。消息行中，有对资源的请求方法、资源的标识符及使用的协议。例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST http://xg.mediportal.com.cn/health/sms/verify/telephone HTTP/1.1</span><br></pre></td></tr></table></figure><p>请求头中包含许多有关的客户端环境和请求正文的有用信息。例如，请求头可以声明浏览器所用的语言，请求正文的长度等。例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">User-Agent: DGroupPatient/1.052701.230/Dalvik/2.1.0 (Linux; U; Android 5.1.1; KIW-AL10 Build/HONORKIW-AL10)</span><br><span class="line">Content-Type: application/x-www-form-urlencoded; charset=UTF-8</span><br><span class="line">Host: xg.mediportal.com.cn</span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Accept-Encoding: gzip</span><br><span class="line">Content-Length: 33</span><br></pre></td></tr></table></figure><p>请求头和请求正文之间是一个空行，这个行非常重要，它表示请求头已经结束，接下来的是请求正文。请求正文中可以包含客户端要向服务器端发送的信息，当然如果不需要向服务器端发送信息，也可以没有。例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">telephone=15527177736&amp;userType=1&amp;</span><br></pre></td></tr></table></figure><p>响应：也成为HTTP响应，指从服务器端到客户端的响应消息。与HTTP请求相似，HTTP响应也由3个部分构成，分别是：状态行、响应头、响应正文。状态行由协议版本、数字形式的状态代码、及相应的状态描述，各元素之间以空格分隔。例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HTTP/1.1 200 OK</span><br></pre></td></tr></table></figure><p>响应头主要包含服务器发送的数据相关信息，比如返回数据的类型、长度等等。例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Date: Tue, 31 May 2016 02:09:24 GMT</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Connection: keep-alive</span><br><span class="line">Vary: Accept-Encoding</span><br><span class="line">Access-Control-Allow-Origin: *</span><br><span class="line">Access-Control-Allow-Headers: X-Requested-With,access_token,access-token,content-type,multipart/form-data,application/x-www-form-urlencoded</span><br><span class="line">Access-Control-Allow-Methods: GET,POST,OPTIONS</span><br><span class="line">Content-Length: 49</span><br></pre></td></tr></table></figure><p>响应头和响应正文之间也有一个空行，表示响应头结束。响应正文包含了服务器端向客户端发送的数据。例如：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;&quot;resultCode&quot;:1,&quot;resultMsg&quot;:&quot;手机号未注册&quot;&#125;</span><br></pre></td></tr></table></figure><p>通过下面的图理解请求与响应的流程：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./请求与响应.jpeg" alt="请求与响应" title="">                </div>                <div class="image-caption">请求与响应</div>            </figure><h2 id="什么是MVC"><a href="#什么是MVC" class="headerlink" title="什么是MVC"></a>什么是MVC</h2><p>MVC全名是Model View Controller，是模型(model)－视图(view)－控制器(controller)的缩写，一种软件设计典范，用一种业务逻辑、数据、界面显示分离的方法组织代码，将业务逻辑聚集到一个部件里面，在改进和个性化定制界面及用户交互的同时，不需要重新编写业务逻辑。MVC被独特的发展起来用于映射传统的输入、处理和输出功能在一个逻辑的图形化用户界面的结构中。</p><p>目标：将模型（数据）和视图（显示）解耦合。</p><p>通过控制器，将数据和显示分离，好处是同一个视图可以加载不同的模型，同一个模型也可以显示成不同的视图。</p><p>稍具规模的系统都会使用MVC架构或者它的变体（MVP、MVVM等）。</p><p>通过下面的图来理解MVC的工作模式：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./MVC.jpeg" alt="MVC" title="">                </div>                <div class="image-caption">MVC</div>            </figure><p>在Django中将这种模式称为MTV ：模型（Model）- 模板（Template，对应视图） - 视图（View，对应控制器）</p><h2 id="创建第一个Django项目"><a href="#创建第一个Django项目" class="headerlink" title="创建第一个Django项目"></a>创建第一个Django项目</h2><p>Windows下步骤：</p><p>（在黑屏终端中执行）</p><p><code>python -m venv 虚拟环境名</code>        创建项目虚拟环境</p><p><code>cd 虚拟环境文件名/Scripts</code>        进入虚拟环境</p><p><code>activate.bat</code>                       激活虚拟环境</p><p><code>pip install django==版本号</code>            在虚拟环境下安装django      <code>django-admin --version</code>  查看版本</p><p><code>django-admin startproject 项目名 .</code>  创建django项目</p><p><code>python manage.py runserver</code>         开启服务</p><p>Linux下步骤：</p><p><code>mk 项目目录</code>                    创建django项目目录</p><p><code>cd 项目目录</code>                    进入项目目录</p><p><code>python -m venv 虚拟环境名</code>        创建项目虚拟环境</p><p><code>source 虚拟环境目录/bin/activate</code>    激活虚拟环境</p><p><code>python -m pip install --upgrade pip</code>    更新pip</p><p><code>pip install django==版本号</code>        在虚拟环境下安装django       <code>django-admin --version</code>  查看版本</p><p><code>django-admin startproject 项目名 .</code>    创建django项目</p><p><code>python manage.py runserver</code>         开启服务</p><p>开启了服务之后，在浏览器中输入 <code>127.0.0.1:8000</code> 或 <code>localhost:8000</code> 回车，出现Django界面，第一个Django项目就创建成功了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Django-–-创建第一个Django项目&quot;&gt;&lt;a href=&quot;#Django-–-创建第一个Django项目&quot; class=&quot;headerlink&quot; title=&quot;Django – 创建第一个Django项目&quot;&gt;&lt;/a&gt;Django – 创建第一个Django
+      
+    
+    </summary>
+    
+      <category term="Django" scheme="http://alexyanglong.github.io/categories/Django/"/>
+    
+    
+      <category term="Python" scheme="http://alexyanglong.github.io/tags/Python/"/>
+    
+      <category term="Django" scheme="http://alexyanglong.github.io/tags/Django/"/>
+    
+  </entry>
   
   <entry>
     <title>使用Python代码操作Redis</title>
@@ -549,33 +576,6 @@
       <category term="Python" scheme="http://alexyanglong.github.io/tags/Python/"/>
     
       <category term="分支循环" scheme="http://alexyanglong.github.io/tags/%E5%88%86%E6%94%AF%E5%BE%AA%E7%8E%AF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python基础（5）——集合set</title>
-    <link href="http://alexyanglong.github.io/2018/04/02/Python%E5%9F%BA%E7%A1%80%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%E9%9B%86%E5%90%88set/"/>
-    <id>http://alexyanglong.github.io/2018/04/02/Python基础（5）——集合set/</id>
-    <published>2018-04-01T16:00:00.000Z</published>
-    <updated>2018-06-05T02:01:41.712Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Python基础（5）——集合set"><a href="#Python基础（5）——集合set" class="headerlink" title="Python基础（5）——集合set"></a>Python基础（5）——集合set</h1><h2 id="集合set"><a href="#集合set" class="headerlink" title="集合set"></a>集合set</h2><p>set和dict类似，也是一组key的集合，但不存储value。由于key不能重复，所以，在set中，没有重复的key。</p><p>作用: 一般是对<code>list</code> ，<code>tuple</code>中的元素进行去重的，求交集、并集、差集等</p><p>set的一些常用操作：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获得set</span></span><br><span class="line">set1 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line">print(set1)</span><br><span class="line">print(type(set1))</span><br><span class="line">set2 = set((<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>))</span><br><span class="line">print(set2)</span><br><span class="line">print(type(set2))</span><br><span class="line">set3 = set(&#123;<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">7</span>&#125;)</span><br><span class="line">print(set3)</span><br><span class="line">print(type(set3))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加</span></span><br><span class="line">set4 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>])</span><br><span class="line">set4.add(<span class="number">55</span>)  <span class="comment"># add() #可以添加重复的值,但是没效果</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># set4.add([10, 9]) #直接报错,不能添加list</span></span><br><span class="line">set4.add((<span class="number">10</span>, <span class="number">9</span>))</span><br><span class="line"><span class="comment"># set4.add(&#123;'a':1&#125;) #直接报错,不能添加字典</span></span><br><span class="line"><span class="comment"># 总结:list和dict是可改变的, 而tuple是不可改变</span></span><br><span class="line">print(set4)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改</span></span><br><span class="line">set5 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"><span class="comment"># 将list dict tuple 等等整个插入进去</span></span><br><span class="line">set5.update([<span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>])</span><br><span class="line">set5.update(&#123;<span class="number">9</span> : <span class="string">'a'</span>, <span class="number">10</span> : <span class="string">'b'</span>&#125;)  <span class="comment">#注意：插入字典时，是将key插进去</span></span><br><span class="line">set5.update((<span class="number">11</span>, <span class="number">56</span>))</span><br><span class="line">print(set5)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">set6= set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">set6.remove(<span class="number">4</span>)</span><br><span class="line">print(set6)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 遍历</span></span><br><span class="line">set7 = set((<span class="number">231</span>, <span class="number">323.14</span>, <span class="string">'asddf'</span>, <span class="keyword">None</span>, <span class="keyword">True</span>))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> set7:</span><br><span class="line">    print(i)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 交集  &amp;  并集  |  差集 -  对称差 ^</span></span><br><span class="line">set8 = set([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br><span class="line">set9 = set([<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>])</span><br><span class="line">set10 = set8 &amp; set9</span><br><span class="line">set11 = set8 | set9</span><br><span class="line">print(set10)</span><br><span class="line">print(type(set10))</span><br><span class="line">print(set11)</span><br><span class="line">print(type(set11))</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Python基础（5）——集合set&quot;&gt;&lt;a href=&quot;#Python基础（5）——集合set&quot; class=&quot;headerlink&quot; title=&quot;Python基础（5）——集合set&quot;&gt;&lt;/a&gt;Python基础（5）——集合set&lt;/h1&gt;&lt;h2 id=&quot;集
-      
-    
-    </summary>
-    
-      <category term="Python" scheme="http://alexyanglong.github.io/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://alexyanglong.github.io/tags/Python/"/>
-    
-      <category term="set" scheme="http://alexyanglong.github.io/tags/set/"/>
     
   </entry>
   
