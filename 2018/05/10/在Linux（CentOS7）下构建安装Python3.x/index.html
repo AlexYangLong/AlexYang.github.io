@@ -20,16 +20,16 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="Python,Linux">
+    <meta name="keywords" content="Linux,Python">
     <meta name="description" content="在Linux（CentOS7）下构建安装Python3.xLinux环境自带了Python 2.x版本，但是如果要使用3.x的版本，可以先在Python的官方网站下载Python的源代码并通过源代码构建安装的方式进行安装，具体的步骤如下所示。 1、安装依赖库因为没有这些依赖库可能在源代码构件安装时因为缺失底层依赖库而失败 1yum -y install zlib-devel bzip2-devel">
-<meta name="keywords" content="Python,Linux">
+<meta name="keywords" content="Linux,Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Linux（CentOS7）下构建安装Python3.x">
 <meta property="og:url" content="http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下构建安装Python3.x/index.html">
 <meta property="og:site_name" content="AlexYang&#39;s World">
 <meta property="og:description" content="在Linux（CentOS7）下构建安装Python3.xLinux环境自带了Python 2.x版本，但是如果要使用3.x的版本，可以先在Python的官方网站下载Python的源代码并通过源代码构建安装的方式进行安装，具体的步骤如下所示。 1、安装依赖库因为没有这些依赖库可能在源代码构件安装时因为缺失底层依赖库而失败 1yum -y install zlib-devel bzip2-devel">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-06-05T02:08:14.439Z">
+<meta property="og:updated_time" content="2018-06-05T02:27:46.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Linux（CentOS7）下构建安装Python3.x">
 <meta name="twitter:description" content="在Linux（CentOS7）下构建安装Python3.xLinux环境自带了Python 2.x版本，但是如果要使用3.x的版本，可以先在Python的官方网站下载Python的源代码并通过源代码构建安装的方式进行安装，具体的步骤如下所示。 1、安装依赖库因为没有这些依赖库可能在源代码构件安装时因为缺失底层依赖库而失败 1yum -y install zlib-devel bzip2-devel">
@@ -167,7 +167,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在Linux（CentOS7）下构建安装Python3-x"><span class="post-toc-number">1.</span> <span class="post-toc-text">在Linux（CentOS7）下构建安装Python3.x</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、安装依赖库"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1、安装依赖库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、下载Python源代码并解压缩到指定目录"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2、下载Python源代码并解压缩到指定目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、配置和安装"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3、配置和安装</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在Linux（CentOS7）下构建安装Python3-x"><span class="post-toc-number">1.</span> <span class="post-toc-text">在Linux（CentOS7）下构建安装Python3.x</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1、安装依赖库"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1、安装依赖库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2、下载Python源代码并解压缩到指定目录"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2、下载Python源代码并解压缩到指定目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3、配置和安装"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3、配置和安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4、创建软链接"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4、创建软链接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#5、测试"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">5、测试</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -199,11 +199,9 @@
 <h2 id="2、下载Python源代码并解压缩到指定目录"><a href="#2、下载Python源代码并解压缩到指定目录" class="headerlink" title="2、下载Python源代码并解压缩到指定目录"></a>2、下载Python源代码并解压缩到指定目录</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://www.python.org/ftp/python/3.6.1/Python-3.6.1.tar.xz</span><br><span class="line">xz -d Python-3.6.1.tar.xz</span><br><span class="line">tar -xvf Python-3.6.1.tar</span><br></pre></td></tr></table></figure>
 <h2 id="3、配置和安装"><a href="#3、配置和安装" class="headerlink" title="3、配置和安装"></a>3、配置和安装</h2><p>先切换至Python源代码目录并执行下面的命令进行配置和安装。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd Python-3.6.1</span><br><span class="line">./configure --prefix=/usr/local/python36 --enable-optimizations</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-<p>##4、创建软链接</p>
-<p>这样就可以直接通过python3直接启动Python解释器，pip管理工具，2to3转换工具。</p>
+<h2 id="4、创建软链接"><a href="#4、创建软链接" class="headerlink" title="4、创建软链接"></a>4、创建软链接</h2><p>这样就可以直接通过python3直接启动Python解释器，pip管理工具，2to3转换工具。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/python36/bin/python3 /usr/bin/python3</span><br><span class="line">ln -s /usr/local/python36/bin/pip3 /usr/bin/pip3</span><br><span class="line">ln -s /usr/local/python36/bin/2to3 /usr/bin/2to3</span><br></pre></td></tr></table></figure>
-<p>##5、测试</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3		-  进入python3.X的交互环境</span><br><span class="line">pip3 -V		-  查看pip的版本</span><br><span class="line">2to3		-  查看2to3</span><br></pre></td></tr></table></figure>
+<h2 id="5、测试"><a href="#5、测试" class="headerlink" title="5、测试"></a>5、测试</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python3		-  进入python3.X的交互环境</span><br><span class="line">pip3 -V		-  查看pip的版本</span><br><span class="line">2to3		-  查看2to3</span><br></pre></td></tr></table></figure>
 <p>如果没有报错，就安装成功。</p>
 
         </div>
@@ -213,7 +211,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-05T02:08:14.439Z" itemprop="dateUpdated">2018-06-05 10:08:14</time>
+    最后更新时间：<time datetime="2018-06-05T02:27:46.176Z" itemprop="dateUpdated">2018-06-05 10:27:46</time>
 </span><br>
 
 
