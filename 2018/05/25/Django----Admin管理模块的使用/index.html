@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/Admin——创建用户.png">
 <meta property="og:image" content="http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/Admin——Model管理界面.png">
-<meta property="og:updated_time" content="2018-06-25T07:36:31.278Z">
+<meta property="og:updated_time" content="2018-06-25T08:22:06.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django -- Admin管理模块的使用">
 <meta name="twitter:description" content="Django – Admin管理模块的使用Djang自身集成了管理后台，在管理后台中可以对我们自定义model进行CRUD操作，也能进行列表展示解析，分页等等。 准备先创建一个项目test_p，在项目中创建应用testapp，将项目配置这些配置好。 创建一个model在应用文件目录下的models.py 中创建Student 、Grade 两个Model。 12345678910111213141">
@@ -170,7 +170,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Django-–-Admin管理模块的使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">Django – Admin管理模块的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建一个model"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">创建一个model</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#admin管理后台的url"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">admin管理后台的url</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建admin后台的用户密码"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">创建admin后台的用户密码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在管理后台中管理模型对象"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">在管理后台中管理模型对象</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Django-–-Admin管理模块的使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">Django – Admin管理模块的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建一个model"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">创建一个model</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#admin管理后台的url"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">admin管理后台的url</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建admin后台的用户密码"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">创建admin后台的用户密码</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在管理后台中管理模型对象"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">在管理后台中管理模型对象</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -217,7 +217,7 @@
                 <div class="image-caption">Admin——创建用户</div>
             </figure>
 <p>创建用户名成功之后，在浏览器中输入 <code>127.0.0.1:8000/admin/</code> 或 <code>localhost:8000/admin/</code> 进行登录。</p>
-<h3 id="在管理后台中管理模型对象"><a href="#在管理后台中管理模型对象" class="headerlink" title="在管理后台中管理模型对象"></a>在管理后台中管理模型对象</h3><p>需要在应用文件目录下的<code>admin.py</code> 文件中注册要进行管理的Model。</p>
+<h2 id="在管理后台中管理模型对象"><a href="#在管理后台中管理模型对象" class="headerlink" title="在管理后台中管理模型对象"></a>在管理后台中管理模型对象</h2><p>需要在应用文件目录下的<code>admin.py</code> 文件中注册要进行管理的Model。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># admin.site.register(模型名)</span></span><br><span class="line"></span><br><span class="line">admin.site.register(Grade)</span><br><span class="line">admin.site.register(Student)</span><br></pre></td></tr></table></figure>
 <p>当然也可以继承admin.ModelAdmin，编写自己的admin，来自定义Model的后台管理展示界面。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_gender</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.gender:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'男'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'女'</span></span><br><span class="line"></span><br><span class="line">    set_gender.short_description = <span class="string">'性别'</span></span><br><span class="line">    list_display = [<span class="string">'id'</span>, <span class="string">'name'</span>, set_gender]</span><br><span class="line">    list_filter = [<span class="string">'gender'</span>]</span><br><span class="line">    search_fields = [<span class="string">'name'</span>]</span><br><span class="line">    list_per_page = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">admin.site.register(Student, StudentAdmin)</span><br></pre></td></tr></table></figure>
@@ -246,7 +246,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-25T07:36:31.278Z" itemprop="dateUpdated">2018-06-25 15:36:31</time>
+    最后更新时间：<time datetime="2018-06-25T08:22:06.116Z" itemprop="dateUpdated">2018-06-25 16:22:06</time>
 </span><br>
 
 
