@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Flask -- 模板的使用 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Flask">
+    <meta name="description" content="Flask – 模板的使用jinja2模板介绍Flask中使用jinja2模板引擎 jinja2是由Flask作者开发，模仿Django的模板引擎 优点： 1234速度快，被广泛使用HTML设计和后端python分离非常灵活，快速和安全提供了控制，继承等高级功能 模板语法模板语法主要分为两种：变量和标签 模板中的变量： 12345&amp;#123;&amp;#123; var &amp;#125;&amp;#125;视图传递给">
+<meta name="keywords" content="Python,Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask -- 模板的使用">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Flask – 模板的使用jinja2模板介绍Flask中使用jinja2模板引擎 jinja2是由Flask作者开发，模仿Django的模板引擎 优点： 1234速度快，被广泛使用HTML设计和后端python分离非常灵活，快速和安全提供了控制，继承等高级功能 模板语法模板语法主要分为两种：变量和标签 模板中的变量： 12345&amp;#123;&amp;#123; var &amp;#125;&amp;#125;视图传递给">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-06-25T11:48:38.972Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask -- 模板的使用">
+<meta name="twitter:description" content="Flask – 模板的使用jinja2模板介绍Flask中使用jinja2模板引擎 jinja2是由Flask作者开发，模仿Django的模板引擎 优点： 1234速度快，被广泛使用HTML设计和后端python分离非常灵活，快速和安全提供了控制，继承等高级功能 模板语法模板语法主要分为两种：变量和标签 模板中的变量： 12345&amp;#123;&amp;#123; var &amp;#125;&amp;#125;视图传递给">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Flask -- 模板的使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Flask -- 模板的使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-05T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flask/">Flask</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Flask-–-模板的使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">Flask – 模板的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#jinja2模板介绍"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">jinja2模板介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模板语法"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">模板语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#结构标签"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">结构标签</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#循环"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">循环</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#过滤器"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">过滤器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义模板"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">定义模板</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义基础模板base-html"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">定义基础模板base.html</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#定义基础模板base-main-html"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">定义基础模板base_main.html</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#静态文件信息配置"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">静态文件信息配置</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Flask -- 模板的使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Flask -- 模板的使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-06 00:00:00" datetime="2018-06-05T16:00:00.000Z"  itemprop="datePublished">2018-06-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flask/">Flask</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Flask-–-模板的使用"><a href="#Flask-–-模板的使用" class="headerlink" title="Flask – 模板的使用"></a>Flask – 模板的使用</h1><h2 id="jinja2模板介绍"><a href="#jinja2模板介绍" class="headerlink" title="jinja2模板介绍"></a>jinja2模板介绍</h2><p>Flask中使用jinja2模板引擎</p>
+<p>jinja2是由Flask作者开发，模仿Django的模板引擎</p>
+<p>优点：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">速度快，被广泛使用</span><br><span class="line">HTML设计和后端python分离</span><br><span class="line">非常灵活，快速和安全</span><br><span class="line">提供了控制，继承等高级功能</span><br></pre></td></tr></table></figure>
+<h2 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h2><p>模板语法主要分为两种：变量和标签</p>
+<p>模板中的变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; var &#125;&#125;</span><br><span class="line"></span><br><span class="line">视图传递给模板的数据</span><br><span class="line">前面定义出来的数据</span><br><span class="line">变量不存在，默认忽略</span><br></pre></td></tr></table></figure>
+<p>模板中的标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% tag %&#125;</span><br><span class="line"></span><br><span class="line">控制逻辑</span><br><span class="line">使用外部表达式</span><br><span class="line">创建变量</span><br><span class="line">宏定义</span><br></pre></td></tr></table></figure>
+<h3 id="结构标签"><a href="#结构标签" class="headerlink" title="结构标签"></a>结构标签</h3><p>block</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block xxx %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">块操作</span><br><span class="line">	父模板挖坑，子模板填坑</span><br></pre></td></tr></table></figure>
+<p>extends</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;xxx.html&apos; %&#125;</span><br><span class="line"></span><br><span class="line">继承以后保留块中的内容</span><br><span class="line">&#123;&#123; super() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>挖坑继承体现的化整为零的操作</p>
+<p>macro</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% macro hello(name) %&#125;</span><br><span class="line">	&#123;&#123; name &#125;&#125;</span><br><span class="line">&#123;% endmacro %&#125;</span><br><span class="line"></span><br><span class="line">宏定义，可以在模板中定义函数，在其他地方调用</span><br></pre></td></tr></table></figure>
+<p>宏定义可导入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% from &apos;xxx&apos; import xxx %&#125;</span><br></pre></td></tr></table></figure>
+<p>例子1：</p>
+<p>在index.html中定义macro标签，定义一个方法，然后去调用方法，结果是展示商品的id和商品名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;% macro show_goods(id, name) %&#125;</span><br><span class="line">    商品id：&#123;&#123; id &#125;&#125;</span><br><span class="line">    商品名称：&#123;&#123; name &#125;&#125;</span><br><span class="line">&#123;% endmacro %&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123; show_goods(&apos;1&apos;, &apos;娃哈哈&apos;) &#125;&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&#123;&#123; show_goods(&apos;2&apos;, &apos;雪碧&apos;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>例子2：</p>
+<p>在index.html页面中定义一个say()方法，然后解析该方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% macro say() %&#125;</span><br><span class="line">    &lt;h3&gt;今天天气气温回升&lt;/h3&gt;</span><br><span class="line">    &lt;h3&gt;适合去游泳&lt;/h3&gt;</span><br><span class="line">    &lt;h3&gt;适合去郊游&lt;/h3&gt;</span><br><span class="line">&#123;% endmacro %&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123; say() &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>例子3：</p>
+<p>定义一个function.html中定义一个方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% macro create_user(name) %&#125;</span><br><span class="line">    创建了一个用户:&#123;&#123; name &#125;&#125;</span><br><span class="line">&#123;% endmacro %&#125;</span><br></pre></td></tr></table></figure>
+<p>在index.html中引入function.html中定义的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% from &apos;functions.html&apos; import create_user %&#125;</span><br><span class="line"></span><br><span class="line">&#123;&#123; create_user(&apos;小花&apos;) &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for item in cols %&#125;</span><br><span class="line">	aa</span><br><span class="line">&#123;% else %&#125;</span><br><span class="line">	bb</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<p>也可以获取循环信息loop</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">loop.first</span><br><span class="line">loop.last</span><br><span class="line">loop.index</span><br><span class="line">loop.revindex</span><br></pre></td></tr></table></figure>
+<p>例子:</p>
+<p>在视图中定义一个视图函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@stu.route(&apos;/scores/&apos;)</span><br><span class="line">def scores():</span><br><span class="line">    scores_list = [21,34,32,67,89,43,22,13]</span><br><span class="line"></span><br><span class="line">    content_h2 = &apos;&lt;h2&gt;今天你们真帅&lt;/h2&gt;&apos;</span><br><span class="line">    content_h3 = &apos;   &lt;h3&gt;今天你们真帅&lt;/h3&gt;   &apos;</span><br><span class="line"></span><br><span class="line">    return render_template(&apos;scores.html&apos;,</span><br><span class="line">                           scores=scores_list,</span><br><span class="line">                           content_h2=content_h2,</span><br><span class="line">                           content_h3=content_h3)</span><br></pre></td></tr></table></figure>
+<p>(该视图函数，在下面讲解的过滤器中任然使用其返回的content_h2等参数)</p>
+<p>首先: 在页面中进行解析scores的列表。题目要求：第一个成绩展示为红色，最后一个成绩展示为绿色，其他的不变</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">   &#123;% for score in scores %&#125;</span><br><span class="line">        &#123;% if loop.first %&#125;</span><br><span class="line">            &lt;li style=&quot;color:red;&quot;&gt;&#123;&#123; loop.revindex &#125;&#125;:&#123;&#123; loop.index &#125;&#125;:&#123;&#123; score &#125;&#125;&lt;/li&gt;</span><br><span class="line">        &#123;% elif loop.last %&#125;</span><br><span class="line">            &lt;li style=&quot;color:green;&quot;&gt;&#123;&#123; loop.revindex &#125;&#125;:&#123;&#123; loop.index &#125;&#125;:&#123;&#123; score &#125;&#125;&lt;/li&gt;</span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">            &lt;li&gt; &#123;&#123; loop.revindex &#125;&#125;:&#123;&#123; loop.index &#125;&#125;:&#123;&#123; score &#125;&#125;&lt;/li&gt;</span><br><span class="line">        &#123;% endif %&#125;</span><br><span class="line">    &#123;% endfor %&#125;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="过滤器"><a href="#过滤器" class="headerlink" title="过滤器"></a>过滤器</h3><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; 变量|过滤器|过滤器... &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>capitalize 单词首字母大写</p>
+<p>lower 单词变为小写</p>
+<p>upper 单词变为大写</p>
+<p>title</p>
+<p>trim 去掉字符串的前后的空格</p>
+<p>reverse 单词反转</p>
+<p>format</p>
+<p>striptags 渲染之前，将值中标签去掉</p>
+<p>safe 讲样式渲染到页面中</p>
+<p>default</p>
+<p>last 最后一个字母</p>
+<p>first</p>
+<p>length</p>
+<p>sum</p>
+<p>sort</p>
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;&#123;&#123; content_h2 &#125;&#125;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&#123;&#123; content_h2|safe &#125;&#125;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&#123;&#123; content_h2|striptags &#125;&#125;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">    &lt;li&gt;&#123;&#123; content_h3 &#125;&#125;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&#123;&#123; content_h3|length &#125;&#125;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&#123;&#123; content_h3|trim|safe &#125;&#125;&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;&#123;&#123; content_h3|trim|length &#125;&#125;&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="定义模板"><a href="#定义模板" class="headerlink" title="定义模板"></a>定义模板</h2><h3 id="定义基础模板base-html"><a href="#定义基础模板base-html" class="headerlink" title="定义基础模板base.html"></a>定义基础模板base.html</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;</span><br><span class="line">        &#123;% block title %&#125;</span><br><span class="line">        &#123;% endblock %&#125;</span><br><span class="line">    &lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;https://code.jquery.com/jquery-3.2.1.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">    &#123;% block extCSS %&#125;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&#123;% block header %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block content%&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block footer%&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block extJS %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="定义基础模板base-main-html"><a href="#定义基础模板base-main-html" class="headerlink" title="定义基础模板base_main.html"></a>定义基础模板base_main.html</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;base.html&apos; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block extCSS %&#125;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;&#123; url_for(&apos;static&apos;, filename=&apos;css/main.css&apos;) &#125;&#125;&quot;&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="静态文件信息配置"><a href="#静态文件信息配置" class="headerlink" title="静态文件信息配置"></a>静态文件信息配置</h2><p><strong>django</strong>：</p>
+<p>第一种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;% static &apos;css/index.css&apos; %&#125;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>第二种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/index.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>flask</strong>：</p>
+<p>第一种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/static/css/index.css&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>第二种方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;&#123; url_for(&apos;static&apos;, filename=&apos;css/index.css&apos;) &#125;&#125;&quot;&gt;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-25T11:48:38.972Z" itemprop="dateUpdated">2018-06-25 19:48:38</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/&title=《Flask -- 模板的使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/&title=《Flask -- 模板的使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flask -- 模板的使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/05/Flask -- 蓝图的使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Flask -- 蓝图的使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/&title=《Flask -- 模板的使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/&title=《Flask -- 模板的使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flask -- 模板的使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/06/06/Flask -- 模板的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsklEQVR42u3aUWorMRAEwNz/0n6/gYd3u2dWiQOlL+PYa5UC0tCjr694vL6N7+9cfyZ/wrvvXv/iYwMPDw9vMfX/x7vPvJvE9eSuFyVZgnzOeHh4eKd5+eTakS9lvojJnPHw8PA+hzcrlPPpJk/Aw8PD+1u8tuDOl6z9Lh4eHt7v8tpQIJ9Ku3DXMfHBrAUPDw8v5uVdpM95faS/h4eHh7fuqrfbblJqP9XiiuaJh4eHd4DXXqhKSC21fX5dWOPh4eEd4LVNr03429bAeTEd/QoeHh7emrePYq8PgPYISZajYOPh4eEd4OVla87OC+tZMd0W63h4eHgneMmRMAtYZ0dOXtAPLw3g4eHhLXjXf8635n34O9vob44ZPDw8vB/h5Q3+pOzOlyyPG4qZ4OHh4R3gbQLZTcCaH0ib4h4PDw/vNK+4X3CJmTXD8mOmjpjx8PDwHuXl23deOu8jiVlZv7r7gIeHh9ft8MNLpbP3Z4X7JjLGw8PD+0nehj172ms0bhYaDw8P7wCvveQ0a/C3QUMbfxRtMDw8PLwFr93KkxZX8q3ZETL8j+Hh4eE9yps9Lt/E2yMhBxTzwcPDwzvAa7fsvN80K9lbWFSa4+Hh4R3g5V9OYtMkeJ0tVr4EeHh4eCd4iX6zoc+C4DbyKDpyeHh4eGtesq3P2lSboOFIZw8PDw/vIV5yAOTN/rZlNRv5PPHw8PBO8GbXCJ66WJBfzMpr5puUBQ8PD2/Ne5WjLaDbwrq9znWTPODh4eEd4D1VyM4a/3lDaxM04+Hh4Z3gbaa4Wbm8BG+jZDw8PLyf4W0ePQO3h0H+78HDw8P7HN4seJ210PJY5OYdPDw8vF/ltSFs8ro9YOoAFw8PD+8YL29WzUKEp+LjdoZ4eHh4J3j7yDU/APJtfbPow1XEw8PDu+f9A2XPsYZuluYhAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
