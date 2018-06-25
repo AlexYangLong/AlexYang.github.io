@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://alexyanglong.github.io/"/>
-  <updated>2018-06-25T07:36:27.206Z</updated>
+  <updated>2018-06-25T07:36:15.796Z</updated>
   <id>http://alexyanglong.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Django -- 在CentOS 7上部署Django项目</title>
+    <link href="http://alexyanglong.github.io/2018/05/31/Django----%E5%9C%A8CentOS-7%E4%B8%8A%E9%83%A8%E7%BD%B2Django%E9%A1%B9%E7%9B%AE/"/>
+    <id>http://alexyanglong.github.io/2018/05/31/Django----在CentOS-7上部署Django项目/</id>
+    <published>2018-05-30T16:00:00.000Z</published>
+    <updated>2018-06-25T07:36:15.796Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Django-–-在CentOS-7上部署Django项目"><a href="#Django-–-在CentOS-7上部署Django项目" class="headerlink" title="Django – 在CentOS 7上部署Django项目"></a>Django – 在CentOS 7上部署Django项目</h1><p>在部署之前，要确保CentOS 7系统已经安装了MySQL 5.x数据库、Python 3.6.x和Nginx。</p><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>在CentOS 7的根目录 <code>/</code> 下创建一个<code>project</code> 目录，该目录用于存放所有要部署的项目。在<code>project</code> 下在创建<code>conf</code> （用户存放所有的配置文件）、 <code>env</code> （用户存放所有的虚拟环境）、 <code>src</code> （用于存放所有项目的源码）、 <code>logs</code>（用于存放所有的日志文件）。</p><h3 id="同步数据"><a href="#同步数据" class="headerlink" title="同步数据"></a>同步数据</h3><p>使用navicat 将Windows上的数据库同步到CentOS上。首先要确保CentOS上的MySQL可以支持远程连接。</p><h3 id="安装虚拟环境"><a href="#安装虚拟环境" class="headerlink" title="安装虚拟环境"></a>安装虚拟环境</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 切换目录</span><br><span class="line">cd /project/env</span><br><span class="line"># 安装虚拟环境  参数：指定虚拟环境中Python的版本（-p 本地Python3的安装目录）</span><br><span class="line">virtualenv --no-site-packages -p /usr/local/python3.6 axfvenv</span><br><span class="line"># 进入虚拟环境目录</span><br><span class="line">cd venv</span><br><span class="line"># 激活虚拟环境</span><br><span class="line">source bin/activate</span><br><span class="line"># 安装环境所需要的包 其中re_install.txt文件中记录的是需要安装包的名称以及对应的版本</span><br><span class="line">pip3 install -r re_install.txt</span><br></pre></td></tr></table></figure><p>Django的项目中，在工程目录下settings.py文件中有一个DEBUG=True参数，如果DEBUG=False则会出现js，css，img无法加载的情况出现。</p><p>原因如下：</p><p>Django框架仅在开发模式下提供静态文件服务。当开启DEBUG模式时，Django内置的服务器是提供静态文件的服务的，所以css等文件访问都没有问题，但是关闭DEBUG模式后，Django便不提供静态文件服务了。</p><h3 id="部署在测试环境中"><a href="#部署在测试环境中" class="headerlink" title="部署在测试环境中"></a>部署在测试环境中</h3><p>在测试环境中一般都直接使用python manage.py runserver的方式去运行项目。其中就涉及到DEBUG=False的修改，静态目录的修改等，具体修改如下：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">修改settings.py配置文件中的DEBUG=False模式，修改ALLOEWD_HOST=[&apos;*&apos;]</span><br></pre></td></tr></table></figure><p>修改项目目录下的urls.py</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 引入包</span><br><span class="line">from django.views.static import serve</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    ...,</span><br><span class="line"></span><br><span class="line"># 增加以下的url路由</span><br><span class="line">    url(r&apos;^static/(?P&lt;path&gt;.*)$&apos;, serve, &#123;&quot;document_root&quot;: settings.STATICFILES_DIRS[0]&#125;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><p>使用<code>python manage.py runserver</code> 运行项目。</p><h3 id="部署在正式环境中"><a href="#部署在正式环境中" class="headerlink" title="部署在正式环境中"></a>部署在正式环境中</h3><p>使用 uwsgi + Nginx + MySQL 来部署项目。</p><h4 id="配置nginx-conf文件"><a href="#配置nginx-conf文件" class="headerlink" title="配置nginx.conf文件"></a>配置nginx.conf文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /project/conf</span><br></pre></td></tr></table></figure><p>先编写自己项目的nginx.conf文件如下：</p><p>每一个项目对应有一个自己定义的nginx的配置文件，比如爱鲜蜂项目，定义为axf_nginx.conf 文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">     listen       80;  # 端口</span><br><span class="line">     server_name xx.xx.xx.xx localhost;  # 公网ip、域名</span><br><span class="line"></span><br><span class="line">     access_log /project/logs/axf_access.log;  # 连接成功日志文件</span><br><span class="line">     error_log /project/logs/axf_error.log;  # 错误日志</span><br><span class="line"></span><br><span class="line">     location / &#123;</span><br><span class="line">         include uwsgi_params;</span><br><span class="line">         uwsgi_pass 127.0.0.1:8090;  # 和uwsgi通信的端口</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     location /static/ &#123;</span><br><span class="line">         alias /project/src/axf/static/;  # 静态文件</span><br><span class="line">         expires 30d;</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure><p>再修改总的nginx的配置文件，让总的nginx文件包含我们自定义的项目的axf_nginx.conf 文件。</p><p>总的nginx配置文件在：/etc/nginx/nginx.conf 中</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./django_centos_nginx1.png" alt="django_centos_nginx1" title="">                </div>                <div class="image-caption">django_centos_nginx1</div>            </figure><p>以上步骤操作完成以后，需要重启nginx：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br><span class="line"></span><br><span class="line">systemctl status nginx</span><br></pre></td></tr></table></figure><p>如果自定义的axf_nginx.conf文件没有错误的话，查看nginx的运行状态会有如下的结果：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./django_centos_nginx2.png" alt="django_centos_nginx2" title="">                </div>                <div class="image-caption">django_centos_nginx2</div>            </figure><h4 id="配置uwsgi文件"><a href="#配置uwsgi文件" class="headerlink" title="配置uwsgi文件"></a>配置uwsgi文件</h4><p>先安装uwsgi</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install uwsgi</span><br></pre></td></tr></table></figure><p>然后进行环境变量的配置， 建立软连接</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/local/python3.6/bin/uwsgi /usr/bin/uwsgi</span><br></pre></td></tr></table></figure><p>在 /project/conf 文件夹下除了包含自定义的axf_nginx.conf文件，还有我们自定义的axf_uwsgi.ini 配置文件。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">projectname = axf</span><br><span class="line">base = /project/src</span><br><span class="line"></span><br><span class="line"># 守护进程</span><br><span class="line">master = true</span><br><span class="line"></span><br><span class="line"># 进程个数</span><br><span class="line">processes = 4</span><br><span class="line"></span><br><span class="line"># 虚拟环境</span><br><span class="line">pythonhome = /project/env/axfvenv</span><br><span class="line"></span><br><span class="line"># 项目地址</span><br><span class="line">chdir = %(base)/%(projectname)</span><br><span class="line"></span><br><span class="line"># 指定python版本</span><br><span class="line">pythonpath = /usr/local/python3/bin/python3</span><br><span class="line"></span><br><span class="line"># 指定uwsgi文件</span><br><span class="line">module = %(projectname).wsgi</span><br><span class="line"></span><br><span class="line"># 和nginx通信地址:端口</span><br><span class="line">socket = 127.0.0.1:8090</span><br><span class="line"></span><br><span class="line"># 日志文件地址</span><br><span class="line">logto = /project/logs/axf_uwsgi.log</span><br></pre></td></tr></table></figure><p>运行项目:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /project/conf</span><br><span class="line"></span><br><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Django-–-在CentOS-7上部署Django项目&quot;&gt;&lt;a href=&quot;#Django-–-在CentOS-7上部署Django项目&quot; class=&quot;headerlink&quot; title=&quot;Django – 在CentOS 7上部署Django项目&quot;&gt;&lt;/a
+      
+    
+    </summary>
+    
+      <category term="Django" scheme="http://alexyanglong.github.io/categories/Django/"/>
+    
+    
+      <category term="Linux" scheme="http://alexyanglong.github.io/tags/Linux/"/>
+    
+      <category term="Django" scheme="http://alexyanglong.github.io/tags/Django/"/>
+    
+  </entry>
   
   <entry>
     <title>Django -- 分页、中间件、验证码、文件上传</title>
@@ -534,33 +561,6 @@
       <category term="正则表达式" scheme="http://alexyanglong.github.io/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
       <category term="re模块" scheme="http://alexyanglong.github.io/tags/re%E6%A8%A1%E5%9D%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python基础（11）——面向对象基础</title>
-    <link href="http://alexyanglong.github.io/2018/04/12/Python%E5%9F%BA%E7%A1%80%EF%BC%8811%EF%BC%89%E2%80%94%E2%80%94%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/"/>
-    <id>http://alexyanglong.github.io/2018/04/12/Python基础（11）——面向对象基础/</id>
-    <published>2018-04-11T16:00:00.000Z</published>
-    <updated>2018-06-05T02:04:09.104Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Python基础（11）——面向对象基础"><a href="#Python基础（11）——面向对象基础" class="headerlink" title="Python基础（11）——面向对象基础"></a>Python基础（11）——面向对象基础</h1><p>在Python中，所有数据类型都可以视为对象，当然也可以自定义对象。自定义的对象数据类型就是面向对象中的类（Class）的概念。</p><p>面向对象的三个基本特征是：封装、继承、多态。</p><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>封装是实现面向对象程序设计的第一步，封装就是将数据或函数等集合在一个个的单元中（我们称之为类）。被封装的对象通常被称为抽象数据类型。 隐藏复杂的现实细节，暴露简单的调用接口。</p><p>封装的意义：封装的意义在于保护或者防止代码（数据）被我们无意中破坏。在面向对象程序设计中数据被看作是一个中心的元素并且和使用它的函数结合的很密切，从而保护它不被其它的函数意外的修改。</p><p>​    1、保护数据成员，不让类以外的程序直接访问或修改，只能通过提供的公共的接口访问==&gt;数据封装。</p><p>​    2、方法的细节对用户是隐藏的，只要接口不变，内容的修改不会影响到外部的调用者==&gt;方法封装。</p><p>​    3、当对象含有完整的属性和与之对应的方法时称为封装。</p><p>​    4、从对象外面不能直接访问对象的属性，只能通过和该属性对应的方法访问。</p><p>​    5、对象的方法可以接收对象外面的消息。</p><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>从已有的类创建新类的过程 提供继承信息的称为父类(超类/基类) 得到继承信息的称为子类(派生类)。继承主要实现重用代码，节省开发时间。</p><p>​    1、在类名后边的括号里一般写的是基类的类名</p><p>​    2、子类中继承自父类(基类),则父类的成员属性和成员方法都可以被子类所继承</p><p>​    3、父类中私有的成员属性不能继承给子类的</p><h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>“一个接口，多种表现形式”。</p><p> 同一操作作用于不同的对象，可以有不同的解释，产生不同的执行结果。</p><p>多态的三个条件:</p><p>​    1、继承的存在(继承是多态的基础,没有继承就没有多态)</p><p>​    2、子类重写父类的方法(多态下调用子类重写的方法)</p><p>​    3、父类引用变量指向子类对象(子类到父类的类型转换)</p><p><strong>数据抽象</strong> 一 找到和对象相关的数据——属性( 名词），可以使用包装器<code>@property</code>和修改器<code>@属性.setter</code>来装饰属性。</p><p><code>__slots__</code>限定自定义类型的对象只能绑定某些属性，可以通过在类中定义<code>__slots__</code>变量来进行限定。需要注意的是<code>__slots__</code>的限定只对当前类的对象生效，对子类并不起任何作用。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class Person(object):</span><br><span class="line">    # 限定Person对象只能绑定_name, _age和_gender属性</span><br><span class="line">    __slots__ = (&apos;_name&apos;, &apos;_age&apos;, &apos;_gender&apos;)</span><br></pre></td></tr></table></figure><p><strong>行为抽象</strong> 一 找到和对象相关的行为——方法（动词）</p><p><strong>成员方法</strong>：第一个参数为<code>self</code>，由实例化的对象调用</p><p><strong>类方法</strong>：使用<code>@classmethod</code>装饰的方法是类方法，与成员方法的区别在于所接收的第一个参数不是 <code>self</code> （类实例的指针），而是<code>cls</code>（当前类的具体类型）</p><p><strong>静态方法</strong>：使用<code>@staticmethod</code>装饰的方法是类静态方法，其跟成员方法的区别是没有 <code>self</code> 参数，并且可以在类不进行实例化的情况下调用</p><p><strong>魔法方法</strong>：<code>__init__()</code> 、<code>__del__()</code> 、<code>__str__()</code> 、<code>__repr__()</code></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Python基础（11）——面向对象基础&quot;&gt;&lt;a href=&quot;#Python基础（11）——面向对象基础&quot; class=&quot;headerlink&quot; title=&quot;Python基础（11）——面向对象基础&quot;&gt;&lt;/a&gt;Python基础（11）——面向对象基础&lt;/h1&gt;&lt;
-      
-    
-    </summary>
-    
-      <category term="Python" scheme="http://alexyanglong.github.io/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://alexyanglong.github.io/tags/Python/"/>
-    
-      <category term="面向对象" scheme="http://alexyanglong.github.io/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     
   </entry>
   
