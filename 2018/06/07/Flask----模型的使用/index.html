@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Flask -- 模型的使用 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Flask">
+    <meta name="description" content="Flask – 模型的使用Flask模型Flask默认并没有提供任何数据库操作的API 我们可以选择任何适合自己项目的数据库来使用 Flask中可以自己的选择数据，用原生语句实现功能，也可以选择ORM（SQLAlchemy，MongoEngine） SQLAlchemy是一个很强大的关系型数据库框架，支持多种数据库后台。SQLAlchemy提供了高层ORM，也提供了使用数据库原生SQL的低层功能。">
+<meta name="keywords" content="Python,Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask -- 模型的使用">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Flask – 模型的使用Flask模型Flask默认并没有提供任何数据库操作的API 我们可以选择任何适合自己项目的数据库来使用 Flask中可以自己的选择数据，用原生语句实现功能，也可以选择ORM（SQLAlchemy，MongoEngine） SQLAlchemy是一个很强大的关系型数据库框架，支持多种数据库后台。SQLAlchemy提供了高层ORM，也提供了使用数据库原生SQL的低层功能。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/flask_sqlalchemy_paginate.png">
+<meta property="og:updated_time" content="2018-06-25T11:35:43.039Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flask -- 模型的使用">
+<meta name="twitter:description" content="Flask – 模型的使用Flask模型Flask默认并没有提供任何数据库操作的API 我们可以选择任何适合自己项目的数据库来使用 Flask中可以自己的选择数据，用原生语句实现功能，也可以选择ORM（SQLAlchemy，MongoEngine） SQLAlchemy是一个很强大的关系型数据库框架，支持多种数据库后台。SQLAlchemy提供了高层ORM，也提供了使用数据库原生SQL的低层功能。">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/flask_sqlalchemy_paginate.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Flask -- 模型的使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Flask -- 模型的使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-06T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-06-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flask/">Flask</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Flask-–-模型的使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">Flask – 模型的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Flask模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Flask模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义模型"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">定义模型</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#创建数据表"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">创建数据表</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#初始化SQLALchemy"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">初始化SQLALchemy</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置数据库的访问地址"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">配置数据库的访问地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#CRUD操作"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">CRUD操作</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#向学生表中添加数据"><span class="post-toc-number">1.6.1.</span> <span class="post-toc-text">向学生表中添加数据</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#批量增加"><span class="post-toc-number">1.6.1.1.</span> <span class="post-toc-text">批量增加</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取所有学生信息"><span class="post-toc-number">1.6.2.</span> <span class="post-toc-text">获取所有学生信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#获取s-id-1的学生的信息"><span class="post-toc-number">1.6.3.</span> <span class="post-toc-text">获取s_id=1的学生的信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改学生的信息"><span class="post-toc-number">1.6.4.</span> <span class="post-toc-text">修改学生的信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#删除一个学生的信息"><span class="post-toc-number">1.6.5.</span> <span class="post-toc-text">删除一个学生的信息</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#查询操作深入"><span class="post-toc-number">1.6.6.</span> <span class="post-toc-text">查询操作深入</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#使用运算符"><span class="post-toc-number">1.6.6.1.</span> <span class="post-toc-text">使用运算符</span></a></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Flask----模型的使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Flask -- 模型的使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-07 00:00:00" datetime="2018-06-06T16:00:00.000Z"  itemprop="datePublished">2018-06-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Flask/">Flask</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Flask-–-模型的使用"><a href="#Flask-–-模型的使用" class="headerlink" title="Flask – 模型的使用"></a>Flask – 模型的使用</h1><h2 id="Flask模型"><a href="#Flask模型" class="headerlink" title="Flask模型"></a>Flask模型</h2><p>Flask默认并没有提供任何数据库操作的API</p>
+<p>我们可以选择任何适合自己项目的数据库来使用</p>
+<p>Flask中可以自己的选择数据，用原生语句实现功能，也可以选择ORM（SQLAlchemy，MongoEngine）</p>
+<p>SQLAlchemy是一个很强大的关系型数据库框架，支持多种数据库后台。SQLAlchemy提供了高层ORM，也提供了使用数据库原生SQL的低层功能。</p>
+<p>ORM：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">将对对象的操作转换为原生SQL</span><br><span class="line">优点</span><br><span class="line">	易用性，可以有效减少重复SQL</span><br><span class="line">	性能损耗少</span><br><span class="line">	设计灵活，可以轻松实现复杂查询</span><br><span class="line">	移植性好</span><br></pre></td></tr></table></figure>
+<p>针对于Flask的支持，<a href="http://flask-sqlalchemy.pocoo.org/2.3/" target="_blank" rel="noopener">官网地址</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install flask-sqlalchemy</span><br></pre></td></tr></table></figure>
+<p>安装驱动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+<h2 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h2><p>使用SQLALchemy的对象去创建字段</p>
+<p>其中<code>__tablename__</code>指定创建的数据库的名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建models.py文件，其中定义模型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line"></span><br><span class="line">db = SQLAlchemy()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(db.Model)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">"student"</span></span><br><span class="line">    </span><br><span class="line">    s_id = db.Column(db.Integer, primary_key=<span class="keyword">True</span>, autoincrement=<span class="keyword">True</span>)</span><br><span class="line">    s_name = db.Column(db.String(<span class="number">16</span>), unique=<span class="keyword">True</span>)</span><br><span class="line">    s_age = db.Column(db.Integer, default=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>其中：</p>
+<p>Integer表示创建的s_id字段的类型为整形，</p>
+<p>primary_key表示是否为主键</p>
+<p>String表示该字段为字符串</p>
+<p>unique表示该字段唯一</p>
+<p>default表示默认值</p>
+<p>autoincrement表示是否自增</p>
+<h2 id="创建数据表"><a href="#创建数据表" class="headerlink" title="创建数据表"></a>创建数据表</h2><p>在视图函数中我们引入models.py中定义的db</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> App.models <span class="keyword">import</span> db</span><br><span class="line"></span><br><span class="line"><span class="meta">@blue.route("/createdb/")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_db</span><span class="params">()</span>:</span></span><br><span class="line">    db.create_all()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"创建成功"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@blue.route('/dropdb/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drop_db</span><span class="params">()</span>:</span></span><br><span class="line">    db.drop_all()</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'删除成功'</span></span><br></pre></td></tr></table></figure>
+<p>其中： db.create_all()表示创建定义模型中对应到数据库中的表</p>
+<p>db.drop_all()表示删除数据库中的所有的表</p>
+<h2 id="初始化SQLALchemy"><a href="#初始化SQLALchemy" class="headerlink" title="初始化SQLALchemy"></a>初始化SQLALchemy</h2><p>在定义的<code>__init__.py</code>文件中使用SQLALchemy去整合一个或多个Flask的应用</p>
+<p>有两种方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一种：</span></span><br><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLALchemy</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line">db = SQLAlchemy(app)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 第二种：</span></span><br><span class="line"><span class="keyword">from</span> App.models <span class="keyword">import</span> db</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_app</span><span class="params">()</span>:</span></span><br><span class="line">    app = Flask(__name__)</span><br><span class="line">    db.init_app(app)</span><br><span class="line">    <span class="keyword">return</span> app</span><br></pre></td></tr></table></figure>
+<h2 id="配置数据库的访问地址"><a href="#配置数据库的访问地址" class="headerlink" title="配置数据库的访问地址"></a>配置数据库的访问地址</h2><p><a href="http://www.pythondoc.com/flask-sqlalchemy/config.html" target="_blank" rel="noopener">官网配置参数</a></p>
+<p>数据库连接的格式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dialect+driver://username:password@host:port/database</span><br><span class="line"><span class="comment"># dialect数据库实现</span></span><br><span class="line"><span class="comment"># driver数据库的驱动</span></span><br></pre></td></tr></table></figure>
+<p>例子： 访问mysql数据库，驱动为pymysql，用户为root，密码为123456，数据库的地址为本地，端口为3306，数据库名称HelloFlask</p>
+<p>设置如下： <code>mysql+pymysql://root:123456@localhost:3306/HelloFlask</code></p>
+<p>在初始化<code>__init__.py</code>文件中如下配置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.config[<span class="string">'SQLALCHEMY_TRACK_MODIFICATIONS'</span>] = <span class="keyword">False</span></span><br><span class="line">app.config[<span class="string">'SQLALCHEMY_DATABASE_URI'</span>] = <span class="string">"mysql+pymysql://root:123456@localhost:3306/HelloFlask"</span></span><br></pre></td></tr></table></figure>
+<h2 id="CRUD操作"><a href="#CRUD操作" class="headerlink" title="CRUD操作"></a>CRUD操作</h2><p>语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">类名.query.xxx</span><br></pre></td></tr></table></figure>
+<p>获取查询集：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">all()</span><br><span class="line">filter(类名.属性名==xxx)</span><br><span class="line">filter_by(属性名=xxx)</span><br></pre></td></tr></table></figure>
+<p>数据操作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 在事务中处理，数据插入</span><br><span class="line"></span><br><span class="line">db.session.add(object)</span><br><span class="line"></span><br><span class="line">db.session.add_all(list[object])</span><br><span class="line"></span><br><span class="line">db.session.delete(object)</span><br><span class="line"></span><br><span class="line">db.session.commit()</span><br><span class="line"></span><br><span class="line"># 修改和删除基于查询</span><br></pre></td></tr></table></figure>
+<h3 id="向学生表中添加数据"><a href="#向学生表中添加数据" class="headerlink" title="向学生表中添加数据"></a>向学生表中添加数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@blue.route('/createstu/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_stu</span><span class="params">()</span>:</span></span><br><span class="line">    s = Student()</span><br><span class="line">    s.s_name = <span class="string">'小花%d'</span> % random.randrange(<span class="number">100</span>)</span><br><span class="line">    s.s_age = <span class="string">'%d'</span> % random.randrange(<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line">    db.session.add(s)</span><br><span class="line">    db.session.commit()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'添加成功'</span></span><br></pre></td></tr></table></figure>
+<p>提交事务，使用commit提交我们的添加数据的操作</p>
+<h4 id="批量增加"><a href="#批量增加" class="headerlink" title="批量增加"></a>批量增加</h4><p>第一种方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@blue.route('/createstus/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_users</span><span class="params">()</span>:</span></span><br><span class="line">    stus = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">		<span class="comment"># 实例化Student的对象</span></span><br><span class="line">        s = Student()</span><br><span class="line">		<span class="comment"># 对象的属性赋值</span></span><br><span class="line">        s.s_name = <span class="string">'张三%s'</span> % random.randrange(<span class="number">10000</span>)</span><br><span class="line">        s.s_age = <span class="string">'%d'</span> % random.randrange(<span class="number">100</span>)</span><br><span class="line">        stus.append(s)</span><br><span class="line">	<span class="comment"># 添加需要创建的数据</span></span><br><span class="line">    db.session.add_all(stus)</span><br><span class="line">	<span class="comment"># 提交事务到数据库</span></span><br><span class="line">    db.session.commit()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'创建成功'</span></span><br></pre></td></tr></table></figure>
+<p>注：在创建单条数据的时候使用db.session.add()，在创建多条数据的时候使用db.session.add_all()</p>
+<p>第二种方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@blue.route('/createstus/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_users</span><span class="params">()</span>:</span></span><br><span class="line">    stus = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">		<span class="comment"># 使用类的初始化去创建Student对象</span></span><br><span class="line">        s = Student(<span class="string">'张三%s'</span> % random.randrange(<span class="number">10000</span>),</span><br><span class="line">                    <span class="string">'%d'</span> % random.randrange(<span class="number">100</span>))</span><br><span class="line">        stus.append(s)</span><br><span class="line"></span><br><span class="line">    db.session.add_all(stus)</span><br><span class="line">    db.session.commit()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'创建成功'</span></span><br></pre></td></tr></table></figure>
+<h3 id="获取所有学生信息"><a href="#获取所有学生信息" class="headerlink" title="获取所有学生信息"></a>获取所有学生信息</h3><p>将学生的全部信息获取到，并且返回给页面，在页面中使用for循环去解析即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@blue.route("/getstudents/")</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_students</span><span class="params">()</span>:</span></span><br><span class="line">    students = Student.query.all()</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">"StudentList.html"</span>, students=students)</span><br></pre></td></tr></table></figure>
+<h3 id="获取s-id-1的学生的信息"><a href="#获取s-id-1的学生的信息" class="headerlink" title="获取s_id=1的学生的信息"></a>获取s_id=1的学生的信息</h3><p>写法1：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter(Student.s_id == <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>写法2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter_by(s_id=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>注意：filter中可以接多个过滤条件</p>
+<p>写法3：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sql = <span class="string">'select * from student where s_id=1'</span></span><br><span class="line">students = db.session.execute(sql)</span><br></pre></td></tr></table></figure>
+<h3 id="修改学生的信息"><a href="#修改学生的信息" class="headerlink" title="修改学生的信息"></a>修改学生的信息</h3><p>写法1：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter_by(s_id=<span class="number">3</span>).first()</span><br><span class="line">students.s_name = <span class="string">'哈哈'</span></span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure>
+<p>写法2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Student.query.filter_by(s_id=<span class="number">3</span>).update(&#123;<span class="string">'s_name'</span>:<span class="string">'娃哈哈'</span>&#125;)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure>
+<h3 id="删除一个学生的信息"><a href="#删除一个学生的信息" class="headerlink" title="删除一个学生的信息"></a>删除一个学生的信息</h3><p>写法1：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter_by(s_id=<span class="number">2</span>).first()</span><br><span class="line">db.session.delete(students)</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure>
+<p>写法2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter_by(s_id=<span class="number">1</span>).all()</span><br><span class="line">db.session.delete(students[<span class="number">0</span>])</span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure>
+<p>注意：filter_by后的结果是一个list的结果集</p>
+<p><strong>重点注意：在增删改中如果不commit的话，数据库中的数据并不会更新，只会修改本地缓存中的数据，所以一定需要db.session.commit()</strong></p>
+<h3 id="查询操作深入"><a href="#查询操作深入" class="headerlink" title="查询操作深入"></a>查询操作深入</h3><h4 id="使用运算符"><a href="#使用运算符" class="headerlink" title="使用运算符"></a>使用运算符</h4><p>获取查询集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filter(类名.属性名.运算符(‘xxx’))</span><br><span class="line"></span><br><span class="line">filter(类名.属性 数学运算符  值)</span><br></pre></td></tr></table></figure>
+<p>运算符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">contains： 包含</span><br><span class="line">startswith：以什么开始</span><br><span class="line">endswith：以什么结束</span><br><span class="line">in_：在范围内</span><br><span class="line">like：模糊</span><br><span class="line">__gt__: 大于</span><br><span class="line">__ge__：大于等于</span><br><span class="line">__lt__：小于</span><br><span class="line">__le__：小于等于</span><br></pre></td></tr></table></figure>
+<p>筛选：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">offset()</span><br><span class="line">limit()</span><br><span class="line">order_by()</span><br><span class="line">get()</span><br><span class="line">first()</span><br><span class="line">paginate()</span><br></pre></td></tr></table></figure>
+<p>逻辑运算：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">与</span><br><span class="line">	and_</span><br><span class="line">	filter(and_(条件),条件…)</span><br><span class="line"></span><br><span class="line">或</span><br><span class="line">	or_</span><br><span class="line">	filter(or_(条件),条件…)</span><br><span class="line"></span><br><span class="line">非</span><br><span class="line">	not_</span><br><span class="line">	filter(not_(条件),条件…)</span><br></pre></td></tr></table></figure>
+<p>例子1：</p>
+<ol>
+<li><p>查询学生的id为3，4，5，6，16的的学生信息，使用<strong>in_逻辑运算</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@blue.route('/getstubyids/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_stu_by_ids</span><span class="params">()</span>:</span></span><br><span class="line"> 	students = Student.query.filter(Student.s_id.in_([<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">16</span>]))</span><br><span class="line"> 	<span class="keyword">return</span> render_template(<span class="string">'StudentList.html'</span>, students=students)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询学生的年龄小于18岁的学生的信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Student.query.filter(Student.s_age &lt; <span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询学生的年龄小于18岁的学生的信息，<strong><strong>lt</strong>小于</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter(Student.s_age.__lt__(<span class="number">15</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询学生的年龄小于等于18岁的学生的信息，<strong><strong>le</strong>小于等于</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter(Student.s_age.__le__(<span class="number">15</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询学生的姓名以什么开始或者以什么结尾的学生的信息<strong>startswith和endswith</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">students = Student.query.filter(Student.s_name.startswith(<span class="string">'张'</span>))</span><br><span class="line">students = Student.query.filter(Student.s_name.endswith(<span class="string">'2'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询id=4的学生的信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Student.query.get(<span class="number">4</span>)</span><br><span class="line"><span class="comment"># 获取的结果是学生的对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>模糊搜索like</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># %：代表一个或者多个</span></span><br><span class="line"><span class="comment"># _：代表一个</span></span><br><span class="line"> </span><br><span class="line">Student.query.filter(Student.s_name.like(<span class="string">'%张%'</span>))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分页，查询第二页的数据4条</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一个参数是那一页，第二个参数是一页的条数，第三个参数是是否输出错误信息</span></span><br><span class="line">students = Student.query.paginate(<span class="number">2</span>, <span class="number">4</span>, <span class="keyword">False</span>).items</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>例子2：</p>
+<p>跳过offset几个信息，截取limit结果的几个值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 按照id降序排列</span></span><br><span class="line">stus = Student.query.order_by(<span class="string">'-s_id'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照id降序获取三个</span></span><br><span class="line">stus = Student.query.order_by(<span class="string">'-s_id'</span>).limit(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取年龄最大的一个</span></span><br><span class="line">stus = Student.query.order_by(<span class="string">'-s_age'</span>).first()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 跳过3个数据，查询5个信息</span></span><br><span class="line">stus = Student.query.order_by(<span class="string">'-s_age'</span>).offset(<span class="number">3</span>).limit(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 跳过3个数据</span></span><br><span class="line">stus = Student.query.order_by(<span class="string">'-s_age'</span>).offset(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取id等于24的学生</span></span><br><span class="line">stus = Student.query.filter(Student.s_id==<span class="number">24</span>)</span><br><span class="line">stus = Student.query.get(<span class="number">24</span>)</span><br></pre></td></tr></table></figure>
+<p>例子3：</p>
+<p>查询：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> <span class="keyword">and</span>, <span class="keyword">or</span>, not_</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询多个条件</span></span><br><span class="line">stus = Student.query.filter(Student.s_age==<span class="number">18</span>, Student.s_name==<span class="string">'雅典娜'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># and_ 并且条件</span></span><br><span class="line">stus = Student.query.filter(and_(Student.s_age==<span class="number">18</span>, Student.s_name==<span class="string">'雅典娜'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># or_ 或者条件</span></span><br><span class="line">stus = Student.query.filter(or_(Student.s_age==<span class="number">18</span>, Student.s_name==<span class="string">'火神'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># not_ 非</span></span><br><span class="line">stus = Student.query.filter(not_(Student.s_age==<span class="number">18</span>), Student.s_name==<span class="string">'火神'</span>)</span><br></pre></td></tr></table></figure>
+<p>分页：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./flask_sqlalchemy_paginate.png" alt="flask_sqlalchemy_paginate" title="">
+                </div>
+                <div class="image-caption">flask_sqlalchemy_paginate</div>
+            </figure>
+<p>后端数据处理：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询第几页的数据	</span></span><br><span class="line">page = int(request.args.get(<span class="string">'page'</span>, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每一页的条数多少，默认为10条</span></span><br><span class="line">per_page = int(request.args.get(<span class="string">'per_page'</span>, <span class="number">10</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询当前第几个的多少条数据</span></span><br><span class="line">paginate = Student.query.order_by(<span class="string">'-s_id'</span>).paginate(page, per_page, error_out=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">stus = paginate.items</span><br></pre></td></tr></table></figure>
+<p>前端数据展示：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;h2&gt;学生信息&lt;/h2&gt;</span><br><span class="line">&#123;% <span class="keyword">for</span> stu <span class="keyword">in</span> stus %&#125;</span><br><span class="line">    id：&#123;&#123; stu.s_id &#125;&#125;</span><br><span class="line">    姓名：&#123;&#123; stu.s_name &#125;&#125;</span><br><span class="line">    年龄：&#123;&#123; stu.s_age &#125;&#125;</span><br><span class="line">    &lt;br&gt;</span><br><span class="line">&#123;% endfor %&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">总页数: &#123;&#123; paginate.pages &#125;&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">一共&#123;&#123; paginate.total &#125;&#125;条数据</span><br><span class="line">&lt;br&gt;</span><br><span class="line">当前页数：&#123;&#123; paginate.page &#125;&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line">&#123;% <span class="keyword">if</span> paginate.has_prev %&#125;</span><br><span class="line">    &lt;a href="/stupage/?page=&#123;&#123; paginate.prev_num &#125;&#125;"&gt;上一页&lt;/a&gt;：&#123;&#123; paginate.prev_num &#125;&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% <span class="keyword">if</span> paginate.has_next %&#125;</span><br><span class="line">    &lt;a href="/stupage/?page=&#123;&#123; paginate.next_num &#125;&#125;"&gt;下一页&lt;/a&gt;：&#123;&#123; paginate.next_num &#125;&#125;</span><br><span class="line">&#123;% endif %&#125;</span><br><span class="line">&lt;br&gt;</span><br><span class="line"></span><br><span class="line">&lt;br&gt;</span><br><span class="line">页码：&#123;% <span class="keyword">for</span> i <span class="keyword">in</span>  paginate.iter_pages() %&#125;</span><br><span class="line">        &lt;a href="/stupage/?page=&#123;&#123; i &#125;&#125;"&gt;&#123;&#123; i &#125;&#125;&lt;/a&gt;</span><br><span class="line">    &#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-25T11:35:43.039Z" itemprop="dateUpdated">2018-06-25 19:35:43</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Flask/">Flask</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/&title=《Flask -- 模型的使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/&title=《Flask -- 模型的使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flask -- 模型的使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/06/08/Flask----模型的关联关系/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Flask -- 模型的关联关系</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/06/06/Flask -- 模板的使用/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Flask -- 模板的使用</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/&title=《Flask -- 模型的使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/&title=《Flask -- 模型的使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Flask -- 模型的使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/06/07/Flask----模型的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuklEQVR42u3aS3LbQAwFQN3/0skFQvrh59hVrZXLksjpWXCgB3w+8etP8Hr6/Pt/nt59+szn4oWHh4e3uvT3zyRXSwDv33rfji9WhYeHh3fGe1po9UGfHxi9wyZfMx4eHt7P5L3Xsb1y+X3L8PDw8H4jL3ncP115d8vw8PDw/i+vFwrkYUR14/KtWcta8PDw8GJe3kX6OX+f9Pfw8PDwlgYC8qOiGtpOWlzROvHw8PAOeHkokDe6qstNwoXRAAEeHh7eKm93IKAXTPTi4GQj8PDw8C5470vMG2DJbSZld7UNhoeHh3fNm4QOSSHeGxdIjqjo6MLDw8M75iUP8eQ/yeExKZELQwN4eHh4q7xq0FDdgt1wtnodPDw8vDte76hICvG8yM43qFCg4+Hh4R3wkgI3j1nzgDW5Tn6XKIzAw8PDW+XlBXQ1hugdDzk4H2LAw8PD2+XljaVeTjxpcVWjkPIkFx4eHt6AV/5a8cCYNNvyhhkeHh7eNa8XB+TI/JiZRMOP68HDw8M75vXC3HxAqho0VIOSf7yLh4eHd8Dr/X6vBrXVkroXRuQ/A/Dw8PAmvHwP8tsn4ULvsMkDXzw8PLw7XpXRC2Hzsrt6JFTDDjw8PLw5b9KYzx/0yaInd3mMKvDw8PCOeVvh6XzEKl9V9IsBDw8Pb5XXG7TqHQZbGXPSTsPDw8O7400e0/OWVRVTjT/w8PDwLnh3xXReWCeP+8lRgYeHh7fL6xXEyeN4t3mWd/Dw8PDwrnmT0CFZSvVQyYOGebGOh4eHN+FV2/zVZtWk0l+4Lx4eHt4ZL790L27Ihwl6ww3l+Qg8PDy8b+ElRXCyxOQKeSxSGCDAw8PD+3ZetXH1vkF5cV99zi+ce3h4eHgBrzdgejEKkJTdhfXg4eHhHfAmkWs1sMgf6/mgwFp/Dw8PD+/rz/wF5/ppztq6qWEAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
