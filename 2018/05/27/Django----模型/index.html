@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Django -- 模型 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Django">
+    <meta name="description" content="Django – 模型Django对数据库提供了很好的支持，对不同的数据库，django提供了统一调用的API，我们可以根据不同的业务需求使用不同是数据库。Django中引入了ORM(Objects Relational Mapping)对象关系映射，是一种程序技术，可以简化我们对数据库的操作。 定义模型重要概念：模型，表，属性，字段一个模型类在数据库中对应一张表，在模型类中定义的属性，对应模型对">
+<meta name="keywords" content="Python,Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django -- 模型">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/27/Django----模型/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Django – 模型Django对数据库提供了很好的支持，对不同的数据库，django提供了统一调用的API，我们可以根据不同的业务需求使用不同是数据库。Django中引入了ORM(Objects Relational Mapping)对象关系映射，是一种程序技术，可以简化我们对数据库的操作。 定义模型重要概念：模型，表，属性，字段一个模型类在数据库中对应一张表，在模型类中定义的属性，对应模型对">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模型/django_models_orm.jpg">
+<meta property="og:updated_time" content="2018-06-25T07:36:34.665Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django -- 模型">
+<meta name="twitter:description" content="Django – 模型Django对数据库提供了很好的支持，对不同的数据库，django提供了统一调用的API，我们可以根据不同的业务需求使用不同是数据库。Django中引入了ORM(Objects Relational Mapping)对象关系映射，是一种程序技术，可以简化我们对数据库的操作。 定义模型重要概念：模型，表，属性，字段一个模型类在数据库中对应一张表，在模型类中定义的属性，对应模型对">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/05/27/Django----模型/django_models_orm.jpg">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Django -- 模型</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Django -- 模型</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-26T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Django-–-模型"><span class="post-toc-number">1.</span> <span class="post-toc-text">Django – 模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义模型"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">定义模型</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#重要概念：模型，表，属性，字段"><span class="post-toc-number">1.1.0.0.0.1.</span> <span class="post-toc-text">重要概念：模型，表，属性，字段</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ORM"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">ORM</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模型查询"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">模型查询</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#a-模型成员objects"><span class="post-toc-number">1.1.3.0.0.1.</span> <span class="post-toc-text">a) 模型成员objects</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#b-过滤器"><span class="post-toc-number">1.1.3.0.0.2.</span> <span class="post-toc-text">b) 过滤器</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#c-查询单个数据"><span class="post-toc-number">1.1.3.0.0.3.</span> <span class="post-toc-text">c) 查询单个数据</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#d-限制查询集"><span class="post-toc-number">1.1.3.0.0.4.</span> <span class="post-toc-text">d) 限制查询集</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#e-字段查询"><span class="post-toc-number">1.1.3.0.0.5.</span> <span class="post-toc-text">e) 字段查询</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#f-比较运算符"><span class="post-toc-number">1.1.3.0.0.6.</span> <span class="post-toc-text">f) 比较运算符</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#g-聚合函数"><span class="post-toc-number">1.1.3.0.0.7.</span> <span class="post-toc-text">g) 聚合函数</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#h-F对象-Q对象"><span class="post-toc-number">1.1.3.0.0.8.</span> <span class="post-toc-text">h) F对象/Q对象</span></a></li></ol></li></ol></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#模型字段定义属性"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">模型字段定义属性</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#模型间的关联关系"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">模型间的关联关系</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一对一"><span class="post-toc-number">1.2.0.1.</span> <span class="post-toc-text">一对一</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#模型"><span class="post-toc-number">1.2.0.1.1.</span> <span class="post-toc-text">模型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#通过学生拓展表去获取学生信息"><span class="post-toc-number">1.2.0.1.2.</span> <span class="post-toc-text">通过学生拓展表去获取学生信息</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#通过学生获取扩展信息1"><span class="post-toc-number">1.2.0.1.3.</span> <span class="post-toc-text">通过学生获取扩展信息1</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#通过学生获取扩展信息2"><span class="post-toc-number">1.2.0.1.4.</span> <span class="post-toc-text">通过学生获取扩展信息2</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#设置对应关系的字段为保护模式"><span class="post-toc-number">1.2.0.1.5.</span> <span class="post-toc-text">设置对应关系的字段为保护模式 :</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#定义on-delete-models-PROTECT"><span class="post-toc-number">1.2.0.1.6.</span> <span class="post-toc-text">定义on_delete=models.PROTECT</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一对多"><span class="post-toc-number">1.2.0.2.</span> <span class="post-toc-text">一对多</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#模型-1"><span class="post-toc-number">1.2.0.2.1.</span> <span class="post-toc-text">模型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#获取数据"><span class="post-toc-number">1.2.0.2.2.</span> <span class="post-toc-text">获取数据</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#性能对比"><span class="post-toc-number">1.2.0.2.3.</span> <span class="post-toc-text">性能对比</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#练习题"><span class="post-toc-number">1.2.0.2.4.</span> <span class="post-toc-text">练习题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#获取python班下的所有学生的信息"><span class="post-toc-number">1.2.0.2.4.1.</span> <span class="post-toc-text">获取python班下的所有学生的信息</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#获取python班下语文成绩大于80分的女学生"><span class="post-toc-number">1.2.0.2.4.2.</span> <span class="post-toc-text">获取python班下语文成绩大于80分的女学生</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#获取python班下语文成绩超过数学成绩10分的男学生"><span class="post-toc-number">1.2.0.2.4.3.</span> <span class="post-toc-text">获取python班下语文成绩超过数学成绩10分的男学生</span></a></li><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#获取出生在80后的男学生，查看他们的班级"><span class="post-toc-number">1.2.0.2.4.4.</span> <span class="post-toc-text">获取出生在80后的男学生，查看他们的班级</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多对多"><span class="post-toc-number">1.2.0.3.</span> <span class="post-toc-text">多对多</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#M-N-模型"><span class="post-toc-number">1.2.0.3.1.</span> <span class="post-toc-text">M:N 模型</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#对多表结构"><span class="post-toc-number">1.2.0.3.2.</span> <span class="post-toc-text">对多表结构</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#练习题-1"><span class="post-toc-number">1.2.0.3.3.</span> <span class="post-toc-text">练习题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#获取第一个用户购买了那些商品"><span class="post-toc-number">1.2.0.3.3.1.</span> <span class="post-toc-text">获取第一个用户购买了那些商品</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Django----模型"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Django -- 模型</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-27 00:00:00" datetime="2018-05-26T16:00:00.000Z"  itemprop="datePublished">2018-05-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Django-–-模型"><a href="#Django-–-模型" class="headerlink" title="Django – 模型"></a>Django – 模型</h1><p>Django对数据库提供了很好的支持，对不同的数据库，django提供了统一调用的API，我们可以根据不同的业务需求使用不同是数据库。Django中引入了ORM(Objects Relational Mapping)对象关系映射，是一种程序技术，可以简化我们对数据库的操作。</p>
+<h2 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h2><h6 id="重要概念：模型，表，属性，字段"><a href="#重要概念：模型，表，属性，字段" class="headerlink" title="重要概念：模型，表，属性，字段"></a>重要概念：模型，表，属性，字段</h6><p>一个模型类在数据库中对应一张表，在模型类中定义的属性，对应模型对照表中的一个字段。</p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><p>在应用文件目录下的<code>models.py</code> 中创建<code>Student</code> 、<code>Grade</code> 两个Model。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">10</span>, null=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>, null=<span class="keyword">False</span>)</span><br><span class="line">    gender = models.BooleanField(default=<span class="keyword">True</span>)</span><br><span class="line">    age = models.IntegerField()</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    grade = models.ForeignKey(Grade)</span><br></pre></td></tr></table></figure>
+<p>然后生成迁移文件、执行迁移文件。</p>
+<p>注意：如果执行<code>python manage.py makemigrations</code>后并没有生成迁移文件，一直提示No changes detected这个结果的话，就要手动的去处理了。有两点处理方式：</p>
+<p>1） 先删除掉<code>__pycache__</code>文件夹</p>
+<p>2） 直接强制的去执行迁移命令，<code>python manage.py makemigrations xxx</code> (xxx就是app的名称)</p>
+<p>3） 查看自动生成的数据库，查看表django_migrations，删掉app字段为xxx的数据(xxx就是app的名称)</p>
+<h3 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h3><p>ORM(Objects Relational Mapping)对象关系映射，是一种程序技术，用于实现面向对象编程语言里不同类型系统的数据之间的转换。可以简单理解为翻译机。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_models_orm.jpg" alt="django_models_orm" title="">
+                </div>
+                <div class="image-caption">django_models_orm</div>
+            </figure>
+<h3 id="模型查询"><a href="#模型查询" class="headerlink" title="模型查询"></a>模型查询</h3><h6 id="a-模型成员objects"><a href="#a-模型成员objects" class="headerlink" title="a) 模型成员objects"></a>a) 模型成员objects</h6><p>Django默认通过模型的objects对象实现模型数据查询</p>
+<h6 id="b-过滤器"><a href="#b-过滤器" class="headerlink" title="b) 过滤器"></a>b) 过滤器</h6><p>查询集表示从数据库获取的对象集合</p>
+<p>查询集可以有多个过滤器</p>
+<p>过滤器就是一个函数，基于所给的参数限制查询的结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">从SQL角度来说，查询集合和select语句等价，过滤器就像where条件</span><br><span class="line"></span><br><span class="line">Django有两种过滤器用于筛选记录</span><br><span class="line"></span><br><span class="line">	filter	  : 返回符合筛选条件的数据集</span><br><span class="line"></span><br><span class="line">	exclude   : 返回不符合筛选条件的数据集</span><br></pre></td></tr></table></figure>
+<p>多个filter和exclude可以连接在一起查询</p>
+<p>当然还有如下这些过滤器:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">all()            返回所有数据</span><br><span class="line"></span><br><span class="line">filter()	 返回符合条件的数据</span><br><span class="line"></span><br><span class="line">exclude()        过滤掉符合条件的数据</span><br><span class="line"></span><br><span class="line">order_by()       排序</span><br><span class="line"></span><br><span class="line">values()         一条数据就是一个字典，返回一个列表</span><br></pre></td></tr></table></figure>
+<h6 id="c-查询单个数据"><a href="#c-查询单个数据" class="headerlink" title="c) 查询单个数据"></a>c) 查询单个数据</h6><p>get()：返回一个满足条件的对象。如果没有返回符合条件的对象，会应该模型类DoesNotExist异常，如果找到多个，会引发模型类MultiObjectsReturned异常</p>
+<p>first()：返回查询集中的第一个对象</p>
+<p>last()：返回查询集中的最后一个对象</p>
+<p>count()：返回当前查询集中的对象个数</p>
+<p>exists()：判断查询集中是否有数据，如果有数据返回True，没有返回False</p>
+<h6 id="d-限制查询集"><a href="#d-限制查询集" class="headerlink" title="d) 限制查询集"></a>d) 限制查询集</h6><p>限制查询集，可以使用下表的方法进行限制，等同于sql中的limit</p>
+<p>模型名.objects.all()[0:5] 小标不能为负数</p>
+<h6 id="e-字段查询"><a href="#e-字段查询" class="headerlink" title="e) 字段查询"></a>e) 字段查询</h6><p>对sql中的where实现，作为方法，filter(),exclude()，get()的参数</p>
+<p>语法：属性名称__比较运算符 = 值</p>
+<p>外键：属性名_id</p>
+<p>注意：like语句中使用%表示通配符。比如sql语句查询 where name like ‘%xxx%’，等同于filter(name_contains=’xxx’)</p>
+<h6 id="f-比较运算符"><a href="#f-比较运算符" class="headerlink" title="f) 比较运算符"></a>f) 比较运算符</h6><p>contains：是否包含，大小写敏感</p>
+<p>startswith，endswith：以values开头或者结尾，大小写敏感 以上的运算符前加上i(ignore)就不区分大小写了</p>
+<p>isnull，isnotnull：是否为空。filter(name__isnull=True)</p>
+<p>in：是否包含在范围内。filter(id__in=[1,2,3])</p>
+<p>gt，gte，lt，lte：大于，大于等于，小于，小于等于。filter(age__gt=10)</p>
+<p>pk：代表主键，也就是id。filter(pk=1)</p>
+<h6 id="g-聚合函数"><a href="#g-聚合函数" class="headerlink" title="g) 聚合函数"></a>g) 聚合函数</h6><p>agregate()函数返回聚合函数的值</p>
+<p>Avg：平均值</p>
+<p>Count：数量</p>
+<p>Max：最大</p>
+<p>Min：最小</p>
+<p>Sum：求和</p>
+<p>例如: Student.objects.aggregate(Max(‘age’))</p>
+<h6 id="h-F对象-Q对象"><a href="#h-F对象-Q对象" class="headerlink" title="h) F对象/Q对象"></a>h) F对象/Q对象</h6><p><strong>F对象:</strong>可以使用模型的A属性与B属性进行比较</p>
+<p>背景:在模型中有两个字段，分别表示学生成绩A与成绩B，要对成绩AB进行比较计算，就需要使用到F对象。</p>
+<p>例如有如下例子1:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 班级中有女生个数字段以及男生个数字段，统计女生数大于男生数的班级</span></span><br><span class="line"></span><br><span class="line">grades = Grade.objects.filter(girlnum__gt=F(<span class="string">'boynum'</span>))</span><br></pre></td></tr></table></figure>
+<p>F对象支持算数运算</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grades = Grade.objects.filter(girlnum__gt=F(<span class="string">'boynum'</span>) + <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p>例子2：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查询python班下语文成绩超过数学成绩10分的学生</span></span><br><span class="line"></span><br><span class="line">grade = Grade.objects.filter(g_name=<span class="string">'python'</span>).first()</span><br><span class="line">students = grade.student_set.all()</span><br><span class="line">	</span><br><span class="line">stu = students.filter(s_yuwen__gt= F(<span class="string">'s_shuxue'</span>) + <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>Q对象:</strong></p>
+<p>Q()对象就是为了将过滤条件组合起来</p>
+<p>当我们在查询的条件中需要组合条件时(例如两个条件“且”或者“或”)时。我们可以使用Q()查询对象</p>
+<p>使用符号&amp;或者|将多个Q()对象组合起来传递给filter()，exclude()，get()等函数</p>
+<p>Q()对象的前面使用字符“~”来代表意义“非”</p>
+<p>例子1:</p>
+<p>查询学生中不是12岁的或者姓名叫张三的学生</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">student = Student.objects.filter(~Q(age=<span class="number">12</span>) | Q(name=<span class="string">'张三'</span>))</span><br></pre></td></tr></table></figure>
+<p>例子2：</p>
+<p>查询python班语文小于80并且数学小于等于80的学生</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">grade = Grade.objects.filter(g_name=<span class="string">'python'</span>).first()</span><br><span class="line">students = grade.student_set.all()</span><br><span class="line">stu = students.filter(~Q(s_yuwen__gte=<span class="number">80</span>) &amp; Q(s_shuxue__lte=<span class="number">80</span>))</span><br></pre></td></tr></table></figure>
+<p>例子3：</p>
+<p>查询python班语文大于等于80或者数学小于等于80的学生</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grade = Grade.objects.filter(g_name=<span class="string">'python'</span>).first()</span><br><span class="line">students = grade.student_set.all()</span><br><span class="line"></span><br><span class="line">stu = students.filter(Q(s_yuwen__gte=<span class="number">80</span>) | Q(s_shuxue__lte=<span class="number">80</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="模型字段定义属性"><a href="#模型字段定义属性" class="headerlink" title="模型字段定义属性"></a>模型字段定义属性</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">概述</span><br><span class="line">	·django根据属性的类型确定以下信息</span><br><span class="line">		·当前选择的数据库支持字段的类型</span><br><span class="line">		·渲染管理表单时使用的默认html控件</span><br><span class="line">		·在管理站点最低限度的验证</span><br><span class="line"></span><br><span class="line">	·django会为表增加自动增长的主键列，每个模型只能有一个主键列，如果使用选项设置某属性为主键列后，则django不会再生成默认的主键列</span><br><span class="line"></span><br><span class="line">	·属性命名限制</span><br><span class="line">		·遵循标识符规则(不使用python预定义的标识符号，内置函数名，异常等。避免使用下划线等)</span><br><span class="line">		·由于django的查询方式，不允许使用连续的下划线</span><br><span class="line"></span><br><span class="line">库</span><br><span class="line">	·定义属性时，需要字段类型，字段类型被定义在django.db.models.fields目录下，为了方便使用，被导入到django.db.models中</span><br><span class="line"></span><br><span class="line">	·使用方式</span><br><span class="line">		·导入from django.db import models</span><br><span class="line">		·通过models.Field创建字段类型的对象，赋值给属性</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">逻辑删除</span><br><span class="line">	·对于重要数据都做逻辑删除，不做物理删除，实现方法是定义isDelete属性，类型为BooleanField，默认值为False</span><br><span class="line"></span><br><span class="line">字段类型</span><br><span class="line">	·AutoField</span><br><span class="line">		·一个根据实际ID自动增长的IntegerField，通常不指定如果不指定，一个主键字段将自动添加到模型中</span><br><span class="line"></span><br><span class="line">	·CharField(max_length=字符长度)</span><br><span class="line">		·字符串，默认的表单样式是 TextInput</span><br><span class="line"></span><br><span class="line">	·TextField</span><br><span class="line">		·大文本字段，一般超过4000使用，默认的表单控件是Textarea</span><br><span class="line"></span><br><span class="line">	·IntegerField</span><br><span class="line">		·整数</span><br><span class="line"></span><br><span class="line">	·DecimalField(max_digits=None, decimal_places=None)</span><br><span class="line">		·使用python的Decimal实例表示的十进制浮点数</span><br><span class="line">		·参数说明</span><br><span class="line">			·DecimalField.max_digits</span><br><span class="line">				·位数总数</span><br><span class="line">			·DecimalField.decimal_places</span><br><span class="line">				·小数点后的数字位数</span><br><span class="line"></span><br><span class="line">	·FloatField</span><br><span class="line">		·用Python的float实例来表示的浮点数</span><br><span class="line"></span><br><span class="line">	·BooleanField</span><br><span class="line">		·true/false 字段，此字段的默认表单控制是CheckboxInput</span><br><span class="line"></span><br><span class="line">	·NullBooleanField</span><br><span class="line">		·支持null、true、false三种值</span><br><span class="line"></span><br><span class="line">	·DateField([auto_now=False, auto_now_add=False])</span><br><span class="line">		·使用Python的datetime.date实例表示的日期</span><br><span class="line">		·参数说明</span><br><span class="line">			·DateField.auto_now</span><br><span class="line">				·每次保存对象时，自动设置该字段为当前时间，用于&quot;最后一次修改&quot;的时间戳，它总是使用当前日期，默认为false</span><br><span class="line">			·DateField.auto_now_add</span><br><span class="line">				·当对象第一次被创建时自动设置当前时间，用于创建的时间戳，它总是使用当前日期，默认为false</span><br><span class="line">		·说明</span><br><span class="line">			·该字段默认对应的表单控件是一个TextInput. 在管理员站点添加了一个JavaScript写的日历控件，和一个“Today&quot;的快捷按钮，包含了一个额外的invalid_date错误消息键</span><br><span class="line">		·注意</span><br><span class="line">			·auto_now_add, auto_now, and default 这些设置是相互排斥的，他们之间的任何组合将会发生错误的结果</span><br><span class="line"></span><br><span class="line">	·TimeField</span><br><span class="line">		·使用Python的datetime.time实例表示的时间，参数同DateField</span><br><span class="line"></span><br><span class="line">	·DateTimeField</span><br><span class="line">		·使用Python的datetime.datetime实例表示的日期和时间，参数同DateField</span><br><span class="line"></span><br><span class="line">	·FileField</span><br><span class="line">		·一个上传文件的字段</span><br><span class="line"></span><br><span class="line">	·ImageField</span><br><span class="line">		·继承了FileField的所有属性和方法，但对上传的对象进行校验，确保它是个有效的image</span><br><span class="line"></span><br><span class="line">字段选项</span><br><span class="line">	·概述</span><br><span class="line">		·通过字段选项，可以实现对字段的约束</span><br><span class="line">		·在字段对象时通过关键字参数指定</span><br><span class="line"></span><br><span class="line">	·null</span><br><span class="line">		·如果为True，则该字段在数据库中是空数据，默认值是 False</span><br><span class="line"></span><br><span class="line">	·blank</span><br><span class="line">		·如果为True，则该字段允许为空白，默认值是 False</span><br><span class="line"></span><br><span class="line">	·注意</span><br><span class="line">		·null是数据库范畴的概念，blank是表单验证证范畴的</span><br><span class="line"></span><br><span class="line">	·db_column</span><br><span class="line">		·字段的名称，如果未指定，则使用属性的名称</span><br><span class="line"></span><br><span class="line">	·db_index</span><br><span class="line">		·若值为 True, 则在表中会为此字段创建索引</span><br><span class="line"></span><br><span class="line">	·default</span><br><span class="line">		·默认值</span><br><span class="line"></span><br><span class="line">	·primary_key</span><br><span class="line">		·若为 True, 则该字段会成为模型的主键字段</span><br><span class="line"></span><br><span class="line">	·unique</span><br><span class="line">		·如果为 True, 这个字段在表中必须有唯一值</span><br></pre></td></tr></table></figure>
+<h2 id="模型间的关联关系"><a href="#模型间的关联关系" class="headerlink" title="模型间的关联关系"></a>模型间的关联关系</h2><h4 id="一对一"><a href="#一对一" class="headerlink" title="一对一"></a>一对一</h4><h5 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建学生的模型：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    stu_name = models.CharField(max_length=<span class="number">6</span>, unique=<span class="keyword">True</span>)</span><br><span class="line">    stu_sex = models.BooleanField(default=<span class="number">0</span>)</span><br><span class="line">    stu_birth = models.DateField()</span><br><span class="line">    stu_delete = models.BooleanField(default=<span class="number">0</span>)</span><br><span class="line">    stu_create_time = models.DateField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    stu_operate_time = models.DateField(auto_now=<span class="keyword">True</span>)</span><br><span class="line">    stu_tel = models.CharField(max_length=<span class="number">11</span>)</span><br><span class="line">    stu_yuwen = models.DecimalField(max_digits=<span class="number">3</span>, decimal_places=<span class="number">1</span>, default=<span class="number">0</span>)</span><br><span class="line">    stu_shuxue = models.DecimalField(max_digits=<span class="number">3</span>, decimal_places=<span class="number">1</span>, default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">'stu'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建学生拓展的模型：</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StuInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line"></span><br><span class="line">    stu_addr = models.CharField(max_length=<span class="number">30</span>)</span><br><span class="line">    stu_age = models.IntegerField()</span><br><span class="line">    stu = models.OneToOneField(Student)</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">'stu_info'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用models.OneToOneField()进行关联</span><br><span class="line">class StuInfo(models.Model):下是通过班级获取学生信</span><br><span class="line">    stu = models.OneToOneField(Student)</span><br><span class="line">注意：在数据中关联字段名称叫stu_id</span><br></pre></td></tr></table></figure>
+<h5 id="通过学生拓展表去获取学生信息"><a href="#通过学生拓展表去获取学生信息" class="headerlink" title="通过学生拓展表去获取学生信息"></a>通过学生拓展表去获取学生信息</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>stuinfo = StuInfo.objects.all().first()
+student = stuinfo.stu
+</code></pre><p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注意：通过拓展表去获取学生的信息的话，语法如下；</span><br><span class="line">    学生拓展表的单条对象.关联字段，即可获取到学生表的数据</span><br></pre></td></tr></table></figure></p>
+<h5 id="通过学生获取扩展信息1"><a href="#通过学生获取扩展信息1" class="headerlink" title="通过学生获取扩展信息1"></a>通过学生获取扩展信息1</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>stu = Student.objects.all().first()
+stuInfo = stu.stuInfo
+</code></pre><p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注意：通过学生获取关联表的数据的话，语法如下：</span><br><span class="line">    学生对象.关联的表名，即可获取到关联表的数据</span><br></pre></td></tr></table></figure></p>
+<h5 id="通过学生获取扩展信息2"><a href="#通过学生获取扩展信息2" class="headerlink" title="通过学生获取扩展信息2"></a>通过学生获取扩展信息2</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在关联字段OneToOneField中加入参数related_name=&apos;xxx&apos;</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>在
+stu = Student.objects.all().first()
+stuInfo = stu.xxx
+</code></pre><p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">注意：通过学生获取关联表的数据的话，语法如下：</span><br><span class="line">    学生对象.关联的字段中定义的related_name参数，即可获取到关联表的数据</span><br></pre></td></tr></table></figure></p>
+<h5 id="设置对应关系的字段为保护模式"><a href="#设置对应关系的字段为保护模式" class="headerlink" title="设置对应关系的字段为保护模式 :"></a>设置对应关系的字段为保护模式 :</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">models.CASCADE                      默认值</span><br><span class="line">models.PROTECT	                保护模式</span><br><span class="line">models.SET_NULL                 置空模式</span><br><span class="line">models.SET_DETAULT          置默认值</span><br><span class="line">models.SET()     删除的时候吃重新动态指向一个实体访问对象元素</span><br><span class="line">on_delete = models.PROTECT</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<p>修改on_delete参数<br>models.OneToOneField(‘Student’, on_delete=models.SET_NULL, null=True)<br>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在删除student对象的时候，stuinfo的关联字段会设置为空null=True，如下命令去删除student的数据：</span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+<p>Student.objects.filter(id=1).delete()<br>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h5 id="定义on-delete-models-PROTECT"><a href="#定义on-delete-models-PROTECT" class="headerlink" title="定义on_delete=models.PROTECT"></a>定义on_delete=models.PROTECT</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">p =  Student.objects.all().first()</span><br><span class="line">p.delete()</span><br><span class="line"></span><br><span class="line">注意：这个时候去执行该业务逻辑的方法的时候会报错</span><br></pre></td></tr></table></figure>
+<h4 id="一对多"><a href="#一对多" class="headerlink" title="一对多"></a>一对多</h4><h5 id="模型-1"><a href="#模型-1" class="headerlink" title="模型"></a>模型</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义一个班级类还有学生类，实现一对多的关系：</span></span><br><span class="line"><span class="comment"># 先定义班级类</span></span><br><span class="line">Class Grade(models.Model):</span><br><span class="line">	g_name = models.CharField(max_length=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义student</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>:</span></span><br><span class="line">	s_name = models.CharField(max_length=<span class="number">10</span>)</span><br><span class="line">	s_age = models.IntegerField(default=<span class="number">1</span>)</span><br><span class="line">	s_grade = models.ForeignKey(Grade, on_delete=PROTECT)</span><br></pre></td></tr></table></figure>
+<p>注意：使用models.ForeignKey关联 获取对象元素 <code>grade.student_set</code></p>
+<h5 id="获取数据"><a href="#获取数据" class="headerlink" title="获取数据"></a>获取数据</h5><p>语法：通过一获取多的数据</p>
+<p>公式： 一的对象.多的模型_set</p>
+<p>然后在获取数据all(), get(), filter() 等等</p>
+<p>如下先通过学生去获取班级信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stu = Student.objects.first()</span><br><span class="line">stu.stu_grade</span><br></pre></td></tr></table></figure>
+<p>如下是通过班级获取学生信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">g = Grade.objects.all().first()</span><br><span class="line">g.stugrade.all()   ---&gt; 其中stugrade是定义的related_name参数</span><br></pre></td></tr></table></figure>
+<p>重点： 定义了related_name字段以后，只能通过related_name去反向获取数据，在也不能通过_set方法去获取数据了</p>
+<h5 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">获取班级的学生(通过一获取多)</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>1. 低性能方法：
+g = Grade.objects.all().first()
+s = Student.objects.filter(s_grade=g)
+
+2. 高性能方法：
+g = Grate.objects.all().first()
+s = g.student_set.all()
+</code></pre><p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h5 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h5><h6 id="获取python班下的所有学生的信息"><a href="#获取python班下的所有学生的信息" class="headerlink" title="获取python班下的所有学生的信息"></a>获取python班下的所有学生的信息</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gs = Grade.objects.filter(g_name=&apos;python&apos;)[0]</span><br><span class="line">allstu = gs.student_set.all()</span><br></pre></td></tr></table></figure>
+<h6 id="获取python班下语文成绩大于80分的女学生"><a href="#获取python班下语文成绩大于80分的女学生" class="headerlink" title="获取python班下语文成绩大于80分的女学生"></a>获取python班下语文成绩大于80分的女学生</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gs = Grade.objects.filter(g_name=&apos;python&apos;)[0]</span><br><span class="line">allstu = gs.student_set.filter(stu_yuwen__gte=80)</span><br></pre></td></tr></table></figure>
+<h6 id="获取python班下语文成绩超过数学成绩10分的男学生"><a href="#获取python班下语文成绩超过数学成绩10分的男学生" class="headerlink" title="获取python班下语文成绩超过数学成绩10分的男学生"></a>获取python班下语文成绩超过数学成绩10分的男学生</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gs = Grade.objects.filter(g_name=&apos;python&apos;)[0]</span><br><span class="line">allstu = gs.student_set.filter(stu_yuwen__gte=F(&apos;stu_shuxue&apos;) + 10)</span><br></pre></td></tr></table></figure>
+<h6 id="获取出生在80后的男学生，查看他们的班级"><a href="#获取出生在80后的男学生，查看他们的班级" class="headerlink" title="获取出生在80后的男学生，查看他们的班级"></a>获取出生在80后的男学生，查看他们的班级</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gs = Grade.objects.filter(g_name=&apos;python&apos;)[0]</span><br><span class="line">allstu = gs.student_set.filter(stu_birth__gte=&apos;1980-01-01&apos;, stu_birth__lte=&apos;1990-01-01&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="多对多"><a href="#多对多" class="headerlink" title="多对多"></a>多对多</h4><h5 id="M-N-模型"><a href="#M-N-模型" class="headerlink" title="M:N 模型"></a>M:N 模型</h5><p>定义购物车，用户的例子实现多对多： </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 创建用户模型: </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GoodsUser</span><span class="params">(models.Model)</span>:</span> </span><br><span class="line">	u_name = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 2. 创建商品模型:</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Goods</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">	g_name = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">	g_user = models.ManyToManyField(User)</span><br></pre></td></tr></table></figure>
+<h5 id="对多表结构"><a href="#对多表结构" class="headerlink" title="对多表结构"></a>对多表结构</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">多对多关系：</span><br><span class="line">1. 生成表的时候会多生成一张表（实际会有三张表）</span><br><span class="line">2. 生成的表是专门用来维护关系的</span><br><span class="line">3. 生成的表是使用两个外键来维护多对多的关系</span><br><span class="line">4. 两个一对多的关系来实现多对多的实现　　　</span><br><span class="line">5. 删除一个表的数据的话，中间关联表也要删除相关的信息</span><br></pre></td></tr></table></figure>
+<h5 id="练习题-1"><a href="#练习题-1" class="headerlink" title="练习题"></a>练习题</h5><h6 id="获取第一个用户购买了那些商品"><a href="#获取第一个用户购买了那些商品" class="headerlink" title="获取第一个用户购买了那些商品"></a>获取第一个用户购买了那些商品</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>gu = GoodsUser.objects.all().first()
+allstu = gu.goods_set.all()
+</code></pre><p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line">###### 获取指定商品的购买用户信息</span><br></pre></td></tr></table></figure></p>
+<p>​<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    g = Goods.objects.filter(id=1)[0]</span><br><span class="line">    g.g_user.all()</span><br><span class="line">​</span><br></pre></td></tr></table></figure></p>
+<p><code>`</code></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-25T07:36:34.665Z" itemprop="dateUpdated">2018-06-25 15:36:34</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/27/Django----模型/&title=《Django -- 模型》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/27/Django----模型/&title=《Django -- 模型》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/27/Django----模型/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- 模型》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/27/Django----模型/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/27/Django----模型/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/23/Django -- 创建应用、修改配置/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Django -- 创建应用、修改配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/27/Django----模型/&title=《Django -- 模型》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/27/Django----模型/&title=《Django -- 模型》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/27/Django----模型/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- 模型》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/27/Django----模型/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/27/Django----模型/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJ0lEQVR42u3aMZbCMAwFQO5/abal2Bh9KRSxJxUvLzgeCiFLer3K1/vj+ryzfvLqmfWa62+NLgwMjMcy3str/oIr/NX66/uXO8HAwDiAUX99PeDOQ3llbxgYGBjrZ9Ln14EVAwMD4y7GOqTOMRgYGBiTQ2wFX3ll5bD6w7M4BgbGAxn3lszu/fyT/gYGBsajGO/wSoNgJUSm6/+zJgYGxtaMtJSWpoyVzU1KexgYGCcwKkW0+v27ynPxkAcGBsbBjHScYn1/Xla73C0GBsbWjPTQWA+4acLXSxMxMDDOZMzHJprhslyk+1Juw8DA2JRRH4noDUD0Qm3aYMDAwNibMWk0zpPL9KAbZLgYGBjbMSZtyHSFdNYrKLdhYGBsykivShDsbaK3MgYGxt6Merm/V27rUb+kgL3zNwYGxhaMSbsxTSXT8BrPjGBgYGzEuDeAToJm2lTAwMA4h5EG3DqgkvzVB86+pJUYGBhbM9IN1VO6SZOyF9AxMDD2ZlSWSz/3Br96jUwMDIxzGGkbstfmrLyrd5DGwMA4h3HXRtOy/mRcDAMDY29GL9j1XlYvq8XhHgMDY2tGb1t1aiUQ99LK3o+LgYHxXEbz0PiLXytMLm+YE8HAwHgUY1IyS8/Nk9Tz8lsYGBgY4aBYffCrN4L2SrugGBgYhzHS4DtJN9fFu9v+NzAwMB7CqBxi0yJ+PQWs/xwYGBhnMtLRihTwi2Jcs6mJgYHxPMYfl66TYZ8NauYAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
