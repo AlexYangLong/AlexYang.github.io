@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Django -- Admin管理模块的使用 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Django">
+    <meta name="description" content="Django – Admin管理模块的使用Djang自身集成了管理后台，在管理后台中可以对我们自定义model进行CRUD操作，也能进行列表展示解析，分页等等。 准备先创建一个项目test_p，在项目中创建应用testapp，将项目配置这些配置好。 创建一个model在应用文件目录下的models.py 中创建Student 、Grade 两个Model。 12345678910111213141">
+<meta name="keywords" content="Python,Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django -- Admin管理模块的使用">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Django – Admin管理模块的使用Djang自身集成了管理后台，在管理后台中可以对我们自定义model进行CRUD操作，也能进行列表展示解析，分页等等。 准备先创建一个项目test_p，在项目中创建应用testapp，将项目配置这些配置好。 创建一个model在应用文件目录下的models.py 中创建Student 、Grade 两个Model。 12345678910111213141">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/Admin——创建用户.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/Admin——Model管理界面.png">
+<meta property="og:updated_time" content="2018-06-25T07:36:31.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django -- Admin管理模块的使用">
+<meta name="twitter:description" content="Django – Admin管理模块的使用Djang自身集成了管理后台，在管理后台中可以对我们自定义model进行CRUD操作，也能进行列表展示解析，分页等等。 准备先创建一个项目test_p，在项目中创建应用testapp，将项目配置这些配置好。 创建一个model在应用文件目录下的models.py 中创建Student 、Grade 两个Model。 12345678910111213141">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/Admin——创建用户.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Django -- Admin管理模块的使用</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Django -- Admin管理模块的使用</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-24T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Django-–-Admin管理模块的使用"><span class="post-toc-number">1.</span> <span class="post-toc-text">Django – Admin管理模块的使用</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建一个model"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">创建一个model</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#admin管理后台的url"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">admin管理后台的url</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#创建admin后台的用户密码"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">创建admin后台的用户密码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#在管理后台中管理模型对象"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">在管理后台中管理模型对象</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Django----Admin管理模块的使用"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Django -- Admin管理模块的使用</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-25 00:00:00" datetime="2018-05-24T16:00:00.000Z"  itemprop="datePublished">2018-05-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Django-–-Admin管理模块的使用"><a href="#Django-–-Admin管理模块的使用" class="headerlink" title="Django – Admin管理模块的使用"></a>Django – Admin管理模块的使用</h1><p>Djang自身集成了管理后台，在管理后台中可以对我们自定义model进行CRUD操作，也能进行列表展示解析，分页等等。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>先创建一个项目test_p，在项目中创建应用testapp，将项目配置这些配置好。</p>
+<h3 id="创建一个model"><a href="#创建一个model" class="headerlink" title="创建一个model"></a>创建一个model</h3><p>在应用文件目录下的<code>models.py</code> 中创建<code>Student</code> 、<code>Grade</code> 两个Model。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">10</span>, null=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>, null=<span class="keyword">False</span>)</span><br><span class="line">    gender = models.BooleanField(default=<span class="keyword">True</span>)</span><br><span class="line">    age = models.IntegerField()</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    grade = models.ForeignKey(Grade)</span><br></pre></td></tr></table></figure>
+<h3 id="admin管理后台的url"><a href="#admin管理后台的url" class="headerlink" title="admin管理后台的url"></a>admin管理后台的url</h3><p>在项目文件目录下可以看到路由配置文件<code>urls.py</code>中有一个admin的url地址</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<h3 id="创建admin后台的用户密码"><a href="#创建admin后台的用户密码" class="headerlink" title="创建admin后台的用户密码"></a>创建admin后台的用户密码</h3><p>在创建用户之前，先要在终端中使用命令迁移数据库。点击IDE最下方的Terminal，进入终端，先检查虚拟环境是否正确，若不正确，先配置虚拟环境。</p>
+<p>在终端中输入命令：</p>
+<p><code>python manage.py makemigrations</code> 生成迁移文件</p>
+<p><code>python manage.py migrate</code> 执行迁移文件</p>
+<p>数据库迁移成功后，开始创建用户，命令如下：</p>
+<p><code>python manage.py createsuperuser</code>  创建超级用户</p>
+<p>接着要填写用户名、邮箱、密码、确认密码。如图：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./Admin——创建用户.png" alt="Admin——创建用户" title="">
+                </div>
+                <div class="image-caption">Admin——创建用户</div>
+            </figure>
+<p>创建用户名成功之后，在浏览器中输入 <code>127.0.0.1:8000/admin/</code> 或 <code>localhost:8000/admin/</code> 进行登录。</p>
+<h3 id="在管理后台中管理模型对象"><a href="#在管理后台中管理模型对象" class="headerlink" title="在管理后台中管理模型对象"></a>在管理后台中管理模型对象</h3><p>需要在应用文件目录下的<code>admin.py</code> 文件中注册要进行管理的Model。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># admin.site.register(模型名)</span></span><br><span class="line"></span><br><span class="line">admin.site.register(Grade)</span><br><span class="line">admin.site.register(Student)</span><br></pre></td></tr></table></figure>
+<p>当然也可以继承admin.ModelAdmin，编写自己的admin，来自定义Model的后台管理展示界面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_gender</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.gender:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'男'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'女'</span></span><br><span class="line"></span><br><span class="line">    set_gender.short_description = <span class="string">'性别'</span></span><br><span class="line">    list_display = [<span class="string">'id'</span>, <span class="string">'name'</span>, set_gender]</span><br><span class="line">    list_filter = [<span class="string">'gender'</span>]</span><br><span class="line">    search_fields = [<span class="string">'name'</span>]</span><br><span class="line">    list_per_page = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">admin.site.register(Student, StudentAdmin)</span><br></pre></td></tr></table></figure>
+<p>说明：</p>
+<p><code>short_description</code> ：表示此字段在界面显示的名称</p>
+<p><code>list_display</code> ：表示需要显示的字段</p>
+<p><code>list_filter</code> ：表示可以进行过滤的字段</p>
+<p><code>search_fields</code> ：表示可以进行搜索的字段</p>
+<p><code>list_per_page</code> ：表示分页的条数</p>
+<p><code>ordering</code> ：表示排序的字段</p>
+<p>界面显示如下：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./Admin——Model管理界面.png" alt="Admin——Model管理界面" title="">
+                </div>
+                <div class="image-caption">Admin——Model管理界面</div>
+            </figure>
+<p>此外，还可以使用装饰器来实现自定义Model的后台管理展示界面。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># @admin.register(模型名)</span></span><br><span class="line"><span class="meta">@admin.register(Student)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_gender</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.gender:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'男'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'女'</span></span><br><span class="line"></span><br><span class="line">    set_gender.short_description = <span class="string">'性别'</span></span><br><span class="line">    list_display = [<span class="string">'id'</span>, <span class="string">'name'</span>, set_gender]</span><br><span class="line">    list_filter = [<span class="string">'gender'</span>]</span><br><span class="line">    search_fields = [<span class="string">'name'</span>]</span><br><span class="line">    list_per_page = <span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-25T07:36:31.278Z" itemprop="dateUpdated">2018-06-25 15:36:31</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/&title=《Django -- Admin管理模块的使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/&title=《Django -- Admin管理模块的使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- Admin管理模块的使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/27/Django----模型/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Django -- 模型</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/23/Django -- 创建应用、修改配置/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Django -- 创建应用、修改配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/&title=《Django -- Admin管理模块的使用》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/&title=《Django -- Admin管理模块的使用》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- Admin管理模块的使用》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3aQY7bMAwF0Nz/0lOgqxm0cf4nrTQFnldBHFt6WogKyccjvr5+X8++/3732S+v3/bsmz+vx4kLDw8PbzT169ddf342/DU7eWfyzYslwMPDwzvGu96+kyHbgdulScIPHh4e3qfx8u1+Hyqu34aHh4f3v/A2m/i9U8fDw8P7BF6SjGh/c83Ln3pTrgUPDw8v5rUFsE/4fLC+h4eHh7eoqu+DxHWTQXtormeLh4eHd4CXp1PzQtQ+8dq2LLwIG3h4eHi38tpk637IfQtCEmx+xD08PDy8W3lJMGgTEzmynWJbqMPDw8M7wTs9zF0p2rzQhYeHh/dOXtJctV+IvJFrtsTRY3h4eHgL3ma7nyUsNgnf2fzx8PDw3sPbJ1uT0JIcl2ctqnUxDA8PDy/m3VVkao/O7fIN0xN4eHh4B3j7dGq7BCfCz4vjNR4eHt6tvGS6eYrhK75myd86mYuHh4d3gJenYtsmgDo6lbDkLh4eHt4J3l0b96yQlh+p2zJbncbFw8PDi3l3lf83m3jbOjBrFMPDw8O7i9ceameJ11lgaAtvf3kKDw8P7xgvGXgTHvIERw6ICmN4eHh4b+HNCmB5YNg0B9RlOTw8PLxjvLy3M9+m81zILD0RBQ88PDy8Y7wkbTorg+WJ4CjT3LZb4eHh4R3j7ctO7bF4fxCP3oyHh4d3gNcehWfBIHlDy04CDB4eHt4JXnuQnTUT5MmFfA7R0uDh4eG9hZcci2f/9E+EmSLi4eHh4d3E22+++5CQJ4vzBcXDw8M7zWvTr20zQftUm015MS4eHh7eMV4+ieSonR95Z8tatCng4eHh/VNe20yQL1ZRr2uP2nh4eHgfwJuVymab+6xhaxUY8PDw8GLerCFglpxt77aBAQ8PD+80b18Aywdo2whWDQF4eHh49/N+ARipSt9jIhPcAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

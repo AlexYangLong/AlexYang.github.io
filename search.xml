@@ -26,6 +26,29 @@
     </entry>
     
     <entry>
+      <title>Django -- Admin管理模块的使用</title>
+      <link href="/2018/05/25/Django----Admin%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+      <url>/2018/05/25/Django----Admin%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<h1 id="Django-–-Admin管理模块的使用"><a href="#Django-–-Admin管理模块的使用" class="headerlink" title="Django – Admin管理模块的使用"></a>Django – Admin管理模块的使用</h1><p>Djang自身集成了管理后台，在管理后台中可以对我们自定义model进行CRUD操作，也能进行列表展示解析，分页等等。</p><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>先创建一个项目test_p，在项目中创建应用testapp，将项目配置这些配置好。</p><h3 id="创建一个model"><a href="#创建一个model" class="headerlink" title="创建一个model"></a>创建一个model</h3><p>在应用文件目录下的<code>models.py</code> 中创建<code>Student</code> 、<code>Grade</code> 两个Model。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">10</span>, null=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>, null=<span class="keyword">False</span>)</span><br><span class="line">    gender = models.BooleanField(default=<span class="keyword">True</span>)</span><br><span class="line">    age = models.IntegerField()</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    grade = models.ForeignKey(Grade)</span><br></pre></td></tr></table></figure><h3 id="admin管理后台的url"><a href="#admin管理后台的url" class="headerlink" title="admin管理后台的url"></a>admin管理后台的url</h3><p>在项目文件目录下可以看到路由配置文件<code>urls.py</code>中有一个admin的url地址</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h3 id="创建admin后台的用户密码"><a href="#创建admin后台的用户密码" class="headerlink" title="创建admin后台的用户密码"></a>创建admin后台的用户密码</h3><p>在创建用户之前，先要在终端中使用命令迁移数据库。点击IDE最下方的Terminal，进入终端，先检查虚拟环境是否正确，若不正确，先配置虚拟环境。</p><p>在终端中输入命令：</p><p><code>python manage.py makemigrations</code> 生成迁移文件</p><p><code>python manage.py migrate</code> 执行迁移文件</p><p>数据库迁移成功后，开始创建用户，命令如下：</p><p><code>python manage.py createsuperuser</code>  创建超级用户</p><p>接着要填写用户名、邮箱、密码、确认密码。如图：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./Admin——创建用户.png" alt="Admin——创建用户" title="">                </div>                <div class="image-caption">Admin——创建用户</div>            </figure><p>创建用户名成功之后，在浏览器中输入 <code>127.0.0.1:8000/admin/</code> 或 <code>localhost:8000/admin/</code> 进行登录。</p><h3 id="在管理后台中管理模型对象"><a href="#在管理后台中管理模型对象" class="headerlink" title="在管理后台中管理模型对象"></a>在管理后台中管理模型对象</h3><p>需要在应用文件目录下的<code>admin.py</code> 文件中注册要进行管理的Model。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># admin.site.register(模型名)</span></span><br><span class="line"></span><br><span class="line">admin.site.register(Grade)</span><br><span class="line">admin.site.register(Student)</span><br></pre></td></tr></table></figure><p>当然也可以继承admin.ModelAdmin，编写自己的admin，来自定义Model的后台管理展示界面。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_gender</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.gender:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'男'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'女'</span></span><br><span class="line"></span><br><span class="line">    set_gender.short_description = <span class="string">'性别'</span></span><br><span class="line">    list_display = [<span class="string">'id'</span>, <span class="string">'name'</span>, set_gender]</span><br><span class="line">    list_filter = [<span class="string">'gender'</span>]</span><br><span class="line">    search_fields = [<span class="string">'name'</span>]</span><br><span class="line">    list_per_page = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">admin.site.register(Student, StudentAdmin)</span><br></pre></td></tr></table></figure><p>说明：</p><p><code>short_description</code> ：表示此字段在界面显示的名称</p><p><code>list_display</code> ：表示需要显示的字段</p><p><code>list_filter</code> ：表示可以进行过滤的字段</p><p><code>search_fields</code> ：表示可以进行搜索的字段</p><p><code>list_per_page</code> ：表示分页的条数</p><p><code>ordering</code> ：表示排序的字段</p><p>界面显示如下：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./Admin——Model管理界面.png" alt="Admin——Model管理界面" title="">                </div>                <div class="image-caption">Admin——Model管理界面</div>            </figure><p>此外，还可以使用装饰器来实现自定义Model的后台管理展示界面。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># @admin.register(模型名)</span></span><br><span class="line"><span class="meta">@admin.register(Student)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_gender</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.gender:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'男'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'女'</span></span><br><span class="line"></span><br><span class="line">    set_gender.short_description = <span class="string">'性别'</span></span><br><span class="line">    list_display = [<span class="string">'id'</span>, <span class="string">'name'</span>, set_gender]</span><br><span class="line">    list_filter = [<span class="string">'gender'</span>]</span><br><span class="line">    search_fields = [<span class="string">'name'</span>]</span><br><span class="line">    list_per_page = <span class="number">10</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      <categories>
+          
+          <category> Django </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python </tag>
+            
+            <tag> Django </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Django -- 创建应用、修改配置</title>
       <link href="/2018/05/23/Django%20--%20%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE/"/>
       <url>/2018/05/23/Django%20--%20%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE/</url>
@@ -187,6 +210,29 @@
     </entry>
     
     <entry>
+      <title>在Linux（CentOS7）下安装Nginx服务器</title>
+      <link href="/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+      <url>/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
+      <content type="html"><![CDATA[<h1 id="在Linux（CentOS7）下安装Nginx服务器"><a href="#在Linux（CentOS7）下安装Nginx服务器" class="headerlink" title="在Linux（CentOS7）下安装Nginx服务器"></a>在Linux（CentOS7）下安装Nginx服务器</h1><p>nginx是一款高性能的web服务器，在Linux中可以使用 yum 来安装，安装步骤如下：</p><h2 id="1、检查yum包管理工具中有没有Nginx"><a href="#1、检查yum包管理工具中有没有Nginx" class="headerlink" title="1、检查yum包管理工具中有没有Nginx"></a>1、检查yum包管理工具中有没有Nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search nginx</span><br></pre></td></tr></table></figure><h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure><h2 id="3、启动nginx服务器"><a href="#3、启动nginx服务器" class="headerlink" title="3、启动nginx服务器"></a>3、启动nginx服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx-  如果没有报错，就OK</span><br></pre></td></tr></table></figure><h2 id="4、测试"><a href="#4、测试" class="headerlink" title="4、测试"></a>4、测试</h2><p>在浏览器地址栏输入主机公网ip，进行测试查看。注意：先确保主机的80端口[web服务默认80端口]是开启的。</p>]]></content>
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Nginx </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>在Linux（CentOS7）下构建安装Python3.x</title>
       <link href="/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E6%9E%84%E5%BB%BA%E5%AE%89%E8%A3%85Python3.x/"/>
       <url>/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E6%9E%84%E5%BB%BA%E5%AE%89%E8%A3%85Python3.x/</url>
@@ -227,29 +273,6 @@
             <tag> Linux </tag>
             
             <tag> Git使用 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>在Linux（CentOS7）下安装Nginx服务器</title>
-      <link href="/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-      <url>/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/</url>
-      <content type="html"><![CDATA[<h1 id="在Linux（CentOS7）下安装Nginx服务器"><a href="#在Linux（CentOS7）下安装Nginx服务器" class="headerlink" title="在Linux（CentOS7）下安装Nginx服务器"></a>在Linux（CentOS7）下安装Nginx服务器</h1><p>nginx是一款高性能的web服务器，在Linux中可以使用 yum 来安装，安装步骤如下：</p><h2 id="1、检查yum包管理工具中有没有Nginx"><a href="#1、检查yum包管理工具中有没有Nginx" class="headerlink" title="1、检查yum包管理工具中有没有Nginx"></a>1、检查yum包管理工具中有没有Nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search nginx</span><br></pre></td></tr></table></figure><h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure><h2 id="3、启动nginx服务器"><a href="#3、启动nginx服务器" class="headerlink" title="3、启动nginx服务器"></a>3、启动nginx服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx-  如果没有报错，就OK</span><br></pre></td></tr></table></figure><h2 id="4、测试"><a href="#4、测试" class="headerlink" title="4、测试"></a>4、测试</h2><p>在浏览器地址栏输入主机公网ip，进行测试查看。注意：先确保主机的80端口[web服务默认80端口]是开启的。</p>]]></content>
-      
-      <categories>
-          
-          <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-            <tag> Nginx </tag>
             
         </tags>
       

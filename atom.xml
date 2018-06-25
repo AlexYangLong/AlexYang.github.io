@@ -44,6 +44,33 @@
   </entry>
   
   <entry>
+    <title>Django -- Admin管理模块的使用</title>
+    <link href="http://alexyanglong.github.io/2018/05/25/Django----Admin%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://alexyanglong.github.io/2018/05/25/Django----Admin管理模块的使用/</id>
+    <published>2018-05-24T16:00:00.000Z</published>
+    <updated>2018-06-25T07:36:31.278Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Django-–-Admin管理模块的使用"><a href="#Django-–-Admin管理模块的使用" class="headerlink" title="Django – Admin管理模块的使用"></a>Django – Admin管理模块的使用</h1><p>Djang自身集成了管理后台，在管理后台中可以对我们自定义model进行CRUD操作，也能进行列表展示解析，分页等等。</p><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>先创建一个项目test_p，在项目中创建应用testapp，将项目配置这些配置好。</p><h3 id="创建一个model"><a href="#创建一个model" class="headerlink" title="创建一个model"></a>创建一个model</h3><p>在应用文件目录下的<code>models.py</code> 中创建<code>Student</code> 、<code>Grade</code> 两个Model。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">10</span>, null=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    name = models.CharField(max_length=<span class="number">20</span>, null=<span class="keyword">False</span>)</span><br><span class="line">    gender = models.BooleanField(default=<span class="keyword">True</span>)</span><br><span class="line">    age = models.IntegerField()</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>)</span><br><span class="line">    update_time = models.DateTimeField(auto_now_add=<span class="keyword">True</span>, auto_now=<span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line">    grade = models.ForeignKey(Grade)</span><br></pre></td></tr></table></figure><h3 id="admin管理后台的url"><a href="#admin管理后台的url" class="headerlink" title="admin管理后台的url"></a>admin管理后台的url</h3><p>在项目文件目录下可以看到路由配置文件<code>urls.py</code>中有一个admin的url地址</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">]</span><br></pre></td></tr></table></figure><h3 id="创建admin后台的用户密码"><a href="#创建admin后台的用户密码" class="headerlink" title="创建admin后台的用户密码"></a>创建admin后台的用户密码</h3><p>在创建用户之前，先要在终端中使用命令迁移数据库。点击IDE最下方的Terminal，进入终端，先检查虚拟环境是否正确，若不正确，先配置虚拟环境。</p><p>在终端中输入命令：</p><p><code>python manage.py makemigrations</code> 生成迁移文件</p><p><code>python manage.py migrate</code> 执行迁移文件</p><p>数据库迁移成功后，开始创建用户，命令如下：</p><p><code>python manage.py createsuperuser</code>  创建超级用户</p><p>接着要填写用户名、邮箱、密码、确认密码。如图：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./Admin——创建用户.png" alt="Admin——创建用户" title="">                </div>                <div class="image-caption">Admin——创建用户</div>            </figure><p>创建用户名成功之后，在浏览器中输入 <code>127.0.0.1:8000/admin/</code> 或 <code>localhost:8000/admin/</code> 进行登录。</p><h3 id="在管理后台中管理模型对象"><a href="#在管理后台中管理模型对象" class="headerlink" title="在管理后台中管理模型对象"></a>在管理后台中管理模型对象</h3><p>需要在应用文件目录下的<code>admin.py</code> 文件中注册要进行管理的Model。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># admin.site.register(模型名)</span></span><br><span class="line"></span><br><span class="line">admin.site.register(Grade)</span><br><span class="line">admin.site.register(Student)</span><br></pre></td></tr></table></figure><p>当然也可以继承admin.ModelAdmin，编写自己的admin，来自定义Model的后台管理展示界面。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_gender</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.gender:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'男'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'女'</span></span><br><span class="line"></span><br><span class="line">    set_gender.short_description = <span class="string">'性别'</span></span><br><span class="line">    list_display = [<span class="string">'id'</span>, <span class="string">'name'</span>, set_gender]</span><br><span class="line">    list_filter = [<span class="string">'gender'</span>]</span><br><span class="line">    search_fields = [<span class="string">'name'</span>]</span><br><span class="line">    list_per_page = <span class="number">10</span></span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">admin.site.register(Student, StudentAdmin)</span><br></pre></td></tr></table></figure><p>说明：</p><p><code>short_description</code> ：表示此字段在界面显示的名称</p><p><code>list_display</code> ：表示需要显示的字段</p><p><code>list_filter</code> ：表示可以进行过滤的字段</p><p><code>search_fields</code> ：表示可以进行搜索的字段</p><p><code>list_per_page</code> ：表示分页的条数</p><p><code>ordering</code> ：表示排序的字段</p><p>界面显示如下：</p><figure class="image-bubble">                <div class="img-lightbox">                    <div class="overlay"></div>                    <img src="./Admin——Model管理界面.png" alt="Admin——Model管理界面" title="">                </div>                <div class="image-caption">Admin——Model管理界面</div>            </figure><p>此外，还可以使用装饰器来实现自定义Model的后台管理展示界面。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># @admin.register(模型名)</span></span><br><span class="line"><span class="meta">@admin.register(Student)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">set_gender</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> self.gender:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'男'</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'女'</span></span><br><span class="line"></span><br><span class="line">    set_gender.short_description = <span class="string">'性别'</span></span><br><span class="line">    list_display = [<span class="string">'id'</span>, <span class="string">'name'</span>, set_gender]</span><br><span class="line">    list_filter = [<span class="string">'gender'</span>]</span><br><span class="line">    search_fields = [<span class="string">'name'</span>]</span><br><span class="line">    list_per_page = <span class="number">10</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Django-–-Admin管理模块的使用&quot;&gt;&lt;a href=&quot;#Django-–-Admin管理模块的使用&quot; class=&quot;headerlink&quot; title=&quot;Django – Admin管理模块的使用&quot;&gt;&lt;/a&gt;Django – Admin管理模块的使用&lt;/
+      
+    
+    </summary>
+    
+      <category term="Django" scheme="http://alexyanglong.github.io/categories/Django/"/>
+    
+    
+      <category term="Python" scheme="http://alexyanglong.github.io/tags/Python/"/>
+    
+      <category term="Django" scheme="http://alexyanglong.github.io/tags/Django/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Django -- 创建应用、修改配置</title>
     <link href="http://alexyanglong.github.io/2018/05/23/Django%20--%20%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8%E3%80%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE/"/>
     <id>http://alexyanglong.github.io/2018/05/23/Django -- 创建应用、修改配置/</id>
@@ -233,6 +260,33 @@
   </entry>
   
   <entry>
+    <title>在Linux（CentOS7）下安装Nginx服务器</title>
+    <link href="http://alexyanglong.github.io/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下安装Nginx服务器/</id>
+    <published>2018-05-09T16:00:00.000Z</published>
+    <updated>2018-06-05T02:08:30.006Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="在Linux（CentOS7）下安装Nginx服务器"><a href="#在Linux（CentOS7）下安装Nginx服务器" class="headerlink" title="在Linux（CentOS7）下安装Nginx服务器"></a>在Linux（CentOS7）下安装Nginx服务器</h1><p>nginx是一款高性能的web服务器，在Linux中可以使用 yum 来安装，安装步骤如下：</p><h2 id="1、检查yum包管理工具中有没有Nginx"><a href="#1、检查yum包管理工具中有没有Nginx" class="headerlink" title="1、检查yum包管理工具中有没有Nginx"></a>1、检查yum包管理工具中有没有Nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search nginx</span><br></pre></td></tr></table></figure><h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure><h2 id="3、启动nginx服务器"><a href="#3、启动nginx服务器" class="headerlink" title="3、启动nginx服务器"></a>3、启动nginx服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx-  如果没有报错，就OK</span><br></pre></td></tr></table></figure><h2 id="4、测试"><a href="#4、测试" class="headerlink" title="4、测试"></a>4、测试</h2><p>在浏览器地址栏输入主机公网ip，进行测试查看。注意：先确保主机的80端口[web服务默认80端口]是开启的。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;在Linux（CentOS7）下安装Nginx服务器&quot;&gt;&lt;a href=&quot;#在Linux（CentOS7）下安装Nginx服务器&quot; class=&quot;headerlink&quot; title=&quot;在Linux（CentOS7）下安装Nginx服务器&quot;&gt;&lt;/a&gt;在Linux（C
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://alexyanglong.github.io/categories/Linux/"/>
+    
+    
+      <category term="Linux" scheme="http://alexyanglong.github.io/tags/Linux/"/>
+    
+      <category term="Nginx" scheme="http://alexyanglong.github.io/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
     <title>在Linux（CentOS7）下构建安装Python3.x</title>
     <link href="http://alexyanglong.github.io/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E6%9E%84%E5%BB%BA%E5%AE%89%E8%A3%85Python3.x/"/>
     <id>http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下构建安装Python3.x/</id>
@@ -283,33 +337,6 @@
       <category term="Linux" scheme="http://alexyanglong.github.io/tags/Linux/"/>
     
       <category term="Git使用" scheme="http://alexyanglong.github.io/tags/Git%E4%BD%BF%E7%94%A8/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在Linux（CentOS7）下安装Nginx服务器</title>
-    <link href="http://alexyanglong.github.io/2018/05/10/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>http://alexyanglong.github.io/2018/05/10/在Linux（CentOS7）下安装Nginx服务器/</id>
-    <published>2018-05-09T16:00:00.000Z</published>
-    <updated>2018-06-05T02:08:30.006Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="在Linux（CentOS7）下安装Nginx服务器"><a href="#在Linux（CentOS7）下安装Nginx服务器" class="headerlink" title="在Linux（CentOS7）下安装Nginx服务器"></a>在Linux（CentOS7）下安装Nginx服务器</h1><p>nginx是一款高性能的web服务器，在Linux中可以使用 yum 来安装，安装步骤如下：</p><h2 id="1、检查yum包管理工具中有没有Nginx"><a href="#1、检查yum包管理工具中有没有Nginx" class="headerlink" title="1、检查yum包管理工具中有没有Nginx"></a>1、检查yum包管理工具中有没有Nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum search nginx</span><br></pre></td></tr></table></figure><h2 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure><h2 id="3、启动nginx服务器"><a href="#3、启动nginx服务器" class="headerlink" title="3、启动nginx服务器"></a>3、启动nginx服务器</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx-  如果没有报错，就OK</span><br></pre></td></tr></table></figure><h2 id="4、测试"><a href="#4、测试" class="headerlink" title="4、测试"></a>4、测试</h2><p>在浏览器地址栏输入主机公网ip，进行测试查看。注意：先确保主机的80端口[web服务默认80端口]是开启的。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;在Linux（CentOS7）下安装Nginx服务器&quot;&gt;&lt;a href=&quot;#在Linux（CentOS7）下安装Nginx服务器&quot; class=&quot;headerlink&quot; title=&quot;在Linux（CentOS7）下安装Nginx服务器&quot;&gt;&lt;/a&gt;在Linux（C
-      
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://alexyanglong.github.io/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://alexyanglong.github.io/tags/Linux/"/>
-    
-      <category term="Nginx" scheme="http://alexyanglong.github.io/tags/Nginx/"/>
     
   </entry>
   
@@ -540,41 +567,6 @@
       <category term="StringIO" scheme="http://alexyanglong.github.io/tags/StringIO/"/>
     
       <category term="BytesIO" scheme="http://alexyanglong.github.io/tags/BytesIO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域</title>
-    <link href="http://alexyanglong.github.io/2018/04/08/Python%E5%9F%BA%E7%A1%80%EF%BC%889%EF%BC%89%E2%80%94%E2%80%94%E5%87%BD%E6%95%B0%E3%80%81%E8%A3%85%E9%A5%B0%E5%99%A8%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8%E3%80%81%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
-    <id>http://alexyanglong.github.io/2018/04/08/Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域/</id>
-    <published>2018-04-07T16:00:00.000Z</published>
-    <updated>2018-06-05T02:03:30.427Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域"><a href="#Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域" class="headerlink" title="Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域"></a>Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域</h1><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>定义函数，使用 <code>def</code> 关键字。</p><p>结构：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> 函数名<span class="params">(参数列表...)</span>:</span></span><br><span class="line">语句...</span><br><span class="line"><span class="keyword">return</span> 返回值...</span><br></pre></td></tr></table></figure><p>函数的参数：</p><p>1、不定长参数： *args</p><p>2、关键字参数：**kwargs</p><p>匿名函数: 关键字 lambda      eg：qm = lambda x: x ** x</p><p>偏函数: 导入模块 import functools        </p><p>​    functools.partical()就是创建一个新的函数，不需要自行定义函数，直接将结果赋值给一个变量，而这个变量就是一个函数。这个函数的目的是将默认参数给固定住。</p><p>回调函数：定义函数时，将函数名作为参数传递过来，然后在函数里边再次调用函数。</p><p>常用函数：</p><p><code>abs()</code>: 返回数字的绝对值<br><code>max()</code>: 返回给定参数中的最大值<br><code>min()</code>:返回给定参数中最小的值<br><code>pow()</code>: 求幂(求次方)  [求<code>3^4</code> —&gt;  <code>print(3**4)</code> 、 <code>print(pow(3, 4))</code>]<br><code>round()</code>:四舍五入,如果只有一个参数,默认不保留小数点.参数二: 小数点后保留的位数</p><p><code>import math</code><br><code>math.ceil()</code>:向上取整<br><code>math.floor()</code>:向下取整<br><code>math.sqrt()</code>:求开方<br><code>math.modf()</code>:返回参数的整数部分和小数部分</p><p><code>import random</code><br><code>random.choice()</code>:返回列表,元祖,字典中的某一个值<br><code>random.choices()</code>:返回列表,元祖,字典中的指定个数值个值 k 关键字参数<br><code>random.random()</code>:返回0-1之间的数,  [0, 1)<br><code>random.uniform()</code>:返回指定的一个区间范围的随机数 [, )<br><code>random.randint()</code>:返回指定区间范围的随机整数 [, ]<br><code>random.shuffle()</code>:将列表中的数据进行打乱排序</p><p><code>import time</code></p><p><code>time.localtime()</code>  获取本地时间<br><code>time.asctime()</code> / <code>time.ctime()</code> 将时间转换成用户可读时间, 返回str格式  (Thu Apr 19 23:02:35 2018)<br><code>time.strftime(&#39;%Y-%m-%d %X&#39;)</code> 字符串的格式化输出, 返回str格式 (2018-04-19 23:07:51)<br><code>time.strptime(timeObject, &#39;%Y-%m-%d %X&#39;)</code>   将字符串的时间格式转换成元祖类型的时间格式</p><p><code>import datetime</code></p><p><code>datetime.datetime.now()</code> 获取当前时间<br><code>datetime.datetime(2020, 2, 2, 20, 20, 20)</code> 获取指定的时间<br><code>date1.strftime(&#39;%Y-%m-%d %X&#39;)</code>  时间字符串的格式化输出, 返回str格式</p><p><code>import calendar</code></p><p><code>calendar.month(2018, 4)</code> 获取指定的月份日历<br><code>calendar.calendar(2018)</code> 获取指定的年份日历</p><h2 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h2><p>本质还是函数（闭包函数），  一般使用装饰器来装饰其他函数。本身还是函数的调用。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">装饰器:</span></span><br><span class="line"><span class="string">1.在定义函数时,将函数名作为参数来传递</span></span><br><span class="line"><span class="string">2.自定义一个装饰器,(即自定义一个函数),在函数内部去调用真正的函数</span></span><br><span class="line"><span class="string">3.return 装饰器的自调</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">(func)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></span><br><span class="line">        print(<span class="string">'装饰器....'</span>)</span><br><span class="line">        func()</span><br><span class="line">        print(<span class="string">'啦啦啦....'</span>)</span><br><span class="line">    <span class="keyword">return</span> inner</span><br><span class="line"></span><br><span class="line"><span class="meta">@outer  # --&gt; func1 = outer(func1)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'1234567'</span>)</span><br><span class="line"></span><br><span class="line">func1()</span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">输出：</span></span><br><span class="line"><span class="string">装饰器....</span></span><br><span class="line"><span class="string">1234567</span></span><br><span class="line"><span class="string">啦啦啦....</span></span><br><span class="line"><span class="string">"""</span></span><br></pre></td></tr></table></figure><p>例如 <code>@property</code> 、<code>@属性名.setter</code> 广泛应用在类的定义中，可以让调用者写出简短的代码，同时保证对参数进行必要的检查，这样，程序运行时就减少了出错的可能性。</p><h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>迭代器是一个可以记住遍历的位置的对象。</p><p>迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束。迭代器只能往前不会后退。</p><p>迭代器有两个基本的方法：<code>__iter()__</code> 和 <code>next()</code>。</p><p>字符串，列表或元组对象都可用于创建迭代器。</p><h2 id="生成器"><a href="#生成器" class="headerlink" title="生成器"></a>生成器</h2><p><code>yield</code> 函数被称为生成器（generator），生成器是一个返回迭代器的函数，只能用于迭代操作，更简单点理解生成器就是一个迭代器， 每次遇到 <code>yield</code> 时函数会暂停并保存当前所有的运行信息，返回 <code>yield</code> 的值, 并在下一次执行 <code>next()</code> 方法时从当前位置继续运行。调用一个生成器函数，返回的是一个迭代器对象。</p><h2 id="变量作用域（LEGB）"><a href="#变量作用域（LEGB）" class="headerlink" title="变量作用域（LEGB）"></a>变量作用域（LEGB）</h2><p>L （Local） 局部作用域 </p><p>E （Enclosing） 嵌套作用域，闭包函数外的函数中 </p><p>G （Global） 全局作用域 </p><p>B （Built-in） 内建作用域</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域&quot;&gt;&lt;a href=&quot;#Python基础（9）——函数、装饰器、迭代器、生成器、变量作用域&quot; class=&quot;headerlink&quot; title=&quot;Python基础（9）——函数、装饰器、迭代器、生成
-      
-    
-    </summary>
-    
-      <category term="Python" scheme="http://alexyanglong.github.io/categories/Python/"/>
-    
-    
-      <category term="Python" scheme="http://alexyanglong.github.io/tags/Python/"/>
-    
-      <category term="函数" scheme="http://alexyanglong.github.io/tags/%E5%87%BD%E6%95%B0/"/>
-    
-      <category term="装饰器" scheme="http://alexyanglong.github.io/tags/%E8%A3%85%E9%A5%B0%E5%99%A8/"/>
-    
-      <category term="迭代器" scheme="http://alexyanglong.github.io/tags/%E8%BF%AD%E4%BB%A3%E5%99%A8/"/>
-    
-      <category term="生成器" scheme="http://alexyanglong.github.io/tags/%E7%94%9F%E6%88%90%E5%99%A8/"/>
-    
-      <category term="变量作用域" scheme="http://alexyanglong.github.io/tags/%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
     
   </entry>
   
