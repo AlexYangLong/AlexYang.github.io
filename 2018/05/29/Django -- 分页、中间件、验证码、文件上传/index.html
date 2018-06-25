@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Django -- 分页、中间件、验证码、文件上传 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Django">
+    <meta name="description" content="Django – 分页、中间件、验证码、文件上传中间件Middleware中间件： a) 是一个轻量级的，底层的插件，可以介入Django的请求和响应的过程（面向切面编程) b) 中间件的本质就是一个python类 c) 面向切面编程(Aspect Oriented Programming)简称AOP，AOP的主要实现目的是针对业务处理过程中的切面进行提取，它所面对的是处理过程中的某个步骤或阶段，">
+<meta name="keywords" content="Python,Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django -- 分页、中间件、验证码、文件上传">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Django – 分页、中间件、验证码、文件上传中间件Middleware中间件： a) 是一个轻量级的，底层的插件，可以介入Django的请求和响应的过程（面向切面编程) b) 中间件的本质就是一个python类 c) 面向切面编程(Aspect Oriented Programming)简称AOP，AOP的主要实现目的是针对业务处理过程中的切面进行提取，它所面对的是处理过程中的某个步骤或阶段，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/29/Django%20--%20分页、中间件、验证码、文件上传/django_middleware1.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/29/Django%20--%20分页、中间件、验证码、文件上传/django_upload_file1.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/29/Django%20--%20分页、中间件、验证码、文件上传/django_upload_file2.png">
+<meta property="og:updated_time" content="2018-06-25T07:36:27.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django -- 分页、中间件、验证码、文件上传">
+<meta name="twitter:description" content="Django – 分页、中间件、验证码、文件上传中间件Middleware中间件： a) 是一个轻量级的，底层的插件，可以介入Django的请求和响应的过程（面向切面编程) b) 中间件的本质就是一个python类 c) 面向切面编程(Aspect Oriented Programming)简称AOP，AOP的主要实现目的是针对业务处理过程中的切面进行提取，它所面对的是处理过程中的某个步骤或阶段，">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/05/29/Django%20--%20分页、中间件、验证码、文件上传/django_middleware1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Django -- 分页、中间件、验证码、文件上传</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Django -- 分页、中间件、验证码、文件上传</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-28T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Django-–-分页、中间件、验证码、文件上传"><span class="post-toc-number">1.</span> <span class="post-toc-text">Django – 分页、中间件、验证码、文件上传</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#中间件Middleware"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">中间件Middleware</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#中间件的处理函数"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">中间件的处理函数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#处理流程"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">处理流程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义中间件"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">自定义中间件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#配置上传图片的保存路径"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">配置上传图片的保存路径</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现保存图片"><span class="post-toc-number">1.1.5.</span> <span class="post-toc-text">实现保存图片</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#页面中解析上传的图片信息"><span class="post-toc-number">1.1.6.</span> <span class="post-toc-text">页面中解析上传的图片信息</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Django -- 分页、中间件、验证码、文件上传"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Django -- 分页、中间件、验证码、文件上传</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-29 00:00:00" datetime="2018-05-28T16:00:00.000Z"  itemprop="datePublished">2018-05-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Django-–-分页、中间件、验证码、文件上传"><a href="#Django-–-分页、中间件、验证码、文件上传" class="headerlink" title="Django – 分页、中间件、验证码、文件上传"></a>Django – 分页、中间件、验证码、文件上传</h1><h2 id="中间件Middleware"><a href="#中间件Middleware" class="headerlink" title="中间件Middleware"></a>中间件Middleware</h2><p>中间件：</p>
+<p>a) 是一个轻量级的，底层的插件，可以介入Django的请求和响应的过程（面向切面编程)</p>
+<p>b) 中间件的本质就是一个python类</p>
+<p>c) 面向切面编程(Aspect Oriented Programming)简称AOP，AOP的主要实现目的是针对业务处理过程中的切面进行提取，它所面对的是处理过程中的某个步骤或阶段，以获取逻辑过程中各部分之间低耦合的隔离效果</p>
+<h3 id="中间件的处理函数"><a href="#中间件的处理函数" class="headerlink" title="中间件的处理函数"></a>中间件的处理函数</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">__init__：没有参数，在服务器响应的第一个请求的时候自动调用，用户确定时候启动该中间件</span><br><span class="line"></span><br><span class="line">process_request(self, request): 在执行视图前被调用，每个请求上都会被调用，不主动进行返回或返回HttpResponse对象</span><br><span class="line"></span><br><span class="line">process_view(self, request, view_func,view_args, view_kwargs):调用视图之前执行，每个请求都会调用，不主动进行返回或返回HttpResponse对象</span><br><span class="line"></span><br><span class="line">process_template_response(self, request, response)：在视图刚好执行完后进行调用，每个请求都会调用，不主动进行返回或返回HttpResponse对象</span><br><span class="line"></span><br><span class="line">process_response(self, request, response):所有响应返回浏览器之前调用，每个请求都会调用，不主动进行返回或返回HttpResponse对象</span><br><span class="line"></span><br><span class="line">process_exception(self, request, exception):当视图抛出异常时调用，不主动进行返回或返回HttpResponse对象</span><br></pre></td></tr></table></figure>
+<h3 id="处理流程"><a href="#处理流程" class="headerlink" title="处理流程"></a>处理流程</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_middleware1.png" alt="django_middleware1" title="">
+                </div>
+                <div class="image-caption">django_middleware1</div>
+            </figure>
+<h3 id="自定义中间件"><a href="#自定义中间件" class="headerlink" title="自定义中间件"></a>自定义中间件</h3><ol>
+<li><p>在工程目录下创建middleware目录</p>
+</li>
+<li><p>目录中创建一个python文件</p>
+</li>
+<li><p>在根据功能需求，创建切入需求类，重写切入点方法</p>
+</li>
+<li><p>编写代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">from django.utils.deprecation import MiddlewareMixin</span><br></pre></td></tr></table></figure>
+<p> class AuthUserMiddleWare(MiddlewareMixin):</p>
+<pre><code>def process_request(self, request):
+
+    print(‘xxxx’)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. 启动中间件，在settings中进行配置，MIDDLEWARE中添加middleware.文件名.类名</span><br><span class="line"></span><br><span class="line">   ![django_middleware2](./django_middleware2.png)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 分页</span><br><span class="line"></span><br><span class="line">### 分页库Paginator的基本语法</span><br><span class="line"></span><br><span class="line">django提供了分页的工具，存在于django.core中</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>Paginator： 数据分页工具<br>Page：具体的某一页<br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Paginator：</span><br></pre></td></tr></table></figure></p>
+<p>对象创建： Paginator(数据集，每一页数据的条数)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">属性：</span><br></pre></td></tr></table></figure></p>
+<p>count  计算和<br>num_pages: 页面总和<br>page_range: 页码列表，从1开始<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法：</span><br></pre></td></tr></table></figure></p>
+<p>page(页码)：获取的一个page对象，页码不存在则抛出invalidPage的异常<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">常见错误：</span><br></pre></td></tr></table></figure></p>
+<p>invalidPage：page()传递无效页码<br>PageNotAnInteger：Page()传递的不是整数<br>Empty:page()传递的值有效，但是没有数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">### page对象</span><br><span class="line"></span><br><span class="line">page：</span><br></pre></td></tr></table></figure></p>
+<p>对象获取，通过Paginator的page()方法获得<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">属性：</span><br></pre></td></tr></table></figure></p>
+<p>object_list: 当前页面上所有的数据对象<br>number： 当前页的页码值<br>paginator: 当前page关联的Paginator对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">方法：</span><br></pre></td></tr></table></figure></p>
+<p>has_next()   判断是否有下一页<br>has_previous():  判断是否有上一页<br>has_other_pages():  判断是否有上一页或下一页<br>next_page_number();  返回下一页的页码<br>previous_page_number(): 返回上一页的页码<br>len(): 返回当前也的数据的个数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">### Paginator对象和Page对象的关系</span><br><span class="line"></span><br><span class="line">如下有学生表，学生表中有25条数据，通过分页，每一个6条数据，去实现分页的功能</span><br><span class="line"></span><br><span class="line">![django_paginator1](./django_paginator1.png)</span><br><span class="line"></span><br><span class="line">代码：</span><br><span class="line"></span><br><span class="line">![django_paginator1](./django_paginator2.png)</span><br><span class="line"></span><br><span class="line">## 验证码</span><br><span class="line"></span><br><span class="line">在用户登录，注册以及一些敏感操作的时候，我们为了防止服务器被暴力请求，或爬虫爬取，我们可以使用验证码进行过滤，减轻服务器的压力。</span><br><span class="line"></span><br><span class="line">验证码需要使用绘图Pillow</span><br></pre></td></tr></table></figure></p>
+<p>Pip install Pillow<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">核心：</span><br></pre></td></tr></table></figure></p>
+<p>image.ImageDraw.ImageFont<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">绘制流程：</span><br></pre></td></tr></table></figure></p>
+<p>background = (10,20,30)  RGB颜色<br>初始化画布<br>image = Image.new(‘RGB’,(100,50), background)<br>获取画布中画笔对象<br>draw = ImageDraw.Draw(image, ‘RGB’)<br>绘制验证码，随机四个<br>导入字体文件path表示路径<br>font = ImageFont.truetype(‘path’, size)<br>fontcolor = (20,40,60)<br>draw.text((x,y), ‘R’, font.fontcolor)  x,y是文字左上角坐标<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">## 文件上传</span><br><span class="line"></span><br><span class="line">以上传图片为例，同样也需要安装Pillow库。</span><br><span class="line"></span><br><span class="line">### 在Model中定义保存图片的字段</span><br><span class="line"></span><br><span class="line">​```python</span><br><span class="line">class Student(models.Model):</span><br><span class="line">    name = models.CharField(max_length=20, null=False)</span><br><span class="line">    gender = models.BooleanField(default=True)</span><br><span class="line">    age = models.IntegerField()</span><br><span class="line">    avatar = models.ImageField(upload_to=&apos;upload&apos;)  # 头像</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=True)</span><br><span class="line">    update_time = models.DateTimeField(auto_now=True)</span><br></pre></td></tr></table></figure></p>
+<p>注意：在指定字段为ImageField类型的时候，要指定upload_to参数，表示上传的图片的保存路径。</p>
+<h3 id="配置上传图片的保存路径"><a href="#配置上传图片的保存路径" class="headerlink" title="配置上传图片的保存路径"></a>配置上传图片的保存路径</h3><p>先在根目录下创建media目录。</p>
+<p>在工程目录下的settings.py中配置media_url和media_root路径。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MEDIA_URL = <span class="string">'/media/'</span></span><br><span class="line">MEDIA_ROOT = os.path.join(BASE_DIR, <span class="string">'/media/'</span>)</span><br></pre></td></tr></table></figure>
+<p>在工程目录下的urls.py文件中配置media的目录为静态目录。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入static包</span></span><br><span class="line"><span class="keyword">from</span> django.contrib.staticfiles.urls <span class="keyword">import</span> static</span><br><span class="line"><span class="comment"># 导入settings</span></span><br><span class="line"><span class="keyword">from</span> test_p <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    ...,</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置media</span></span><br><span class="line">urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)</span><br></pre></td></tr></table></figure>
+<h3 id="实现保存图片"><a href="#实现保存图片" class="headerlink" title="实现保存图片"></a>实现保存图片</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_upload_file1.png" alt="django_paginator1" title="">
+                </div>
+                <div class="image-caption">django_paginator1</div>
+            </figure>
+<p>注意：上传的时候，需要指定form表单的enctype=‘multipart/form-data’</p>
+<h3 id="页面中解析上传的图片信息"><a href="#页面中解析上传的图片信息" class="headerlink" title="页面中解析上传的图片信息"></a>页面中解析上传的图片信息</h3><p>在数据库中用于保存图片的字段s_content的字段中存的是media下的upload/xxx.jpg地址，所以在页面解析的时候，需要加上media的目录，这样才能解析到图片在服务器中的路径。</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_upload_file2.png" alt="django_paginator1" title="">
+                </div>
+                <div class="image-caption">django_paginator1</div>
+            </figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-25T07:36:27.206Z" itemprop="dateUpdated">2018-06-25 15:36:27</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/&title=《Django -- 分页、中间件、验证码、文件上传》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/&title=《Django -- 分页、中间件、验证码、文件上传》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- 分页、中间件、验证码、文件上传》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/27/Django----模型/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Django -- 模型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/&title=《Django -- 分页、中间件、验证码、文件上传》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/&title=《Django -- 分页、中间件、验证码、文件上传》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- 分页、中间件、验证码、文件上传》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/29/Django -- 分页、中间件、验证码、文件上传/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADNklEQVR42u3aQW7jMBAEQP//097rAo7k7qEMWHTpFCQyzWIOg5nm4xE/z5fn/9+fv/O6zuvP+Qrna178YGNjY9+E/Tx92qWPDiKhtns7Wv/8HWxsbOxd2TngvICt1I7zN5OjTCzY2NjY2G2xSRjJ4a4cPTY2Njb2EWBl3HMVABsbGxu7HdbkbUa+3fZb8kJ7wSwNGxsb++vZs6W/8+eP5NvY2NjYX8x+jp52hbwtyQ86L1p/7AcbGxt7I3ZbJPLmZDaEakddeajwx2exsbGxt2CvXIiZxQN59JtHxfWxYmNjY2/NnoWybcyQM2ZxxZujwcbGxt6I3S7RsvN6kf81v6ATDZWwsbGxt2DPykmyiaTByL+rLW9F34GNjY19W3Ybms4i2/wI2iOe7RAbGxt7J3Ze5dpYdzb6n03185bjTb6NjY2NfVt2O7i/dqP5VaF8J8WnsLGxsbdgtwFqHqbWM60RaTaWwsbGxt6V3ZaZdtjUXsRZCQ+KoRI2Njb2bdntCKm9LjOLE1rSMBjAxsbG3oK9PgBa2XobHrRtEjY2NvYvsBNA2060DUP+TtsgHb6JjY2NvSl71n58YrTUFrm2uGJjY2Pvyl4Z6OQXIvP2o32zCD+wsbGxN2UnRWLpikywrasGSW/WwcbGxt6InUS2wwA13tZK2NxeBipuKmFjY2PfhJ0XsPUh1Odi3TpIwMbGxt6IPWskZoOh2TttU1SEH9jY2NhbsPNW4aoSksexdXy7cmUHGxsb++bsvPG4drifD6RmBbWo2NjY2NhbsNtgoAW37yTtStFvHRUwbGxs7Juz8w/kX982D+0xrQTJ2NjY2Pux8zCgfWfl/9BGtvlhYWNjY+/Hnl3QOW8q2sB4lk63gXSRb2NjY2Pfij27HNMWjHYY1F4kytd/zG4JYWNjY38xu41dZ9cr2yFRUiBXwgxsbGzs/dh50UpigzZyaAdJ+e/r/yQ2Njb2zdmzSzltUzErPCvtxOEK2NjY2D/JTsZMbfnJv6sNg9/0XtjY2Ng/yW5HQvm2ZuwhGBsbG3tTdl4w1gc6LT6PEIqQABsbG3sjdrvR9ipPWwhnI6rLMm1sbGzsO7H/AXNuqm6+CQs3AAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
