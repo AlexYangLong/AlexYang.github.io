@@ -31,7 +31,7 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://alexyanglong.github.io/2018/05/31/Django----在CentOS-7上部署Django项目/django_centos_nginx1.png">
 <meta property="og:image" content="http://alexyanglong.github.io/2018/05/31/Django----在CentOS-7上部署Django项目/django_centos_nginx2.png">
-<meta property="og:updated_time" content="2018-06-25T07:36:15.796Z">
+<meta property="og:updated_time" content="2018-06-26T00:54:02.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Django -- 在CentOS 7上部署Django项目">
 <meta name="twitter:description" content="Django – 在CentOS 7上部署Django项目在部署之前，要确保CentOS 7系统已经安装了MySQL 5.x数据库、Python 3.6.x和Nginx。 部署准备在CentOS 7的根目录 / 下创建一个project 目录，该目录用于存放所有要部署的项目。在project 下在创建conf （用户存放所有的配置文件）、 env （用户存放所有的虚拟环境）、 src （用于存放所">
@@ -207,7 +207,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">修改settings.py配置文件中的DEBUG=False模式，修改ALLOEWD_HOST=[&apos;*&apos;]</span><br></pre></td></tr></table></figure>
 <p>修改项目目录下的urls.py</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 引入包</span><br><span class="line">from django.views.static import serve</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    ...,</span><br><span class="line"></span><br><span class="line">	# 增加以下的url路由</span><br><span class="line">    url(r&apos;^static/(?P&lt;path&gt;.*)$&apos;, serve, &#123;&quot;document_root&quot;: settings.STATICFILES_DIRS[0]&#125;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p>使用<code>python manage.py runserver</code> 运行项目。</p>
+<p>进入项目目录，使用<code>python manage.py runserver</code> 运行项目。</p>
 <h3 id="部署在正式环境中"><a href="#部署在正式环境中" class="headerlink" title="部署在正式环境中"></a>部署在正式环境中</h3><p>使用 uwsgi + Nginx + MySQL 来部署项目。</p>
 <h4 id="配置nginx-conf文件"><a href="#配置nginx-conf文件" class="headerlink" title="配置nginx.conf文件"></a>配置nginx.conf文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /project/conf</span><br></pre></td></tr></table></figure>
 <p>先编写自己项目的nginx.conf文件如下：</p>
@@ -239,7 +239,7 @@
 <p>在 /project/conf 文件夹下除了包含自定义的axf_nginx.conf文件，还有我们自定义的axf_uwsgi.ini 配置文件。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line">projectname = axf</span><br><span class="line">base = /project/src</span><br><span class="line"></span><br><span class="line"># 守护进程</span><br><span class="line">master = true</span><br><span class="line"></span><br><span class="line"># 进程个数</span><br><span class="line">processes = 4</span><br><span class="line"></span><br><span class="line"># 虚拟环境</span><br><span class="line">pythonhome = /project/env/axfvenv</span><br><span class="line"></span><br><span class="line"># 项目地址</span><br><span class="line">chdir = %(base)/%(projectname)</span><br><span class="line"></span><br><span class="line"># 指定python版本</span><br><span class="line">pythonpath = /usr/local/python3/bin/python3</span><br><span class="line"></span><br><span class="line"># 指定uwsgi文件</span><br><span class="line">module = %(projectname).wsgi</span><br><span class="line"></span><br><span class="line"># 和nginx通信地址:端口</span><br><span class="line">socket = 127.0.0.1:8090</span><br><span class="line"></span><br><span class="line"># 日志文件地址</span><br><span class="line">logto = /project/logs/axf_uwsgi.log</span><br></pre></td></tr></table></figure>
 <p>运行项目:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /project/conf</span><br><span class="line"></span><br><span class="line">uwsgi --ini uwsgi.ini</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /project/conf</span><br><span class="line"></span><br><span class="line">uwsgi --ini axf_uwsgi.ini</span><br></pre></td></tr></table></figure>
         </div>
 
         <blockquote class="post-copyright">
@@ -247,7 +247,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2018-06-25T07:36:15.796Z" itemprop="dateUpdated">2018-06-25 15:36:15</time>
+    最后更新时间：<time datetime="2018-06-26T00:54:02.130Z" itemprop="dateUpdated">2018-06-26 08:54:02</time>
 </span><br>
 
 
