@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>Django -- 模板 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Python,Django">
+    <meta name="description" content="Django – 模板在Django框架中，模板是可以帮助开发者快速生成呈现给用户页面的工具。模板的设计方式实现了MVT中V T的解耦，V T有着N：M的关系，一个V可以调用任意T，一个T可以供任意V使用 模板处理分为两个过程：加载、渲染。 1. 加载静态配置文件123456789在settings.py中最底下有一个叫做static的文件夹，主要用来加载一些模板中用到的资源，提供给全局使用这个静">
+<meta name="keywords" content="Python,Django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django -- 模板">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/05/27/Django----模板/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="Django – 模板在Django框架中，模板是可以帮助开发者快速生成呈现给用户页面的工具。模板的设计方式实现了MVT中V T的解耦，V T有着N：M的关系，一个V可以调用任意T，一个T可以供任意V使用 模板处理分为两个过程：加载、渲染。 1. 加载静态配置文件123456789在settings.py中最底下有一个叫做static的文件夹，主要用来加载一些模板中用到的资源，提供给全局使用这个静">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_temp_if.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_temp_dian.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_temp_if.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_temp_for.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_temp_zhushi.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_temp_ifequal.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_url_fan.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_csrf.png">
+<meta property="og:updated_time" content="2018-07-09T09:35:03.630Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django -- 模板">
+<meta name="twitter:description" content="Django – 模板在Django框架中，模板是可以帮助开发者快速生成呈现给用户页面的工具。模板的设计方式实现了MVT中V T的解耦，V T有着N：M的关系，一个V可以调用任意T，一个T可以供任意V使用 模板处理分为两个过程：加载、渲染。 1. 加载静态配置文件123456789在settings.py中最底下有一个叫做static的文件夹，主要用来加载一些模板中用到的资源，提供给全局使用这个静">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/05/27/Django----模板/django_temp_if.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Django -- 模板</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Django -- 模板</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-05-26T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-05-27
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Django-–-模板"><span class="post-toc-number">1.</span> <span class="post-toc-text">Django – 模板</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#1-加载静态配置文件"><span class="post-toc-number">1.0.0.1.</span> <span class="post-toc-text">1. 加载静态配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#2-使用静态配置文件"><span class="post-toc-number">1.0.0.2.</span> <span class="post-toc-text">2. 使用静态配置文件</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#3-模板摘要"><span class="post-toc-number">1.0.0.3.</span> <span class="post-toc-text">3. 模板摘要</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-1-模板主要有两个部分"><span class="post-toc-number">1.0.0.3.1.</span> <span class="post-toc-text">3.1 模板主要有两个部分</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-2-动态填充"><span class="post-toc-number">1.0.0.3.2.</span> <span class="post-toc-text">3.2 动态填充</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-3-模板重的点语法"><span class="post-toc-number">1.0.0.3.3.</span> <span class="post-toc-text">3.3 模板重的点语法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-4模板中的小弊端"><span class="post-toc-number">1.0.0.3.4.</span> <span class="post-toc-text">3.4模板中的小弊端</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#3-5-模板的标签"><span class="post-toc-number">1.0.0.3.5.</span> <span class="post-toc-text">3.5 模板的标签</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#4-if表达式"><span class="post-toc-number">1.0.0.4.</span> <span class="post-toc-text">4. if表达式</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#5-for表达式"><span class="post-toc-number">1.0.0.5.</span> <span class="post-toc-text">5. for表达式</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#注意一下用法"><span class="post-toc-number">1.0.0.5.1.</span> <span class="post-toc-text">注意一下用法:</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#6-注释"><span class="post-toc-number">1.0.0.6.</span> <span class="post-toc-text">6. 注释</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-1-注释可见，可运行"><span class="post-toc-number">1.0.0.6.1.</span> <span class="post-toc-text">6.1 注释可见，可运行</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-1-单行注释注释不可见，不可运行"><span class="post-toc-number">1.0.0.6.2.</span> <span class="post-toc-text">6.1 单行注释注释不可见，不可运行</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#6-2-多行注释注释不可见，不可运行"><span class="post-toc-number">1.0.0.6.3.</span> <span class="post-toc-text">6.2 多行注释注释不可见，不可运行</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#7-过滤器"><span class="post-toc-number">1.0.0.7.</span> <span class="post-toc-text">7. 过滤器</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-1-加法"><span class="post-toc-number">1.0.0.7.1.</span> <span class="post-toc-text">7.1 加法</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-2-修改大小写"><span class="post-toc-number">1.0.0.7.2.</span> <span class="post-toc-text">7.2 修改大小写</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-3-传参数"><span class="post-toc-number">1.0.0.7.3.</span> <span class="post-toc-text">7.3 传参数</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-4-定制日期格式"><span class="post-toc-number">1.0.0.7.4.</span> <span class="post-toc-text">7.4 定制日期格式</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#7-5-是否转义"><span class="post-toc-number">1.0.0.7.5.</span> <span class="post-toc-text">7.5 是否转义</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#8-运算"><span class="post-toc-number">1.0.0.8.</span> <span class="post-toc-text">8. 运算</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#8-1-乘"><span class="post-toc-number">1.0.0.8.1.</span> <span class="post-toc-text">8.1 乘</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#8-2-整除"><span class="post-toc-number">1.0.0.8.2.</span> <span class="post-toc-text">8.2 整除</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#8-3-ifeuqal判断相等"><span class="post-toc-number">1.0.0.8.3.</span> <span class="post-toc-text">8.3 ifeuqal判断相等</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#9-反向解析"><span class="post-toc-number">1.0.0.9.</span> <span class="post-toc-text">9. 反向解析</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#10-跨站请求CSRF-Cross-Site-Request-Forgery"><span class="post-toc-number">1.0.0.10.</span> <span class="post-toc-text">10. 跨站请求CSRF(Cross Site Request Forgery)</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#11-模板继承"><span class="post-toc-number">1.0.0.11.</span> <span class="post-toc-text">11. 模板继承</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#11-1-block挖坑不用看了"><span class="post-toc-number">1.0.0.11.1.</span> <span class="post-toc-text">11.1 block挖坑不用看了</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#11-2-extends"><span class="post-toc-number">1.0.0.11.2.</span> <span class="post-toc-text">11.2 extends</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#11-3-include"><span class="post-toc-number">1.0.0.11.3.</span> <span class="post-toc-text">11.3 include</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#12-模板继承实战"><span class="post-toc-number">1.0.0.12.</span> <span class="post-toc-text">12. 模板继承实战</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#12-1-定义基础模板base-html"><span class="post-toc-number">1.0.0.12.1.</span> <span class="post-toc-text">12.1 定义基础模板base.html</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#12-2-定义继承base-html的base-main-html模板"><span class="post-toc-number">1.0.0.12.2.</span> <span class="post-toc-text">12.2 定义继承base.html的base_main.html模板</span></a></li><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#12-3-定义首页index-html"><span class="post-toc-number">1.0.0.12.3.</span> <span class="post-toc-text">12.3 定义首页index.html</span></a></li></ol></li></ol></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Django----模板"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Django -- 模板</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-05-27 00:00:00" datetime="2018-05-26T16:00:00.000Z"  itemprop="datePublished">2018-05-27</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Django/">Django</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Django-–-模板"><a href="#Django-–-模板" class="headerlink" title="Django – 模板"></a>Django – 模板</h1><p>在Django框架中，模板是可以帮助开发者快速生成呈现给用户页面的工具。模板的设计方式实现了MVT中V T的解耦，V T有着N：M的关系，一个V可以调用任意T，一个T可以供任意V使用 模板处理分为两个过程：加载、渲染。</p>
+<h4 id="1-加载静态配置文件"><a href="#1-加载静态配置文件" class="headerlink" title="1. 加载静态配置文件"></a>1. 加载静态配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">在settings.py中最底下有一个叫做static的文件夹，主要用来加载一些模板中用到的资源，提供给全局使用</span><br><span class="line">这个静态文件主要用来配置css，html，图片，文字文件等</span><br><span class="line"></span><br><span class="line">STATIC_URL = &apos;/static/&apos;</span><br><span class="line">STATICFILES_DIRS = [</span><br><span class="line">    os.path.join(BASE_DIR, &apos;static&apos;)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">只后在模板中，首先加载静态文件，之后调用静态，就不用写绝对全路径了</span><br></pre></td></tr></table></figure>
+<h4 id="2-使用静态配置文件"><a href="#2-使用静态配置文件" class="headerlink" title="2. 使用静态配置文件"></a>2. 使用静态配置文件</h4><p>a) 加载渲染静态配置文件 模板中声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125; 或者 &#123;% load staticfiles %&#125;</span><br></pre></td></tr></table></figure>
+<p>在引用资源的时候使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% static &apos;xxx&apos; %&#125; xxx就是相当于staticfiles_dirs的一个位置</span><br></pre></td></tr></table></figure>
+<p>b) 直接定义静态配。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;/static/images/mvc.png&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>其中: 展示static文件夹下有一个images文件夹，下面有一个mvc.png的图片</p>
+<h4 id="3-模板摘要"><a href="#3-模板摘要" class="headerlink" title="3. 模板摘要"></a>3. 模板摘要</h4><h5 id="3-1-模板主要有两个部分"><a href="#3-1-模板主要有两个部分" class="headerlink" title="3.1 模板主要有两个部分"></a>3.1 模板主要有两个部分</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HTML静态代码</span><br><span class="line">动态插入的代码段（挖坑，填坑）也就是block</span><br></pre></td></tr></table></figure>
+<h5 id="3-2-动态填充"><a href="#3-2-动态填充" class="headerlink" title="3.2 动态填充"></a>3.2 动态填充</h5><p>模板中的动态代码断除了做基本的静态填充，还可以实现一些基本的运算，转换和逻辑 如下:<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_temp_if.png" alt="django_temp_if" title="">
+                </div>
+                <div class="image-caption">django_temp_if</div>
+            </figure></p>
+<p>模板中的变量： 视图传递给模板的数据 标准标识符规则 语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; var &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果变量不存在，则插入空字符串</p>
+<h5 id="3-3-模板重的点语法"><a href="#3-3-模板重的点语法" class="headerlink" title="3.3 模板重的点语法"></a>3.3 模板重的点语法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对象.属性或者方法</span><br><span class="line">索引  （student.0.name）</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_temp_dian.png" alt="django_temp_dian" title="">
+                </div>
+                <div class="image-caption">django_temp_dian</div>
+            </figure>
+<h5 id="3-4模板中的小弊端"><a href="#3-4模板中的小弊端" class="headerlink" title="3.4模板中的小弊端"></a>3.4模板中的小弊端</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">调用对象的方法，不能传递参数</span><br></pre></td></tr></table></figure>
+<h5 id="3-5-模板的标签"><a href="#3-5-模板的标签" class="headerlink" title="3.5 模板的标签"></a>3.5 模板的标签</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">语法 &#123;% tag %&#125;</span><br><span class="line">作用 a）加载外部传入的变量</span><br><span class="line">     b）在输出中创建文本</span><br><span class="line">     c）控制循环或逻辑</span><br></pre></td></tr></table></figure>
+<h4 id="4-if表达式"><a href="#4-if表达式" class="headerlink" title="4. if表达式"></a>4. if表达式</h4><p>格式1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if 表达式 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>格式2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if表达式 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% else %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  endif %&#125;</span><br></pre></td></tr></table></figure>
+<p>格式3：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if表达式 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% elif 表达式 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;%  endif %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_temp_if.png" alt="django_temp_if" title="">
+                </div>
+                <div class="image-caption">django_temp_if</div>
+            </figure>
+<h4 id="5-for表达式"><a href="#5-for表达式" class="headerlink" title="5. for表达式"></a>5. for表达式</h4><p>格式1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for 变量 in 列表 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% empty %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_temp_for.png" alt="django_temp_for" title="">
+                </div>
+                <div class="image-caption">django_temp_for</div>
+            </figure>
+<p>注意：当列表为空或者不存在时，执行empty之后的语句</p>
+<h5 id="注意一下用法"><a href="#注意一下用法" class="headerlink" title="注意一下用法:"></a>注意一下用法:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; forloop.counter &#125;&#125; 表示当前是第几次循环，从1开始</span><br><span class="line">&#123;&#123; forloop.counter0 &#125;&#125; 表示当前从第几次循环，从0开始</span><br><span class="line">&#123;&#123;forloop.revcounter&#125;&#125;表示当前是第几次循环，倒着数数，到1停</span><br><span class="line">&#123;&#123;forloop.revcounter0&#125;&#125;表示当前是第几次循环，倒着数数，到0停</span><br><span class="line">&#123;&#123;forloop.first&#125;&#125;是否是第一个      布尔值</span><br><span class="line">&#123;&#123;forloop.last&#125;&#125;是否是最后一个      布尔值</span><br></pre></td></tr></table></figure>
+<h4 id="6-注释"><a href="#6-注释" class="headerlink" title="6. 注释"></a>6. 注释</h4><h5 id="6-1-注释可见，可运行"><a href="#6-1-注释可见，可运行" class="headerlink" title="6.1 注释可见，可运行"></a>6.1 注释可见，可运行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 注释内容 --&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="6-1-单行注释注释不可见，不可运行"><a href="#6-1-单行注释注释不可见，不可运行" class="headerlink" title="6.1 单行注释注释不可见，不可运行"></a>6.1 单行注释注释不可见，不可运行</h5><p>单行注释(页面源码中不会显示注释内容)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;# 被注释掉的内容 #&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="6-2-多行注释注释不可见，不可运行"><a href="#6-2-多行注释注释不可见，不可运行" class="headerlink" title="6.2 多行注释注释不可见，不可运行"></a>6.2 多行注释注释不可见，不可运行</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% comment %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endcomment %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_temp_zhushi.png" alt="django_temp_zhushi" title="">
+                </div>
+                <div class="image-caption">django_temp_zhushi</div>
+            </figure>
+<h4 id="7-过滤器"><a href="#7-过滤器" class="headerlink" title="7. 过滤器"></a>7. 过滤器</h4><p>引入过滤器定义：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;var|过滤器&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>作用：在变量显示前修改 过滤器有很多，比如add / lower / upper</p>
+<h5 id="7-1-加法"><a href="#7-1-加法" class="headerlink" title="7.1 加法"></a>7.1 加法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; p.page | add:5 &#125;&#125;</span><br><span class="line">没有减法的过滤器，但是加法里面可以加负数</span><br><span class="line">&#123;&#123; p.page | add: -5 &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="7-2-修改大小写"><a href="#7-2-修改大小写" class="headerlink" title="7.2 修改大小写"></a>7.2 修改大小写</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lower / upper : &#123;&#123; p.pname | lower &#125;&#125; 变为小写或者大写</span><br></pre></td></tr></table></figure>
+<h5 id="7-3-传参数"><a href="#7-3-传参数" class="headerlink" title="7.3 传参数"></a>7.3 传参数</h5><p>过滤器可以传递参数，参数需要使用引号引起来。比如join：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; student | join &apos;=&apos; &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果值为空则设置默认值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">默认值：default，格式&#123;&#123; var | default value &#125;&#125;</span><br><span class="line">如果变量没有被提供或者为False，空，会使用默认值</span><br></pre></td></tr></table></figure>
+<h5 id="7-4-定制日期格式"><a href="#7-4-定制日期格式" class="headerlink" title="7.4 定制日期格式"></a>7.4 定制日期格式</h5><p>根据制定格式转换日期为字符串，处理时间的就是针对date进行的转换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; dateVal | date: &apos;y-m-d h:m:s&apos; &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>如果过滤器，定义为小写的y，则返回的数据为两位的年。如果写的是大写的Y，则返回的是四位的年<br>定义小写的m，则返回数字的月份，如果定义大写的M，则返回英文<br>定义小写的h，则返回12小时制度的时，如果定义的是大写的H，则返回24小时制度的时</p>
+<h5 id="7-5-是否转义"><a href="#7-5-是否转义" class="headerlink" title="7.5 是否转义"></a>7.5 是否转义</h5><p>HTML转义: 将接收到的数据当成普通字符串处理还是当成HTML代码来渲染的一个问题 渲染成html：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; code | safe &#125;&#125; </span><br><span class="line">还可以使用autoscape渲染: &#123;&#123; autoscape off &#125;&#125; &#123;&#123; endautoscape &#125;&#125; </span><br><span class="line">不渲染的话: &#123;&#123; autoscape on &#125;&#125; &#123;&#123; endautoscape &#125;&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="8-运算"><a href="#8-运算" class="headerlink" title="8. 运算"></a>8. 运算</h4><h5 id="8-1-乘"><a href="#8-1-乘" class="headerlink" title="8.1 乘"></a>8.1 乘</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% widthratio 数 分母 分子 %&#125;</span><br></pre></td></tr></table></figure>
+<p>如下例子： 求数学成绩的10倍的结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% widthratio 10 1 stu.stu_shuxue %&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="8-2-整除"><a href="#8-2-整除" class="headerlink" title="8.2 整除"></a>8.2 整除</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123; num|divisibleby:2 &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：该语句的意思是，判断num值是否能被2整除，如果能的话返回True，不能的话返回False</p>
+<h5 id="8-3-ifeuqal判断相等"><a href="#8-3-ifeuqal判断相等" class="headerlink" title="8.3 ifeuqal判断相等"></a>8.3 ifeuqal判断相等</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% ifequal value1 value2 %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% endifqueal %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_temp_ifequal.png" alt="django_temp_ifequal" title="">
+                </div>
+                <div class="image-caption">django_temp_ifequal</div>
+            </figure>
+<h4 id="9-反向解析"><a href="#9-反向解析" class="headerlink" title="9. 反向解析"></a>9. 反向解析</h4><p>Url 反向解析 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% url &apos;namespace:name&apos; p1 p2 %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="./django_url_fan.png" alt="django_url_fan" title="">
+                </div>
+                <div class="image-caption">django_url_fan</div>
+            </figure>
+<h4 id="10-跨站请求CSRF-Cross-Site-Request-Forgery"><a href="#10-跨站请求CSRF-Cross-Site-Request-Forgery" class="headerlink" title="10. 跨站请求CSRF(Cross Site Request Forgery)"></a>10. 跨站请求CSRF(Cross Site Request Forgery)</h4><p>某些而已网站包含链接，表单，按钮，js利用登录用户在浏览器重的认证信息，进行非法操作，攻击服务，破坏数据<br>理解如下图：</p>
+<p> <img src="./django_csrf.png" alt="django_csrf"></p>
+<ol>
+<li><p>在表单中添加 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% csrf_token %&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在settings中的中间件MIDDLEWARE中配置打开 ‘django.middleware.csrf.CsrfViewMiddleware’</p>
+</li>
+</ol>
+<h4 id="11-模板继承"><a href="#11-模板继承" class="headerlink" title="11. 模板继承"></a>11. 模板继承</h4><h5 id="11-1-block挖坑不用看了"><a href="#11-1-block挖坑不用看了" class="headerlink" title="11.1 block挖坑不用看了"></a>11.1 block挖坑不用看了</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">关键字 block挖坑</span><br><span class="line">&#123;% block xxx %&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="11-2-extends"><a href="#11-2-extends" class="headerlink" title="11.2 extends"></a>11.2 extends</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">extends 继承，写在开头位置</span><br><span class="line">&#123;% extends &apos;父模板路径&apos;%&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="11-3-include"><a href="#11-3-include" class="headerlink" title="11.3 include"></a>11.3 include</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">include 加载模型进行渲染</span><br><span class="line">&#123;% include &apos;模板文件&apos;%&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="12-模板继承实战"><a href="#12-模板继承实战" class="headerlink" title="12. 模板继承实战"></a>12. 模板继承实战</h4><h5 id="12-1-定义基础模板base-html"><a href="#12-1-定义基础模板base-html" class="headerlink" title="12.1 定义基础模板base.html"></a>12.1 定义基础模板base.html</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;</span><br><span class="line">        &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;</span><br><span class="line">            &#123;% block title %&#125;</span><br><span class="line">            &#123;% endblock %&#125;</span><br><span class="line">        &lt;/title&gt;</span><br><span class="line">        &#123;% block extCSS %&#125;</span><br><span class="line">        &#123;% endblock %&#125;</span><br><span class="line">        &#123;% block extJS %&#125;</span><br><span class="line">        &#123;% endblock %&#125;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &#123;% block indexbody %&#125;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line"></span><br><span class="line">    &#123;% block content %&#125;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">    &#123;% block footer %&#125;</span><br><span class="line">    &#123;% endblock %&#125;</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h5 id="12-2-定义继承base-html的base-main-html模板"><a href="#12-2-定义继承base-html的base-main-html模板" class="headerlink" title="12.2 定义继承base.html的base_main.html模板"></a>12.2 定义继承base.html的base_main.html模板</h5><p>该base_main.html模板主要用于加载一些公共的js或者css，其余模板继承该模板后，可以直接加载定义好的公共的js或者css</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;base.html&apos; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block extJS %&#125;</span><br><span class="line">    &lt;script type=&quot;text/javascript&quot; src=&quot;/static/js/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="12-3-定义首页index-html"><a href="#12-3-定义首页index-html" class="headerlink" title="12.3 定义首页index.html"></a>12.3 定义首页index.html</h5><p>在首页index.html中使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block extJS %&#125;</span><br><span class="line">	&#123;&#123; block.super &#125;&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+<p>去加载之前在base_main.html中定义好了的js文件，将它继承过来，那么在index.html中就会加载两个js文件了。实现了将公共的js文件或者css文件单独提炼出去，不需要再每个页面中重复的去写加载js的重复代码了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &apos;base_main.html&apos; %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block title %&#125;</span><br><span class="line">	首页&#123;&#123; user.username &#125;&#125;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block extCSS %&#125;</span><br><span class="line">	&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/static/css/public.css&quot; /&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block extJS %&#125;</span><br><span class="line">	&#123;&#123; block.super &#125;&#125;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot; src=&quot;/static/js/public.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line"></span><br><span class="line">&#123;% block indexbody %&#125;</span><br><span class="line">&lt;frameset rows=&quot;100,*&quot; cols=&quot;*&quot; scrolling=&quot;No&quot; framespacing=&quot;0&quot;</span><br><span class="line">	frameborder=&quot;no&quot; border=&quot;0&quot;&gt;</span><br><span class="line">	&lt;frame src=&quot;&#123;% url &apos;app:head&apos; %&#125;&quot; name=&quot;headmenu&quot; id=&quot;mainFrame&quot; title=&quot;mainFrame&quot;&gt;&lt;!-- 引用头部 --&gt;</span><br><span class="line">&lt;!-- 引用左边和主体部分 --&gt;</span><br><span class="line">	&lt;frameset rows=&quot;100*&quot; cols=&quot;220,*&quot; scrolling=&quot;No&quot;</span><br><span class="line">	framespacing=&quot;0&quot; frameborder=&quot;no&quot; border=&quot;0&quot;&gt;</span><br><span class="line">		&lt;frame src=&quot;&#123;% url &apos;app:left&apos; %&#125;&quot; name=&quot;leftmenu&quot; id=&quot;mainFrame&quot; title=&quot;mainFrame&quot;&gt;</span><br><span class="line">		&lt;frame src=&quot;&#123;% url &apos;app:grade&apos; %&#125;&quot; name=&quot;main&quot; scrolling=&quot;yes&quot; noresize=&quot;noresize&quot;</span><br><span class="line">	id=&quot;rightFrame&quot; title=&quot;rightFrame&quot;&gt;</span><br><span class="line">	&lt;/frameset&gt;</span><br><span class="line">&lt;/frameset&gt;</span><br><span class="line">&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure>
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-07-09T09:35:03.630Z" itemprop="dateUpdated">2018-07-09 17:35:03</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Django/">Django</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/27/Django----模板/&title=《Django -- 模板》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/27/Django----模板/&title=《Django -- 模板》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/27/Django----模板/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- 模板》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/27/Django----模板/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/27/Django----模板/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/05/28/Django----视图/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Django -- 视图</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/05/27/Django----模型/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Django -- 模型</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/05/27/Django----模板/&title=《Django -- 模板》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/05/27/Django----模板/&title=《Django -- 模板》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/05/27/Django----模板/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《Django -- 模板》 — AlexYang's World&url=http://alexyanglong.github.io/2018/05/27/Django----模板/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/05/27/Django----模板/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACHklEQVR42u3aUY7DIAwFwN7/0t0TNH3PUK1CJl9V1QBDJcvYvF7x8/7wJL9Mxvz0zeYHAwPjtoz35XM9ZT5+8vl63i8bhIGB8QDGbPokjOZxMp8LAwMDIxluFo6vAysGBgbG3oA7w+eJIAYGBsbsENsu9/rdfzuLY2Bg3JCxt2S29/NP+hsYGBi3YrzLp209ti3P4aowMDCOZuQBbj1lzFPPdj0YGBhnM9pj5EpxPy/P1RfFMDAwjmbklx5mI8w2K9+mL7VDDAyMIxhJwX0WcFeaB/VbGBgYRzNmgbItis2SxbqEh4GB8WBGu/ToCtema2RFZoqBgXEQYyWBa5H5aEnqiYGB8TRG8nJb7m9LeHVyiYGBcTRjVwLXNjjb8lyRIGJgYBzKSF7Ow+JsQQmv6KZiYGAcx8hf3nvlK9++YWqIgYFxc8bsCle7xFmczFsFGBgYZzOu07X8sJq0B/JZVq5iYGBgnMrIJ15PDdcPscP/AQMD4whGG0xn6d16CvhxNAwMjAcw2gQuL9W1TYI8xRzmqhgYGDdn5AExP6buLc8VGS4GBsYRjG3BrkzpkiNrMS8GBsbRjLbF2CaRyaa0RbqkzIeBgXEeYxZkZ6T1LSsOsRgYGMcx2oL+7JtZOa+4bIGBgYExaj3uaoh+oWJgYGAslL3aZLFNQzEwMJ7DyEPk7MA5u1J2va0YGBjPYeRBMw/H7WWL2UowMDAewPgDdf+yUAaUkUgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
