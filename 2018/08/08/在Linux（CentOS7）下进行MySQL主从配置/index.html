@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>在Linux（CentOS7）下进行MySQL主从配置 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,MySQL">
+    <meta name="description" content="在Linux（CentOS7）下进行MySQL主从配置大型网站为了软解大量的并发访问，除了在网站实现分布式负载均衡，远远不够。到了数据业务层、数据访问层，如果还是传统的数据结构，或者只是单单靠一台服务器来扛，如此多的数据库连接操作，数据库必然会崩溃，数据丢失的话，后果是不堪设想的。这时候，我们会考虑如何减少数据库的联接，一方面采用优秀的代码框架，进行代码的优化，采用优秀的数据缓存技术如：redis">
+<meta name="keywords" content="Linux,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Linux（CentOS7）下进行MySQL主从配置">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="在Linux（CentOS7）下进行MySQL主从配置大型网站为了软解大量的并发访问，除了在网站实现分布式负载均衡，远远不够。到了数据业务层、数据访问层，如果还是传统的数据结构，或者只是单单靠一台服务器来扛，如此多的数据库连接操作，数据库必然会崩溃，数据丢失的话，后果是不堪设想的。这时候，我们会考虑如何减少数据库的联接，一方面采用优秀的代码框架，进行代码的优化，采用优秀的数据缓存技术如：redis">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/mysql-master-slave1.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/mysql-master-slave2.png">
+<meta property="og:updated_time" content="2018-08-08T09:46:18.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Linux（CentOS7）下进行MySQL主从配置">
+<meta name="twitter:description" content="在Linux（CentOS7）下进行MySQL主从配置大型网站为了软解大量的并发访问，除了在网站实现分布式负载均衡，远远不够。到了数据业务层、数据访问层，如果还是传统的数据结构，或者只是单单靠一台服务器来扛，如此多的数据库连接操作，数据库必然会崩溃，数据丢失的话，后果是不堪设想的。这时候，我们会考虑如何减少数据库的联接，一方面采用优秀的代码框架，进行代码的优化，采用优秀的数据缓存技术如：redis">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/mysql-master-slave1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在Linux（CentOS7）下进行MySQL主从配置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在Linux（CentOS7）下进行MySQL主从配置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-07T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-08-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在Linux（CentOS7）下进行MySQL主从配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">在Linux（CentOS7）下进行MySQL主从配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备工作"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">准备工作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置Master"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">配置Master</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改配置文件"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">修改配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#授权"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">授权</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置Slave"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">配置Slave</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#修改配置文件-1"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">修改配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#启动从机"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">启动从机</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#验证主从"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">验证主从</span></a></li></ol></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-在Linux（CentOS7）下进行MySQL主从配置"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在Linux（CentOS7）下进行MySQL主从配置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-08 00:00:00" datetime="2018-08-07T16:00:00.000Z"  itemprop="datePublished">2018-08-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="在Linux（CentOS7）下进行MySQL主从配置"><a href="#在Linux（CentOS7）下进行MySQL主从配置" class="headerlink" title="在Linux（CentOS7）下进行MySQL主从配置"></a>在Linux（CentOS7）下进行MySQL主从配置</h1><p>大型网站为了软解大量的并发访问，除了在网站实现分布式负载均衡，远远不够。到了数据业务层、数据访问层，如果还是传统的数据结构，或者只是单单靠一台服务器来扛，如此多的数据库连接操作，数据库必然会崩溃，数据丢失的话，后果是不堪设想的。这时候，我们会考虑如何减少数据库的联接，一方面采用优秀的代码框架，进行代码的优化，采用优秀的数据缓存技术如：redis、memcached，如果资金丰厚的话，必然会想到架设服务器群，来分担主数据库的压力。这里讲一下利用MySQL主从配置，实现读写分离，减轻数据库压力。这种方式，在如今很多网站里都有使用。</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>假设有两台Linux（CentOS7）服务器，都装有MySQL 5.x版本的数据库。</p>
+<p>如果没有安装，可以参看</p>
+<p><a href="https://alexyanglong.github.io/2018/05/12/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85MySQL5.x/">https://alexyanglong.github.io/2018/05/12/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85MySQL5.x/</a></p>
+<p>里面有安装的详细步骤。</p>
+<h2 id="配置Master"><a href="#配置Master" class="headerlink" title="配置Master"></a>配置Master</h2><h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>在/etc/my.cnf下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/my.cnf</span><br></pre></td></tr></table></figure>
+<p>使用vim编辑器进行编辑，在 [mysqld] 下增加如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Mysql-Master Config</span><br><span class="line">server-id=200  # 设置主服务器的ID</span><br><span class="line">innodb_flush_log_at_trx_commit=2   # 操作系统崩溃或者系统断电的情况下，上一秒钟所有事务数据才可能丢失</span><br><span class="line">sync_binlog=1  # 开启binlog日志同步功能</span><br><span class="line">log-bin=mysql-bin-200  # binlog日志文件名</span><br><span class="line">binlog-do-db=xxxx  # 这个表示只同步某个库，前提是主从服务器都有此数据库（如果没有此项，表示同步主服务器中所有的库）</span><br></pre></td></tr></table></figure>
+<p>修改完成之后，重启MySQL的服务</p>
+<h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<p>进入数据库</p>
+<p>执行下面的语句创建从机访问主机的用户名、密码并授权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grant replication slave on *.* to &apos;username&apos;@&apos;slave ip&apos; identified by &apos;password&apos;;</span><br><span class="line"># 授权给从数据库服务器，用户名，密码</span><br></pre></td></tr></table></figure>
+<p>查看主库的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show master status;</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="mysql-master-slave1.png" alt="mysql-master-slave1" title="">
+                </div>
+                <div class="image-caption">mysql-master-slave1</div>
+            </figure>
+<p>其中File是主机log-bin的日志文件，Position是主机现在执行SQL的点（这两个很重要，在配置从机时要使用），Binlog_Do_DB是主从同步的数据库，这里没有是因为之前没有指定要同步的数据库。</p>
+<h2 id="配置Slave"><a href="#配置Slave" class="headerlink" title="配置Slave"></a>配置Slave</h2><h3 id="修改配置文件-1"><a href="#修改配置文件-1" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><p>修改从机的配置文件和主机差不多，也是在/etc/my.cnf中，增加如下内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># Mysql-Slave Config</span><br><span class="line">server-id=201  # 从机服务器ID，注意要和主机不一样</span><br><span class="line">innodb_flush_log_at_trx_commit=2</span><br><span class="line">sync_binlog=1</span><br><span class="line">log-bin=mysql-bin-201</span><br></pre></td></tr></table></figure>
+<p>重启数据库MySQL服务</p>
+<h3 id="启动从机"><a href="#启动从机" class="headerlink" title="启动从机"></a>启动从机</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<p>进入数据库</p>
+<p>使用如下命令连接Master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">change master to master_host=&apos;master ip&apos;,master_user=&apos;username&apos; ,master_password=&apos;password&apos;, master_log_file=&apos;xxxx&apos; ,master_log_pos=xxxx;</span><br></pre></td></tr></table></figure>
+<p>其中master ip 即为主服务器的ip，username、password为之前主机给从机授权的username、password，master_log_file、master_log_pos 为之前在主机中查看状态中的 File、Position。</p>
+<p>启动从机</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start slave; ##开启从库 (stop slave; 关闭从库）</span><br></pre></td></tr></table></figure>
+<p>查看连接状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show slave status \G;  # Slave_IO_Running,Slave_SQL_Running 都为Yes的时候表示配置成功</span><br></pre></td></tr></table></figure>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="mysql-master-slave2.png" alt="mysql-master-slave2" title="">
+                </div>
+                <div class="image-caption">mysql-master-slave2</div>
+            </figure>
+<h3 id="验证主从"><a href="#验证主从" class="headerlink" title="验证主从"></a>验证主从</h3><p>如果主服务器配置时没有指定数据库，可以在主服务器上创建一个数据库，看从机是否可以同步。</p>
+<p>如果主服务器配置时指定了数据库，可以在主服务器的的这个库中创建一张表，看从机是否可以同步。</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-08T09:46:18.431Z" itemprop="dateUpdated">2018-08-08 17:46:18</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/">MySQL</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/&title=《在Linux（CentOS7）下进行MySQL主从配置》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/&title=《在Linux（CentOS7）下进行MySQL主从配置》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Linux（CentOS7）下进行MySQL主从配置》 — AlexYang's World&url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/08/09/Redis配置文件详解/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Redis配置文件详解</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">在Linux（CentOS7）下进行Redis主从配置</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/&title=《在Linux（CentOS7）下进行MySQL主从配置》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/&title=《在Linux（CentOS7）下进行MySQL主从配置》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Linux（CentOS7）下进行MySQL主从配置》 — AlexYang's World&url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADLUlEQVR42u3awU7jQBAEUP7/p7PSnlYCQlW3WcWT5xNyiD2vOQzdNR8f8fX4e32+8+/1+f53v58/M3na508vu7CxsbFvwk5eliylLccjuPLVtoXDxsbGPo/9fNPabBXJVjT7VrIpfnsfGxsb+y3Zz3+etTQt4/kdbGxsbOycnY9+8iXun4ONjY39zuxkWJM0Ks+/m8DyYdN/mqVhY2Njvzy7bSFe+edfzLexsbGxX5L9KK8kKtg3CfnzhwpsbGzsg9ib0LT9F78dGLXNTPtebGxs7DPYj9GVNADJuKcltcOpb9+LjY2NfTR71iTsn9BGznlBvygxNjY29qHsq47RRFtIXIh8tp/HxtjY2NgnsfOgtF16ftznqqFVWxpsbGzsM9h5aJrwZgdo8jfmY6koHsDGxsY+gt2+Pt9+ZqP/DSZ/MjY2NvZJ7LYlmAWr7aZYnzlqy42NjY19HHu/OW2GR7OhUt4gDYNebGxs7JuwN5FAO/TZxL15uaOIFxsbG/tQ9myQlN9PFpQPttpBEjY2Nvap7NlBnGtbiGtblLoDw8bGxr45O39lPtDJX7w/3JPf/8hJ2NjY2Ddk521Dzs4D4/yQUHtA54cNDxsbG/sIdl6b5GhOuwXOvrvZzLCxsbHPY7dBaYLfB7qzwrV/NmxsbOwz2FGnMmo5NueG8tal3eqwsbGxT2Xng/5NCTYHg/KiRFEHNjY29nHsduzeItsDQPu44offxMbGxn4D9lUha/tp3lqsnoyNjY19ELvdNtpxUt42JAXN1zaMe7GxsbFvzm6D3llTcVWQkNzPy42NjY19X/ZsuXmrMAtr29aiLhM2Njb2oew2mm3v52VKmpnZer6IB7CxsbFvzs4XsWkGZgHt7IxNux1iY2Nj3539KK98EbM4YV/Q6JnY2NjYB7HzKx8A7Unt1tWGFtjY2NjnsWeDmxwzK0o+7s/jhGL3xsbGxr4hux0w5cP32eC+AJSjJWxsbOx3Zs8KtDpeUwbARfCAjY2N/cbsfNCzB7RjqSTMwMbGxj6V3Ya77fi+bTnaAVZSdGxsbOxT2bOgNz+mc8EA6KK31IXAxsbGfnX2H676xHBy2lHUAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>在Linux（CentOS7）下进行Redis主从配置 | AlexYang&#39;s World | AlexYang的博客世界</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Linux,Redis">
+    <meta name="description" content="在Linux（CentOS7）下进行Redis主从配置概述redis的复制功能是支持多个数据库之间的数据同步。一类是主数据库（master）一类是从数据库（slave），主数据库可以进行读写操作，当发生写操作的时候自动将数据同步到从数据库，而从数据库一般是只读的，并接收主数据库同步过来的数据，一个主数据库可以有多个从数据库。 通过redis的复制功能可以很好的实现数据库的读写分离，提高服务器的负载">
+<meta name="keywords" content="Linux,Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Linux（CentOS7）下进行Redis主从配置">
+<meta property="og:url" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/index.html">
+<meta property="og:site_name" content="AlexYang&#39;s World">
+<meta property="og:description" content="在Linux（CentOS7）下进行Redis主从配置概述redis的复制功能是支持多个数据库之间的数据同步。一类是主数据库（master）一类是从数据库（slave），主数据库可以进行读写操作，当发生写操作的时候自动将数据同步到从数据库，而从数据库一般是只读的，并接收主数据库同步过来的数据，一个主数据库可以有多个从数据库。 通过redis的复制功能可以很好的实现数据库的读写分离，提高服务器的负载">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/redis-master-slave1.png">
+<meta property="og:image" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/redis-master-slave2.png">
+<meta property="og:updated_time" content="2018-08-09T09:25:53.180Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Linux（CentOS7）下进行Redis主从配置">
+<meta name="twitter:description" content="在Linux（CentOS7）下进行Redis主从配置概述redis的复制功能是支持多个数据库之间的数据同步。一类是主数据库（master）一类是从数据库（slave），主数据库可以进行读写操作，当发生写操作的时候自动将数据同步到从数据库，而从数据库一般是只读的，并接收主数据库同步过来的数据，一个主数据库可以有多个从数据库。 通过redis的复制功能可以很好的实现数据库的读写分离，提高服务器的负载">
+<meta name="twitter:image" content="http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/redis-master-slave1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="AlexYang&#39;s World" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/img/avatar.jpg">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/avatar.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">AlexYang</h5>
+          <a href="mailto:120664469@qq.com" title="120664469@qq.com" class="mail">120664469@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                分类
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签云
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-user"></i>
+                关于
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/AlexYangLong" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">在Linux（CentOS7）下进行Redis主从配置</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">在Linux（CentOS7）下进行Redis主从配置</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-08-07T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2018-08-08
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#在Linux（CentOS7）下进行Redis主从配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">在Linux（CentOS7）下进行Redis主从配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#redis主从复制过程"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">redis主从复制过程</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#哨兵（Sentinel）机制"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">哨兵（Sentinel）机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#哨兵（Sentinel）进程的作用："><span class="post-toc-number">1.1.2.1.</span> <span class="post-toc-text">哨兵（Sentinel）进程的作用：</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#哨兵（Sentinel）进程的工作方式："><span class="post-toc-number">1.1.2.2.</span> <span class="post-toc-text">哨兵（Sentinel）进程的工作方式：</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#准备"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">准备</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置主从库"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">配置主从库</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置哨兵"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">配置哨兵</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#启动"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">启动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">测试</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-在Linux（CentOS7）下进行Redis主从配置"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">在Linux（CentOS7）下进行Redis主从配置</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-08-08 00:00:00" datetime="2018-08-07T16:00:00.000Z"  itemprop="datePublished">2018-08-08</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Linux/">Linux</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="在Linux（CentOS7）下进行Redis主从配置"><a href="#在Linux（CentOS7）下进行Redis主从配置" class="headerlink" title="在Linux（CentOS7）下进行Redis主从配置"></a>在Linux（CentOS7）下进行Redis主从配置</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>redis的复制功能是支持多个数据库之间的数据同步。一类是主数据库（master）一类是从数据库（slave），主数据库可以进行读写操作，当发生写操作的时候自动将数据同步到从数据库，而从数据库一般是只读的，并接收主数据库同步过来的数据，一个主数据库可以有多个从数据库。</p>
+<p>通过redis的复制功能可以很好的实现数据库的读写分离，提高服务器的负载能力。主数据库主要进行写操作，而从数据库负责读操作。</p>
+<h3 id="redis主从复制过程"><a href="#redis主从复制过程" class="headerlink" title="redis主从复制过程"></a>redis主从复制过程</h3><p>当启动slave后，slave与master建立连接，然后发送sync命令。无论是第一次连接还是重新连接，master都会启动一个后台进程，将数据库快照保存到文件中，同时master主进程会开始收集新的写命令并缓存。后台进程完成写快照文件后，master就会发送文件和缓存给slave，slave将 文件保存到硬盘上，再加载到内存中，后续master将收到的写命令发送给slave。</p>
+<p>如果master同时收到多个slave发来的同步连接命令，master只会启动一个进程来写数据库镜像，然后发送给所有的slave。master同步数据时是非阻塞式的，可以接收用户的读写请求。然而在slave端是阻塞模式的，slave在同步master数据时，并不能够响应客户端的查询。</p>
+<p>可以在master禁用数据持久化，只需要注释掉master 配置文件中的所有save配置，然后只在slave上配置数据持久化</p>
+<p>拥有主从服务器的好处（从服务器是只读的，可以一主多从）</p>
+<ol>
+<li>主服务器进行读写时，会转移到从读，减轻服务器压力</li>
+</ol>
+<ol start="2">
+<li>热备份 主从都可以设置密码，也可以密码不一致</li>
+</ol>
+<h3 id="哨兵（Sentinel）机制"><a href="#哨兵（Sentinel）机制" class="headerlink" title="哨兵（Sentinel）机制"></a>哨兵（Sentinel）机制</h3><p>Sentinel(哨兵)进程是用于监控redis集群中Master主服务器工作的状态，在Master主服务器发生故障的时候，可以实现Master和Slave服务器的切换，保证系统的高可用，其已经被集成在redis2.6+的版本中，Redis的哨兵模式到了2.8版本之后就稳定了下来。一般在生产环境也建议使用Redis的2.8版本的以后版本。哨兵(Sentinel) 是一个分布式系统，你可以在一个架构中运行多个哨兵(sentinel) 进程，这些进程使用流言协议(gossipprotocols)来接收关于Master主服务器是否下线的信息，并使用投票协议(Agreement Protocols)来决定是否执行自动故障迁移,以及选择哪个Slave作为新的Master。每个哨兵(Sentinel)进程会向其它哨兵(Sentinel)、Master、Slave定时发送消息，以确认对方是否”活”着，如果发现对方在指定配置时间(可配置的)内未得到回应，则暂时认为对方已掉线，也就是所谓的”主观认为宕机” ，英文名称：Subjective Down，简称SDOWN。有主观宕机，肯定就有客观宕机。当“哨兵群”中的多数Sentinel进程在对Master主服务器做出 SDOWN 的判断，并且通过 SENTINEL is-master-down-by-addr 命令互相交流之后，得出的Master Server下线判断，这种方式就是“客观宕机”，英文名称是：Objectively Down， 简称 ODOWN。通过一定的vote算法，从剩下的slave从服务器节点中，选一台提升为Master服务器节点，然后自动修改相关配置，并开启故障转移（failover）。哨兵(sentinel) 虽然有一个单独的可执行文件 redis-sentinel ,但实际上它只是一个运行在特殊模式下的 Redis 服务器，可以以启动一个普通 Redis 服务器的方式通过给定 –sentinel 选项来启动哨兵(sentinel)。</p>
+<h4 id="哨兵（Sentinel）进程的作用："><a href="#哨兵（Sentinel）进程的作用：" class="headerlink" title="哨兵（Sentinel）进程的作用："></a>哨兵（Sentinel）进程的作用：</h4><p>1、监控(Monitoring): 哨兵(sentinel) 会不断地检查你的Master和Slave是否运作正常。</p>
+<p>2、提醒(Notification)：当被监控的某个Redis节点出现问题时, 哨兵(sentinel) 可以通过 API 向管理员或者其他应用程序发送通知。</p>
+<p>3、自动故障迁移(Automatic failover)：当一个Master不能正常工作时，哨兵(sentinel) 会开始一次自动故障迁移操作，它会将失效Master的其中一个Slave升级为新的Master, 并让失效Master的其他Slave改为复制新的Master；当客户端试图连接失效的Master时，集群也会向客户端返回新Master的地址，使得集群可以使用现在的Master替换失效Master。Master和Slave服务器切换后，Master的redis.conf、Slave的redis.conf和sentinel.conf的配置文件的内容都会发生相应的改变，即Master主服务器的redis.conf配置文件中会多一行slaveof的配置，sentinel.conf的监控目标会随之调换。</p>
+<h4 id="哨兵（Sentinel）进程的工作方式："><a href="#哨兵（Sentinel）进程的工作方式：" class="headerlink" title="哨兵（Sentinel）进程的工作方式："></a>哨兵（Sentinel）进程的工作方式：</h4><p>1、每个Sentinel（哨兵）进程以每秒钟一次的频率向整个集群中的Master主服务器，Slave从服务器以及其他Sentinel（哨兵）进程发送一个 PING 命令。</p>
+<p>2、如果一个实例（instance）距离最后一次有效回复 PING 命令的时间超过 down-after-milliseconds 选项所指定的值， 则这个实例会被 Sentinel（哨兵）进程标记为主观下线（SDOWN）。</p>
+<p>3、如果一个Master主服务器被标记为主观下线（SDOWN），则正在监视这个Master主服务器的所有Sentinel（哨兵）进程要以每秒一次的频率确认Master主服务器的确进入了主观下线状态。</p>
+<p>4、当有足够数量的 Sentinel（哨兵）进程（大于等于配置文件指定的值）在指定的时间范围内确认Master主服务器进入了主观下线状态（SDOWN）， 则Master主服务器会被标记为客观下线（ODOWN）。</p>
+<p>5、在一般情况下， 每个 Sentinel（哨兵）进程会以每 10 秒一次的频率向集群中的所有Master主服务器、Slave从服务器发送 INFO 命令。</p>
+<p>6、当Master主服务器被 Sentinel（哨兵）进程标记为客观下线（ODOWN）时，Sentinel（哨兵）进程向下线的 Master主服务器的所有 Slave从服务器发送 INFO 命令的频率会从 10 秒一次改为每秒一次。</p>
+<p>7、若没有足够数量的 Sentinel（哨兵）进程同意 Master主服务器下线， Master主服务器的客观下线状态就会被移除。若 Master主服务器重新向 Sentinel（哨兵）进程发送 PING 命令返回有效回复，Master主服务器的主观下线状态就会被移除。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>确保redis已经正确安装，具体安装步骤可以参看：</p>
+<p><a href="https://alexyanglong.github.io/2018/05/13/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Redis/">https://alexyanglong.github.io/2018/05/13/%E5%9C%A8Linux%EF%BC%88CentOS7%EF%BC%89%E4%B8%8B%E5%AE%89%E8%A3%85Redis/</a></p>
+<p>一个Master，两个Slave，一个哨兵（sentinel）</p>
+<h2 id="配置主从库"><a href="#配置主从库" class="headerlink" title="配置主从库"></a>配置主从库</h2><p>先从安装的redis目录下复制三份redis.conf，分别命名为redis-6379.conf、redis-6380.conf、redis-6381.conf。</p>
+<p>其中 redis-6379.conf 配置成主库，redis-6380.conf、redis-6381.conf 配置成从库。</p>
+<p>对主库配置进行如下修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">bind 172.19.92.129  # 这里配置成主机的ip</span><br><span class="line">...</span><br><span class="line">port 6379  # 运行端口</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"># daemonize no  # 是否以守护进程启动，yes表示是</span><br><span class="line">...</span><br><span class="line">requirepass &quot;redis&quot;  # 认证密码</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>对从库配置进行如下修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># redis-6380.conf</span><br><span class="line">...</span><br><span class="line">bind 172.19.92.129  # 这里配置成主机的ip</span><br><span class="line">...</span><br><span class="line">port 6380  # 运行端口</span><br><span class="line">...</span><br><span class="line"># daemonize no  # 是否以守护进程启动，yes表示是</span><br><span class="line">...</span><br><span class="line">slaveof 172.19.92.129 6379  # 设置为 172.19.92.129 6379 的slave</span><br><span class="line">masterauth redis  # 连接master的认证密码</span><br><span class="line">...</span><br><span class="line">requirepass &quot;redis&quot;  # 认证密码</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># redis-6381.conf</span><br><span class="line">...</span><br><span class="line">bind 172.19.92.129  # 这里配置成主机的ip</span><br><span class="line">...</span><br><span class="line">port 6381  # 运行端口</span><br><span class="line">...</span><br><span class="line"># daemonize no  # 是否以守护进程启动，yes表示是</span><br><span class="line">...</span><br><span class="line">slaveof 172.19.92.129 6379  # 设置为 172.19.92.129 6379 的slave</span><br><span class="line">masterauth redis  # 连接master的认证密码</span><br><span class="line">...</span><br><span class="line">requirepass &quot;redis&quot;  # 认证密码</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<h2 id="配置哨兵"><a href="#配置哨兵" class="headerlink" title="配置哨兵"></a>配置哨兵</h2><p>先从redis的安装目录下复制一份sentinel.conf，命名为sentinel-26379.conf。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">port 26379  # 运行端口</span><br><span class="line">sentinel monitor mymaster 172.19.92.129 6379 1  # Sentinel Monitor 设置</span><br><span class="line">sentinel down-after-milliseconds mymaster 3000  # 哨兵程序sentinel实例认定为失效的间隔时间</span><br><span class="line">sentinel failover-timeout mymaster 10000  # failover过期时间。当failover开始后，在此时间内仍然没有触发任何failover操作，当前sentinel将会认为此次failoer失败。</span><br><span class="line">sentinel auth-pass mymaster redis  # Master认证密码</span><br></pre></td></tr></table></figure>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-server redis-6379.conf &gt; redis-6379.log &amp;  # 启动主库</span><br><span class="line">redis-server redis-6380.conf &gt; redis-6380.log &amp;  # 启动从库</span><br><span class="line">redis-server redis-6381.conf &gt; redis-6381.log &amp;  # 启动从库</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-sentinel sentinel-26379.conf &gt; sentinel-26379.log &amp;  # 启动哨兵</span><br></pre></td></tr></table></figure>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>1、查看节点信息：</p>
+<p>进入redis客户端 <code>redis-cli -h ip -p port</code></p>
+<p>使用 <code>info replication</code> 查看信息</p>
+<p>主库信息：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="redis-master-slave1.png" alt="redis-master-slave1" title="">
+                </div>
+                <div class="image-caption">redis-master-slave1</div>
+            </figure>
+<p>从库信息：</p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="redis-master-slave2.png" alt="redis-master-slave2" title="">
+                </div>
+                <div class="image-caption">redis-master-slave2</div>
+            </figure>
+<p>2、kill 掉主库之后，再查看哨兵日志信息（sentinel-26379.log）以及节点的信息</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-08-09T09:25:53.180Z" itemprop="dateUpdated">2018-08-09 17:25:53</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="http://alexyanglong.github.io">
+            <img src="/img/avatar.jpg" alt="AlexYang">
+            AlexYang
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/">Redis</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/&title=《在Linux（CentOS7）下进行Redis主从配置》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/&title=《在Linux（CentOS7）下进行Redis主从配置》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Linux（CentOS7）下进行Redis主从配置》 — AlexYang's World&url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/08/08/在Linux（CentOS7）下进行MySQL主从配置/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">在Linux（CentOS7）下进行MySQL主从配置</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/08/02/Django----使用Haystack+Whoosh配置全文搜索/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Django -- 使用Haystack+Whoosh配置全文搜索</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Valine Comments -->
+    <div class="comments vcomment" id="comments"></div>
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine@latest/dist/Valine.min.js"></script>
+    <!-- Valine Comments script -->
+    <script>
+        var GUEST_INFO = ['nick','mail','link'];
+        var guest_info = 'nick,mail'.split(',').filter(function(item){
+          return GUEST_INFO.indexOf(item) > -1
+        });
+        new Valine({
+            el: '#comments',
+            notify: 'true' == 'true',
+            verify: 'false' == 'true',
+            appId: "K2pQ8y8pW8SHz1EbhbJjiDWN-gzGzoHsz",
+            appKey: "Auoz21hvbzMNswnM6XQw5hWV",
+            avatar: "mm",
+            placeholder: "快来评论吧~~~",
+            guest_info: guest_info.length == 0 ? GUEST_INFO : guest_info,
+            pageSize: "10"
+        })
+    </script>
+    <!-- Valine Comments end -->
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        (つェ⊂)谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.jpg" alt="打赏二维码">
+        </div>
+        
+        <label class="reward-toggle">
+            <input id="rewardToggle" type="checkbox" class="reward-toggle-check"
+                data-wechat="/img/wechat.jpg" data-alipay="/img/alipay.jpg">
+            <div class="reward-toggle-ctrol">
+                <span class="reward-toggle-item wechat">微信</span>
+                <span class="reward-toggle-label"></span>
+                <span class="reward-toggle-item alipay">支付宝</span>
+            </div>
+        </label>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span><a href="https://github.com/AlexYangLong" target="_blank" class="rss"><i class="icon icon-lg icon-github"></i></a></span>
+        </p>
+		
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+    </div>
+    <div class="bottom">
+        <p>
+			<span>AlexYang &copy; 2018</span>
+			<span> AlexYangLong.github.io </span>
+		<p>
+			<span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" target="_blank" href="http://service.weibo.com/share/share.php?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/&title=《在Linux（CentOS7）下进行Redis主从配置》 — AlexYang's World&pic=http://alexyanglong.github.io/img/avatar.jpg" data-title="微博">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="微信">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" target="_blank" href="http://connect.qq.com/widget/shareqq/index.html?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/&title=《在Linux（CentOS7）下进行Redis主从配置》 — AlexYang's World&source=学习弯道超车的技巧！" data-title=" QQ">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/" data-title=" Facebook">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" target="_blank" href="https://twitter.com/intent/tweet?text=《在Linux（CentOS7）下进行Redis主从配置》 — AlexYang's World&url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/&via=http://alexyanglong.github.io" data-title=" Twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="google share-sns" target="_blank" href="https://plus.google.com/share?url=http://alexyanglong.github.io/2018/08/08/在Linux（CentOS7）下进行Redis主从配置/" data-title=" Google+">
+          <i class="icon icon-google-plus"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAADKklEQVR42u3aS24jMQwFQN//0pkDOJEfyfbATVevAqQ/KnnxQFKPR3z9PF3n/z7fWf37+f3ntT3ecWFjY2PfhJ0v+rzcfHH5s39t8fnNZws2Njb2Vna+0Dw2ek+dNzqPyRffxcbGxv5idvKxPEjyaOz9PNjY2NjYOay30LyoyEMOGxsb+zvZ1eZ+8rHJtiYr/E+9NGxsbOyPZ+ctns//+y3zbWxsbOwPZv8Ur0mDqbeSfBhcUGBjY2MvYveWlQ9iJw2j6vCgun5sbGzsHexqm/78sWSJE1JvIP3LndjY2NiL2NcewamWCr0Qmgyhy1NibGxs7FuxqyPVyf29kXBvoPtivo2NjY29gp234KvR8r65dN7AKrwIGxsb+4bspDzobcckivJxQr7F2NjY2LvZ1QCblB95aFXLnsK2YmNjYy9i56VFb1OuKniu3SxsbGzsTew8WnpHJKt7X20zVY/7YGNjY+9j562lBJNESFJa5Ed8LpuHYGNjY9+WPXndpDzI4ycZG5x/pCi3sbGxsW/Lzh/IF9QLofmmlyMNGxsbezU7vydH9r41iqgzHhsbG3sFOylF8oZRvtzes9UDOqOmEjY2NvYKdj4G7m1ldcw8KWAKvTRsbGzsW7GvatPnyN4WVMFRKYWNjY29iF0d3/Y+c9WoeNQ/m5OwsbGxP4x97ZxhUmAkUVf+DSeHdbCxsbFvws6b7BNk7zDQJMaiQgUbGxt7HXsSMHnTpzpInkTpi/djY2NjL2X3Aqb61OQQT55Bo6kINjY29g3Z0a3FVlTeEqq2inptrEePh42NjX0T9mQA0DtAk0fXpBSJchsbGxt7Bbv6yV75MY/PpBUVbRk2Njb2Uvb51fki8lAZLb0Vk9jY2Nib2L1hbfKZfIm91tV5g170jrCxsbEXsa9txOdjg2qM5c2v/HgQNjY29iZ2fmiyWqJU46oarqMAw8bGxl7H7gVDcrAyaUjlW3xZ6GJjY2N/PbvXAOotuleQvNh6bGxsbOzWIqrPzhv9fxYq2NjY2OvYvQKjOu7Nh7XVUMwHGNjY2Nj72HkMXNUk6h0DyjcoaX5hY2Njr2D/A8kcFhHcSybPAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '欢迎来到Alex的世界！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
